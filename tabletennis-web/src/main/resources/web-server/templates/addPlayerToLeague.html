@@ -1,0 +1,81 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="header :: copy"></head>
+
+<body>
+	<h1>Add league</h1>
+
+
+	<div th:if="${leagueDTO}">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Season</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr>
+					<td th:text="${leagueDTO.id}">1</td>
+					<td	th:text="${leagueDTO.name}">2</td>
+					<td th:text="${leagueDTO.season}">3</td>
+					<td th:text="${leagueDTO.description}">4</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+
+	<form action="#" th:action="@{/leagues/list}" class="form-horizontal">
+		<!--  List button -->
+		<div class="form-group">
+			<div class="col-xs-offset-2 col-xs-10">
+				<button type="submit" class="btn btn-primary">List</button>
+			</div>
+		</div>
+	</form>
+
+	<form action="#" th:object="${leagueDTO}" th:action="@{/leagues/addplayers}" class="form-horizontal" >
+		<input type="hidden" id="id" th:field="*{id}" />
+		<!--  Delete button -->
+		<div class="form-group">
+			<div class="col-xs-offset-2 col-xs-10">
+				<button type="submit" class="btn btn-primary">Add players</button>
+			</div>
+		</div>
+	</form>
+
+	<p th:text="Players">Players</p>
+
+	<div th:if="${leagueDTO.leaguePlayersDTO}">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>First name</th>
+					<th>Last name</th>
+					<th>Email</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="lp : ${leagueDTO.leaguePlayersDTO}">
+					<td th:text="${lp.playerDTO.id}">1</td>
+					<td	th:text="${lp.playerDTO.firstName}">2</td>
+					<td th:text="${lp.playerDTO.lastName}">3</td>
+					<td th:text="${lp.playerDTO.email}">4</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+
+	<div th:replace="footer :: copy"></div>
+
+</body>
+</html>

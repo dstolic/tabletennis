@@ -1,0 +1,159 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="header :: copy"></head>
+
+<body>
+	<h1>Add league</h1>
+
+	<form action="#" th:object="${leagueDTO}"
+		th:action="@{/leagues/doadd}" class="form-horizontal">
+
+		<!-- League id field -->
+		<div class="form-group">
+			<label for="search" class="control-label col-xs-2">ID</label>
+			<div class="col-xs-2">
+				<input type="text" class="form-control" id="id" th:field="*{id}"
+					placeholder="ID (generated)" style="width: 10em;"
+					readonly="readonly" />
+			</div>
+			<div class="col-xs-8">&nbsp;</div>
+		</div>
+
+		<!-- League id field -->
+		<div class="form-group">
+			<label for="search" class="control-label col-xs-2">Name</label>
+			<div class="col-xs-2">
+				<input type="text" class="form-control" id="name" th:field="*{name}"
+					placeholder="Name" style="width: 10em;" />
+			</div>
+			<div class="col-xs-8">&nbsp;</div>
+
+			<!-- Owner name errors (if any) -->
+			<div class="form-group">
+				<div class="control-label col-xs-2">&nbsp;</div>
+				<div class="col-xs-2">&nbsp;</div>
+				<div class="col-xs-8">
+					<span th:if="${#fields.hasErrors('name')}"
+						style="color: red; font-size: smaller" th:errors="*{name}"></span>
+				</div>
+			</div>
+
+		</div>
+		<!-- League id field -->
+		<div class="form-group">
+			<label for="search" class="control-label col-xs-2">Season</label>
+			<div class="col-xs-2">
+				<input type="text" class="form-control" id="season"
+					th:field="*{season}" placeholder="Season" style="width: 10em;" />
+			</div>
+			<div class="col-xs-8">&nbsp;</div>
+		</div>
+
+		<!-- Owner name errors (if any) -->
+		<div class="form-group">
+			<div class="control-label col-xs-2">&nbsp;</div>
+			<div class="col-xs-2">&nbsp;</div>
+			<div class="col-xs-8">
+				<span th:if="${#fields.hasErrors('season')}"
+					style="color: red; font-size: smaller" th:errors="*{season}"></span>
+			</div>
+		</div>
+
+		<!-- League id field -->
+		<div class="form-group">
+			<label for="search" class="control-label col-xs-2">Description</label>
+			<div class="col-xs-2">
+				<input type="text" class="form-control" id="description"
+					th:field="*{description}" placeholder="Description"
+					style="width: 10em;" />
+			</div>
+			<div class="col-xs-8">&nbsp;</div>
+		</div>
+
+		<!-- Owner name errors (if any) -->
+		<div class="form-group">
+			<div class="control-label col-xs-2">&nbsp;</div>
+			<div class="col-xs-2">&nbsp;</div>
+			<div class="col-xs-8">
+				<span th:if="${#fields.hasErrors('description')}"
+					style="color: red; font-size: smaller" th:errors="*{description}"></span>
+			</div>
+		</div>
+
+		<!--  New button (placeholder) -->
+		<div class="form-group">
+			<div class="col-xs-offset-2 col-xs-10">
+				<button type="submit" class="btn btn-primary">New</button>
+			</div>
+		</div>
+
+		<!--  Save button -->
+		<div class="form-group">
+			<div class="col-xs-offset-2 col-xs-10">
+				<button type="submit" class="btn btn-primary" th:value="*{id} == 0 ? 'Save' : 'Update' ">Save</button>
+			</div>
+		</div>
+
+	</form>
+
+	<form action="#" th:action="@{/leagues/list}" class="form-horizontal">
+		<!--  List button -->
+		<div class="form-group">
+			<div class="col-xs-offset-2 col-xs-10">
+				<button type="submit" class="btn btn-primary">List</button>
+			</div>
+		</div>
+	</form>
+
+	<form action="#" th:object="${leagueDTO}" th:action="@{/leagues/delete}" class="form-horizontal" >
+		<input type="hidden" id="id" th:field="*{id}" />
+		<!--  Delete button -->
+		<div class="form-group">
+			<div class="col-xs-offset-2 col-xs-10">
+				<button type="submit" class="btn btn-primary">Delete</button>
+			</div>
+		</div>
+	</form>
+
+	<form action="#" th:object="${leagueDTO}" th:action="@{/leagues/addplayers}" class="form-horizontal" >
+		<input type="hidden" id="id" th:field="*{id}" />
+		<!--  Delete button -->
+		<div class="form-group">
+			<div class="col-xs-offset-2 col-xs-10">
+				<button type="submit" class="btn btn-primary">Add players</button>
+			</div>
+		</div>
+	</form>
+
+	<p th:text="Players">Players</p>
+
+	<div th:if="${leagueDTO.leaguePlayersDTO}">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>First name</th>
+					<th>Last name</th>
+					<th>Email</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="lp : ${leagueDTO.leaguePlayersDTO}">
+					<td th:text="${lp.playerDTO.id}">1</td>
+					<td	th:text="${lp.playerDTO.firstName}">2</td>
+					<td th:text="${lp.playerDTO.lastName}">3</td>
+					<td th:text="${lp.playerDTO.email}">4</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+
+
+	<div th:replace="footer :: copy"></div>
+
+</body>
+</html>

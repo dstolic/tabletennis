@@ -1,0 +1,116 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="header :: copy"></head>
+
+<body>
+	<h1>Add competition</h1>
+
+	<form action="#" th:object="${competitionDto}"
+		th:action="@{/competition/doadd}" class="form-horizontal">
+
+		<!-- id field -->
+		<div class="form-group">
+			<label for="search" class="control-label col-xs-2">ID</label>
+			<div class="col-xs-2">
+				<input type="text" class="form-control" id="id" th:field="*{id}"
+					placeholder="ID (generated)" style="width: 10em;"
+					readonly="readonly" />
+			</div>
+			<div class="col-xs-8">&nbsp;</div>
+		</div>
+
+		<!-- name field -->
+		<div class="form-group">
+			<label for="search" class="control-label col-xs-2">Name</label>
+			<div class="col-xs-2">
+				<input type="text" class="form-control" id="name" th:field="*{name}"
+					placeholder="Name" style="width: 10em;" />
+			</div>
+			<div class="col-xs-8">&nbsp;</div>
+
+			<!-- Owner name errors (if any) -->
+			<div class="form-group">
+				<div class="control-label col-xs-2">&nbsp;</div>
+				<div class="col-xs-2">&nbsp;</div>
+				<div class="col-xs-8">
+					<span th:if="${#fields.hasErrors('name')}"
+						style="color: red; font-size: smaller" th:errors="*{name}"></span>
+				</div>
+			</div>
+
+		</div>
+
+		<!-- desc field -->
+		<div class="form-group">
+			<label for="search" class="control-label col-xs-2">Description</label>
+			<div class="col-xs-2">
+				<input type="text" class="form-control" id="description"
+					th:field="*{description}" placeholder="Description"
+					style="width: 10em;" />
+			</div>
+			<div class="col-xs-8">&nbsp;</div>
+		</div>
+
+		<!-- Owner name errors (if any) -->
+		<div class="form-group">
+			<div class="control-label col-xs-2">&nbsp;</div>
+			<div class="col-xs-2">&nbsp;</div>
+			<div class="col-xs-8">
+				<span th:if="${#fields.hasErrors('description')}"
+					style="color: red; font-size: smaller" th:errors="*{description}"></span>
+			</div>
+		</div>
+
+		<!--  New button (placeholder) -->
+		<div class="form-group">
+			<div class="col-xs-offset-2 col-xs-10">
+				<button type="submit" class="btn btn-primary">New</button>
+			</div>
+		</div>
+
+		<!--  Save button -->
+		<div class="form-group">
+			<div class="col-xs-offset-2 col-xs-10">
+				<button type="submit" class="btn btn-primary" th:value="*{id} == 0 ? 'Save' : 'Update' ">Save</button>
+			</div>
+		</div>
+
+	</form>
+
+	<form action="#" th:action="@{/competition/}" class="form-horizontal">
+		<!--  List button -->
+		<div class="form-group">
+			<div class="col-xs-offset-2 col-xs-10">
+				<button type="submit" class="btn btn-primary">List</button>
+			</div>
+		</div>
+	</form>
+
+	<form action="#" th:object="${competitionDto}" th:action="@{/competition/delete}" class="form-horizontal" >
+		<input type="hidden" id="id" th:field="*{id}" />
+		<!--  Delete button -->
+		<div class="form-group">
+			<div class="col-xs-offset-2 col-xs-10">
+				<button type="submit" class="btn btn-primary">Delete</button>
+			</div>
+		</div>
+	</form>
+
+	<form action="#" th:object="${competitionDto}" th:action="@{/competition/addplayers}" class="form-horizontal" >
+		<input type="hidden" id="id" th:field="*{id}" />
+		<!--  Delete button -->
+		<div class="form-group">
+			<div class="col-xs-offset-2 col-xs-10">
+				<button type="submit" class="btn btn-primary">Add players</button>
+			</div>
+		</div>
+	</form>
+
+
+
+	<div th:replace="footer :: copy"></div>
+
+</body>
+</html>

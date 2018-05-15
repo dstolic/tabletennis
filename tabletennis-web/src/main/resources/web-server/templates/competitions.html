@@ -1,0 +1,39 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="header :: copy"></head>
+
+<body>
+	<h1><span th:text="${title}">text</span></h1>
+	<div th:if="not ${competitions}" class="error">
+		No competitions found.
+		<div style="height: 2cm">&nbsp;</div>
+	</div>
+
+	<div th:if="${competitions}">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="competition : ${competitions}">
+					<td>
+						<a href="league.html" th:href="@{|/competition/${competition.id}|}" th:text="|${competition.id}|">1</a>
+					</td>
+					<td th:text="${competition.id}">1</td>
+					<td	th:text="${competition.name}">2</td>
+					<td th:text="${competition.description}">4</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div th:replace="footer :: copy"></div>
+</body>
+</html>

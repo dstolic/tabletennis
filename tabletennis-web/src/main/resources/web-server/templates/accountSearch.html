@@ -1,0 +1,36 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="header :: copy"></head>
+
+<body>
+	<h1>Account Search</h1>
+
+	<form action="#" th:object="${league}" method="GET"
+		th:action="@{/leagues/dosearch}" class="form-horizontal">
+
+		<!-- Owner name field -->
+		<div class="form-group">
+			<label for="search" class="control-label col-xs-2">Owner
+				Search</label>
+			<div class="col-xs-2">
+				<input type="text" class="form-control" id="sale"
+					th:field="*{sale}" placeholder="sale"
+					style="width: 10em;" />
+			</div>
+			<div class="col-xs-8">Case-insensitive, supports part name matching</div>
+		</div>
+
+		<!--  Submit button -->
+		<div class="form-group">
+			<div class="col-xs-offset-2 col-xs-10">
+				<button type="submit" class="btn btn-primary">Save</button>
+			</div>
+		</div>
+	</form>
+
+	<div th:replace="footer :: copy"></div>
+
+</body>
+</html>

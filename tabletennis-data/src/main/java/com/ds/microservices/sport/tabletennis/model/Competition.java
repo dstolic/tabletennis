@@ -1,6 +1,8 @@
 package com.ds.microservices.sport.tabletennis.model;
 
 import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.*;
 
 
@@ -20,6 +22,10 @@ public class Competition implements Serializable {
 	private String description;
 
 	private String name;
+
+	//bi-directional many-to-one association to CompetitionPlayer
+	@OneToMany(mappedBy="competition")
+	private List<CompetitionPlayer> competitionPlayers;
 
 	public Competition() {
 	}
@@ -46,6 +52,14 @@ public class Competition implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public List<CompetitionPlayer> getCompetitionPlayers() {
+		return competitionPlayers;
+	}
+
+	public void setCompetitionPlayers(List<CompetitionPlayer> competitionPlayers) {
+		this.competitionPlayers = competitionPlayers;
 	}
 
 }

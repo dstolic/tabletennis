@@ -14,14 +14,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ds.microservices.sport.tabletennis.dto.CompetitionDto;
+import com.ds.microservices.sport.tabletennis.dto.PlayerDto;
 //import org.springframework.web.bind.annotation.;
 import com.ds.microservices.sport.tabletennis.service.CompetitionService;
+import com.ds.microservices.sport.tabletennis.service.PlayerService;
 
 @Controller
 public class CompetitionController {
 	
 	@Autowired
 	protected CompetitionService competitionService;
+	
+	@Autowired
+	protected PlayerService playerService;
 	
 	protected Logger logger = Logger.getLogger(CompetitionController.class.getName());
 	
@@ -50,7 +55,7 @@ public class CompetitionController {
 	}
 	
 
-//	in progress
+	//	Jedno - radi
 	@RequestMapping("/competition/{id}")
 	public String byId(Model model, @PathVariable("id") Long id) {
 
@@ -69,11 +74,33 @@ public class CompetitionController {
 		
 		
 		
+		logger.info("web-service byId() found CompetitionPlayers: " + competitionDto.getCompetitionPlayers());
+//		if (competitionDto.getCompetitionPlayers() == null) {
+//			competitionDto.setCompetitionPlayers(new ArrayList<CompetitionPlayerDto>());
+//		}
+		
 		model.addAttribute("competitionDto", competitionDto);
 		return "competition";
 	}
 	
+//	in progress
+	@RequestMapping("/competition/{id}/players")
+	public String findPlayers(Model model, CompetitionDto competitionDto ) {
+		logger.info("web-service findPlayers() " + competitionDto);
 
+		List<PlayerDto> players = playerService.findPlayersForCompetition(competitionDto);
+
+		logger.info("web-service findPlayers() found: " + players);
+
+		if (players != null)
+			model.addAttribute("players", players);
+
+		logger.info("web-service allPlayers() END ");
+		return "players";
+	}
+	
+
+	
 	@RequestMapping(value = "/add")
 	public String searchForm(Model model) {
 		model.addAttribute("leagueDTO", new CompetitionDto());

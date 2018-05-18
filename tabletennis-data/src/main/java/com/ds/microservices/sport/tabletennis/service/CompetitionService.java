@@ -34,7 +34,7 @@ public class CompetitionService {
 	}
 
 	public List<CompetitionDto> all() {
-		logger.info("competition-service allLeagues() invoked: " + competitionRepository.getClass().getName());
+		logger.info("competition-service allCompetitions() invoked: " + competitionRepository.getClass().getName());
 		
 		List<Competition> competitions = (List<Competition>)competitionRepository.findAll();
 		logger.info("competition-service all() found: " + competitions);

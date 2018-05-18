@@ -31,13 +31,24 @@ public class PlayerService {
 	}
 
 
-	@RequestMapping("/players/all")
-	public List<PlayerDto> findAllPlayers() {
-		logger.info("player-service allPlayers() invoked: ");
+	public List<PlayerDto> findPlayers() {
+		logger.info("player-service findPlayers() invoked: ");
 
 		List<Player> result = (List<Player>)playerRepository.findAll();
 		
-		logger.info("player-service allPlayers() found: " + result);
+		logger.info("player-service findPlayers() found: " + result);
+
+		return result.stream()
+			.map(player -> playerMapper.playerToPlayerDto(player))
+			.collect(Collectors.toList());
+	}
+
+	public List<PlayerDto> findPlayersByCompetition(Long competitionId) {
+		logger.info("player-service findPlayersByCompetition() invoked: ");
+
+		List<Player> result = (List<Player>)playerRepository.findAll();
+		
+		logger.info("player-service findPlayersByCompetition() found: " + result);
 
 		return result.stream()
 			.map(player -> playerMapper.playerToPlayerDto(player))

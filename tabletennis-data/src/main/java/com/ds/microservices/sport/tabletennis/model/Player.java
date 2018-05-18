@@ -2,7 +2,9 @@ package com.ds.microservices.sport.tabletennis.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
 import java.math.BigInteger;
+import java.util.List;
 
 
 /**
@@ -27,6 +29,10 @@ public class Player implements Serializable {
 	private String lastName;
 
 	private BigInteger points;
+
+	//bi-directional many-to-one association to CompetitionPlayer
+	@OneToMany(mappedBy="player")
+	private List<CompetitionPlayer> competitionPlayers;
 
 	public Player() {
 	}
@@ -69,6 +75,14 @@ public class Player implements Serializable {
 
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	public List<CompetitionPlayer> getCompetitionPlayers() {
+		return competitionPlayers;
+	}
+
+	public void setCompetitionPlayers(List<CompetitionPlayer> competitionPlayers) {
+		this.competitionPlayers = competitionPlayers;
 	}
 
 }

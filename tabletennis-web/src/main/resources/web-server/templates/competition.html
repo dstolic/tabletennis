@@ -98,8 +98,11 @@
 		</div>
 	</form>
 
-	<form action="#" th:object="${competitionDto}" th:action="@{/competition/addplayers}" class="form-horizontal" >
-		<input type="hidden" id="id" th:field="*{id}" />
+
+	
+	<a href="league.html" th:href="@{/competition/{xxx}/players(xxx=${competitionDto.id})}" >Add players</a>
+	
+	<form action="#" th:object="${competitionDto}" th:action="@{/competition/{xxx}/players(xxx=${competitionDto.id})}" class="form-horizontal" >
 		<!--  Delete button -->
 		<div class="form-group">
 			<div class="col-xs-offset-2 col-xs-10">
@@ -107,6 +110,32 @@
 			</div>
 		</div>
 	</form>
+
+	<p th:text="Players">Players</p>
+
+	<div th:if="${competitionDto.competitionPlayers} != null">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>First name</th>
+					<th>Last name</th>
+					<th>Email</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="lp : ${competitionDto.competitionPlayers}">
+					<td th:text="${lp.player.id}">1</td>
+					<td	th:text="${lp.player.firstName}">2</td>
+					<td th:text="${lp.player.lastName}">3</td>
+					<td th:text="${lp.player.points}">4</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+
 
 
 

@@ -15,6 +15,8 @@ public class PlayerDto implements Serializable {
 	@Id
 	private Long id;
 
+	private boolean active;
+
 	@Column(name="first_name")
 	private String firstName;
 
@@ -56,6 +58,14 @@ public class PlayerDto implements Serializable {
 
 	public void setPoints(BigInteger points) {
 		this.points = points;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
 }

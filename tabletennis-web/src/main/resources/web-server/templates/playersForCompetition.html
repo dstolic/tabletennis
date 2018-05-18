@@ -11,9 +11,6 @@
 		<div style="height: 2cm">&nbsp;</div>
 	</div>
 
-
-	<form action="#" th:action="@{/players/activate}" class="form-horizontal">
-
 	<div th:if="${players}">
 		<table class="table table-striped">
 			<thead>
@@ -22,8 +19,6 @@
 					<th>First name</th>
 					<th>Last name</th>
 					<th>Points</th>
-					<th>Active</th>
-					<th>Active</th>
 				</tr>
 			</thead>
 
@@ -33,17 +28,11 @@
 					<td	th:text="${player.firstName}">2</td>
 					<td th:text="${player.lastName}">3</td>
 					<td th:text="${player.points}">4</td>
-					<td th:text="${player.active}">5</td>
-					<td>
-						<input type="checkbox" class="form-control" id="active" th:checked="${player.active}" />
-					</td>
-					
 				</tr>
 			</tbody>
 		</table>
 	</div>
-	
-	</form>
+
 
 	<div th:replace="footer :: copy"></div>
 </body>

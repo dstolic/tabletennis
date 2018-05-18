@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ds.microservices.sport.tabletennis.dto.CompetitionDto;
+import com.ds.microservices.sport.tabletennis.dto.PlayerDto;
 import com.ds.microservices.sport.tabletennis.repository.CompetitionRepository;
-import com.ds.microservices.sport.tabletennis.service.CompetitionService;;
+import com.ds.microservices.sport.tabletennis.service.CompetitionService;
+import com.ds.microservices.sport.tabletennis.service.PlayerService;;
 
 
 @RestController
@@ -24,6 +26,9 @@ public class CompetitionController {
 
 	@Autowired
 	protected CompetitionService competitionService;
+	
+	@Autowired
+	protected PlayerService playerService;
 	
 	@Autowired
 	public CompetitionController(CompetitionService competitionService) {
@@ -39,13 +44,26 @@ public class CompetitionController {
 		return ResponseEntity.ok(competitionService.all());
 	}
 	
+	@RequestMapping("/competition/{id}/players/ccc")
+	public List<PlayerDto> findPlayers(@RequestBody CompetitionDto competitionDto) {
+		logger.info("player-service findPlayers() invoked: " + competitionDto);
+		
+//		if (competitionDto == null) {
+			return playerService.findPlayers();
+//		} else {
+//			return playerService.findPlayersByCompetition();
+//		}
+	}
+
 	@RequestMapping("/competition/{id}")
 	public ResponseEntity<CompetitionDto> findById(@PathVariable("id") Long id) {
 		logger.info("competetion-service findById() invoked: " + id);
 		
 		return ResponseEntity.ok(competitionService.findOne(id));
 
-}
+	}
+	
+
 
 
 	@RequestMapping(value = "/leagues/add")

@@ -1,82 +1,42 @@
 package com.ds.microservices.sport.tabletennis.dto;
 
 import java.io.Serializable;
-import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonRootName;
-
-import java.util.Date;
-import java.sql.Timestamp;
-import java.util.List;
 
 @JsonRootName("Game")
 public class GameDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
 	private Long id;
-
-	private Timestamp created;
-
-	private String description;
 
 	private byte finished;
 
-	@Temporal(TemporalType.DATE)
-	@Column(name="played_data")
-	private Date playedData;
+	private int pointsAway;
 
-	@Column(name="result_away")
-	private short resultAway;
+	private int pointsHome;
 
-	@Column(name="result_home")
-	private short resultHome;
+	@JsonIgnore
+	private CompetitionDto competition;
 
-	private Timestamp updated;
+	private PlayerDto playerHome;
 
-	//bi-directional many-to-one association to League
-	@ManyToOne
-	private CompetitionDto league;
+	private PlayerDto playerAway;
 
-	//bi-directional many-to-one association to LeUser
-	@ManyToOne
-	@JoinColumn(name="player_away_id")
-	private PlayerDto leUser1;
+	private Long groupNum;
 
-	//bi-directional many-to-one association to LeUser
-	@ManyToOne
-	@JoinColumn(name="player_home_id")
-	private PlayerDto leUser2;
-
-	//bi-directional many-to-one association to LeagueGame
-	@OneToMany(mappedBy="game")
-	private List<LeagueGameDto> leagueGames;
+	private int round;
 
 	public GameDto() {
-	}
-
+	} 
+	
 	public Long getId() {
 		return this.id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Timestamp getCreated() {
-		return this.created;
-	}
-
-	public void setCreated(Timestamp created) {
-		this.created = created;
-	}
-
-	public String getDescription() {
-		return this.description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 
 	public byte getFinished() {
@@ -87,82 +47,82 @@ public class GameDto implements Serializable {
 		this.finished = finished;
 	}
 
-	public Date getPlayedData() {
-		return this.playedData;
+	public int getPointsAway() {
+		return this.pointsAway;
 	}
 
-	public void setPlayedData(Date playedData) {
-		this.playedData = playedData;
+	public void setPointsAway(int pointsAway) {
+		this.pointsAway = pointsAway;
 	}
 
-	public short getResultAway() {
-		return this.resultAway;
+	public int getPointsHome() {
+		return this.pointsHome;
 	}
 
-	public void setResultAway(short resultAway) {
-		this.resultAway = resultAway;
+	public void setPointsHome(int pointsHome) {
+		this.pointsHome = pointsHome;
 	}
 
-	public short getResultHome() {
-		return this.resultHome;
+	public CompetitionDto getCompetition() {
+		return competition;
 	}
 
-	public void setResultHome(short resultHome) {
-		this.resultHome = resultHome;
+	public void setCompetition(CompetitionDto competition) {
+		this.competition = competition;
 	}
 
-	public Timestamp getUpdated() {
-		return this.updated;
+	public PlayerDto getPlayerHome() {
+		return playerHome;
 	}
 
-	public void setUpdated(Timestamp updated) {
-		this.updated = updated;
+	public void setPlayerHome(PlayerDto playerHome) {
+		this.playerHome = playerHome;
 	}
 
-	public CompetitionDto getLeague() {
-		return this.league;
+	public PlayerDto getPlayerAway() {
+		return playerAway;
 	}
 
-	public void setLeague(CompetitionDto league) {
-		this.league = league;
+	public void setPlayerAway(PlayerDto playerAway) {
+		this.playerAway = playerAway;
 	}
 
-	public PlayerDto getLeUser1() {
-		return this.leUser1;
+	public int getRound() {
+		return round;
 	}
 
-	public void setLeUser1(PlayerDto leUser1) {
-		this.leUser1 = leUser1;
+	public void setRound(int round) {
+		this.round = round;
 	}
 
-	public PlayerDto getLeUser2() {
-		return this.leUser2;
+	public Long getGroupNum() {
+		return groupNum;
 	}
 
-	public void setLeUser2(PlayerDto leUser2) {
-		this.leUser2 = leUser2;
+	public void setGroupNum(Long groupNum) {
+		this.groupNum = groupNum;
 	}
 
-	public List<LeagueGameDto> getLeagueGames() {
-		return this.leagueGames;
+	@Override
+	public String toString() {
+		return "GameDto [playerHome=" + playerHome + ", playerAway=" + playerAway + ", group=" + groupNum + ", round="
+				+ round + "]";
 	}
 
-	public void setLeagueGames(List<LeagueGameDto> leagueGames) {
-		this.leagueGames = leagueGames;
-	}
-
-	public LeagueGameDto addLeagueGame(LeagueGameDto leagueGame) {
-		getLeagueGames().add(leagueGame);
-		leagueGame.setGame(this);
-
-		return leagueGame;
-	}
-
-	public LeagueGameDto removeLeagueGame(LeagueGameDto leagueGame) {
-		getLeagueGames().remove(leagueGame);
-		leagueGame.setGame(null);
-
-		return leagueGame;
-	}
+//	public CompetitionPlayer getCompetitionPlayer1() {
+//		return this.competitionPlayer1;
+//	}
+//
+//	public void setCompetitionPlayer1(CompetitionPlayer competitionPlayer1) {
+//		this.competitionPlayer1 = competitionPlayer1;
+//	}
+//
+//	public CompetitionPlayer getCompetitionPlayer2() {
+//		return this.competitionPlayer2;
+//	}
+//
+//	public void setCompetitionPlayer2(CompetitionPlayer competitionPlayer2) {
+//		this.competitionPlayer2 = competitionPlayer2;
+//	}
 
 }

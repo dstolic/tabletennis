@@ -1,14 +1,20 @@
 package com.ds.microservices.sport.tabletennis.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
-import java.math.BigInteger;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
-/**
- * The persistent class for the competition_properties database table.
- * 
- */
 @Entity
 @Table(name="competition_properties")
 @NamedQuery(name="CompetitionProperty.findAll", query="SELECT c FROM CompetitionProperty c")
@@ -17,10 +23,13 @@ public class CompetitionProperty implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private String id;
+	private Long id;
 
-	@Column(name="competition_id")
-	private BigInteger competitionId;
+	@JsonIgnore // budzevina, resiti kasnije
+//	@JsonManagedReference
+    @ManyToOne
+    @JoinColumn(name = "competition_id")
+	private Competition competition;
 
 	private String name;
 
@@ -29,20 +38,20 @@ public class CompetitionProperty implements Serializable {
 	public CompetitionProperty() {
 	}
 
-	public String getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public BigInteger getCompetitionId() {
-		return this.competitionId;
+	public Competition getCompetition() {
+		return this.competition;
 	}
 
-	public void setCompetitionId(BigInteger competitionId) {
-		this.competitionId = competitionId;
+	public void setCompetition(Competition competition) {
+		this.competition = competition;
 	}
 
 	public String getName() {
@@ -59,6 +68,11 @@ public class CompetitionProperty implements Serializable {
 
 	public void setValue(String value) {
 		this.value = value;
+	}
+
+	@Override
+	public String toString() {
+		return "CompetitionProperty [id=" + id + ", competition=" + competition + ", name=" + name + ", value=" + value + "]";
 	}
 
 }

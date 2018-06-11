@@ -1,8 +1,12 @@
 package com.ds.microservices.sport.tabletennis.repository;
 
+import java.util.List;
+
+import org.jboss.logging.annotations.Param;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
+import com.ds.microservices.sport.tabletennis.model.Game;
 import com.ds.microservices.sport.tabletennis.model.Player;
 
 public interface PlayerRepository extends PagingAndSortingRepository<Player, Long> {
@@ -10,12 +14,17 @@ public interface PlayerRepository extends PagingAndSortingRepository<Player, Lon
 	@Query("SELECT count(*) from Player")
 	public long count();
 
+//	@Query("select id, firstName, lastName, points, active from Player p where p.active=1 ")
+//	@Query("select id, firstName, lastName, points, active from Player p where p.active=1 ")
+	public List<Player> findByActive(boolean active);
 
-//	public Iterable<Player> findAll();
-	
-//	public Player findByEmail(String email);
+	public List<Player> findByActiveOrderByPointsDesc(boolean active);
 
-//	public List<Player> findByEmailContainingIgnoreCase(String partialName);
+//	@Query("INSERT into CompetitionPlayer values (:competition, :player)")
+//	public void savePlayer(@Param("competition") Long competitionId, @Param("player") Long playerId);
+
+
+//	public List<Player> findByCompetitionId(Long competitionId);
 
 
 }

@@ -1,10 +1,16 @@
 package com.ds.microservices.sport.tabletennis.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
-
-import java.math.BigInteger;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 
 
 /**
@@ -18,7 +24,7 @@ public class Player implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private String id;
+	private Long id;
 
 	private boolean active;
 
@@ -28,20 +34,24 @@ public class Player implements Serializable {
 	@Column(name="last_name")
 	private String lastName;
 
-	private BigInteger points;
+	private Long points;
+	
+//	private boolean seed;
 
 	//bi-directional many-to-one association to CompetitionPlayer
-	@OneToMany(mappedBy="player")
-	private List<CompetitionPlayer> competitionPlayers;
+//	@OneToMany(mappedBy="player")
+//    @ManyToOne
+//    @JoinColumn(name = "competition_id")
+//	private Competition competition;
 
 	public Player() {
 	}
 
-	public String getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -61,11 +71,11 @@ public class Player implements Serializable {
 		this.lastName = lastName;
 	}
 
-	public BigInteger getPoints() {
+	public Long getPoints() {
 		return this.points;
 	}
 
-	public void setPoints(BigInteger points) {
+	public void setPoints(Long points) {
 		this.points = points;
 	}
 
@@ -77,12 +87,26 @@ public class Player implements Serializable {
 		this.active = active;
 	}
 
-	public List<CompetitionPlayer> getCompetitionPlayers() {
-		return competitionPlayers;
+
+//	public boolean isSeed() {
+//		return seed;
+//	}
+//
+//	public void setSeed(boolean seed) {
+//		this.seed = seed;
+//	}
+
+	@Override
+	public String toString() {
+		return "Player [id=" + id + ", active=" + active + ", firstName=" + firstName + ", lastName=" + lastName + ", points=" + points + "]";
 	}
 
-	public void setCompetitionPlayers(List<CompetitionPlayer> competitionPlayers) {
-		this.competitionPlayers = competitionPlayers;
-	}
-
+//	@Override
+//	public int compareTo(Player o) {
+//		if(this.points > o.getPoints()) return -1;
+//		else if (this.points > o.getPoints()) return 1;
+//		
+//		return 0;
+//	}
+//
 }

@@ -10,7 +10,7 @@ public class DrawService {
 	
 	public final static String FORMAT = "CUP";
 	public final static int NUMBER_OF_PLAYERS = 32;
-	public final static int NUMBER_OF_SEEDS = 32;
+	public final static int NUMBER_OF_SEEDS = 8;
 
 	protected Logger logger = Logger.getLogger(DrawService.class.getName());
 

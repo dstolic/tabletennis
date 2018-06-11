@@ -1,29 +1,23 @@
 package com.ds.microservices.sport.tabletennis.dto;
 
 import java.io.Serializable;
-import java.math.BigInteger;
-
-import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
 
-import java.sql.Timestamp;
-import java.util.List;
-
 @JsonRootName("Player")
 public class PlayerDto implements Serializable {
-	@Id
+
 	private Long id;
 
 	private boolean active;
 
-	@Column(name="first_name")
+
 	private String firstName;
 
-	@Column(name="last_name")
+
 	private String lastName;
 
-	private BigInteger points;
+	private Long points;
 
 	public PlayerDto() {
 	}
@@ -52,11 +46,11 @@ public class PlayerDto implements Serializable {
 		this.lastName = lastName;
 	}
 
-	public BigInteger getPoints() {
+	public Long getPoints() {
 		return this.points;
 	}
 
-	public void setPoints(BigInteger points) {
+	public void setPoints(Long points) {
 		this.points = points;
 	}
 

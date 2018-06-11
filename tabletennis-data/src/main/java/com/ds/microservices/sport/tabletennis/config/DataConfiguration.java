@@ -24,42 +24,4 @@ public class DataConfiguration {
 	@Autowired
 	public DataSource dataSource;
 	
-//	@Bean
-////	@ConfigurationProperties(prefix="spring.datasource")
-//	public DataSource dataSource() {
-//		
-//		logger.info("dataSource() invoked");
-//
-////		DataSource dataSource = (DataSource)(new DataSourceAutoConfiguration());
-////				.addScript("classpath:testdb/schema.sql")
-////				.addScript("classpath:testdb/data.sql")
-////				.build();
-//
-////		JndiDataSourceLookup jndiDataSourceLookup = new JndiDataSourceLookup();
-////		DataSource dataSource = jndiDataSourceLookup.getDataSource("java:comp/env/dejan")
-//		
-//		DataSource dataSource = DataSourceBuilder.create().build();
-//		logger.info("dataSource = " + dataSource);
-//
-//		// Sanity check
-//		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-//		List<Map<String, Object>> accounts = jdbcTemplate.queryForList("SELECT number FROM T_ACCOUNT");
-//		logger.info("System has " + accounts.size() + " accounts");
-//		
-//		// Populate with random balances
-//		Random random = new Random();
-//		
-//		for (Map<String, Object> item : accounts) {
-//			String number = (String)item.get("number");
-//			BigDecimal balance = new BigDecimal(random.nextInt(10000000) / 100.0).setScale(2, BigDecimal.ROUND_HALF_UP);
-//			jdbcTemplate.update("UPDATE T_ACCOUNT SET balance = ? WHERE number = ?", balance, number);
-//			
-//		}
-//
-//		
-//		logger.info("dataSource = " + dataSource);
-//
-//		return dataSource;
-//	}
-
 }

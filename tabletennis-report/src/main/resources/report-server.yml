@@ -1,0 +1,11 @@
+# Spring properties
+spring:
+  application:
+     name: report-service  # Service registers under this name
+  freemarker:
+    enabled: false           # Ignore Eureka dashboard FreeMarker templates
+
+# HTTP Server
+server:
+  port: 3333   # HTTP (Tomcat) port
+

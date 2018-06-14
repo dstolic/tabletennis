@@ -4,7 +4,7 @@ import org.mapstruct.Context;
 import org.mapstruct.Mapper;
 
 import com.ds.microservices.sport.tabletennis.dto.PlayerDto;
-import com.ds.microservices.sport.tabletennis.model.Player;
+import com.ds.microservices.sport.tabletennis.entity.Player;
 
 
 @Mapper(componentModel = "spring")

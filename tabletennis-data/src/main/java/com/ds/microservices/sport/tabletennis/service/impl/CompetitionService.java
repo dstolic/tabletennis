@@ -1,68 +1,54 @@
-package com.ds.microservices.sport.tabletennis.service;
+package com.ds.microservices.sport.tabletennis.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ds.microservices.sport.tabletennis.dto.CompetitionDto;
-import com.ds.microservices.sport.tabletennis.dto.GameDto;
-import com.ds.microservices.sport.tabletennis.mapper.CompetititonMapper;
-import com.ds.microservices.sport.tabletennis.mapper.CycleAvoidMappingContext;
-import com.ds.microservices.sport.tabletennis.mapper.PlayerMapper;
-import com.ds.microservices.sport.tabletennis.model.Competition;
-import com.ds.microservices.sport.tabletennis.model.CompetitionPlayer;
-import com.ds.microservices.sport.tabletennis.model.Game;
-import com.ds.microservices.sport.tabletennis.model.Group;
-import com.ds.microservices.sport.tabletennis.model.Player;
+import com.ds.microservices.sport.tabletennis.entity.Competition;
+import com.ds.microservices.sport.tabletennis.entity.CompetitionPlayer;
+import com.ds.microservices.sport.tabletennis.entity.Game;
+import com.ds.microservices.sport.tabletennis.entity.Group;
+import com.ds.microservices.sport.tabletennis.entity.Player;
+import com.ds.microservices.sport.tabletennis.repository.CompetitionPlayerRepository;
 import com.ds.microservices.sport.tabletennis.repository.CompetitionRepository;
+import com.ds.microservices.sport.tabletennis.repository.PlayerRepository;
+import com.ds.microservices.sport.tabletennis.service.BaseCompetitionService;
 import com.ds.microservices.sport.tabletennis.util.CompetitionUtil;
 
 @Service
-public class CompetitionService {
+public class CompetitionService implements BaseCompetitionService {
 
 	protected Logger logger = Logger.getLogger(CompetitionService.class.getName());
 	
+	@Autowired
 	protected CompetitionRepository competitionRepository;
+	
+	@Autowired
+	protected CompetitionPlayerRepository competitionPlayerRepository;
 
 	@Autowired
-	private PlayerService playerService;
+	protected PlayerRepository playerRepository;
 
-	@Autowired
-	private CompetititonMapper competitionMapper;
 
-	@Autowired
-	public CompetitionService(CompetitionRepository competitionRepository) {
-		this.competitionRepository = competitionRepository;
-
-		logger.info("DES CompetitionRepository says system has " + competitionRepository.count() + " competitions.");
-	}
-
-	// List of all players
-	public List<CompetitionDto> all() {
+	// List of all competitions
+	@Override
+	public List<Competition> allCompetitions() {
 		logger.info("competition-service all() invoked.");
 		
-		List<Competition> competitions = (List<Competition>)competitionRepository.findAll();
-		
-		logger.info("competition-service all() found: " + competitions);
-
-		return competitions.stream()
-				.map(competition -> competitionMapper.competitionToCompetitionDto(competition, new CycleAvoidMappingContext()))
-				.collect(Collectors.toList());
+		return (List<Competition>)competitionRepository.findAll();
 	}
 
 	// Find competition by id
-	public CompetitionDto findById(Long id) {
+	@Override
+	public Competition findById(Long id) {
 		logger.info("competition-service findById invoked. ");
 	
-		return competitionMapper.competitionToCompetitionDto(competitionRepository.findOne(id), new CycleAvoidMappingContext());
+		return competitionRepository.findOne(id);
 	}
 
+	@Override
 	public Competition findByIdNoTransform(Long id) {
 		logger.info("competition-service findById invoked. ");
 	
@@ -70,24 +56,28 @@ public class CompetitionService {
 	}
 
 	// Find competition by id
-	public CompetitionDto findPlayersForCompetition(Long id) {
-		logger.info("competition-service findById invoked. ");
-	
-		return competitionMapper.competitionToCompetitionDto(competitionRepository.findOne(id), new CycleAvoidMappingContext());
-	}
+//	@Override
+//	public Competition findPlayersForCompetition(Long id) {
+//		logger.info("competition-service findById invoked. ");
+//	
+//		return competitionRepository.findOne(id);
+//	}
 
 	// Save/update competition
-	public CompetitionDto save(CompetitionDto competitionDTO) {
+	@Override
+	public Competition saveCompetition(Competition competition) {
 		logger.info("competition-service save invoked. ");
 
-		return competitionMapper.competitionToCompetitionDto(
-				competitionRepository.save(
-						competitionMapper.competitionDtoToCompetition(competitionDTO, new CycleAvoidMappingContext())), new CycleAvoidMappingContext());
+		return competitionRepository.save(competition);
 	}
 
 
 	// ???
-	public void delete(Long competitionId) {
+	/* (non-Javadoc)
+	 * @see com.ds.microservices.sport.tabletennis.service.AdminCompetitionService#delete(java.lang.Long)
+	 */
+	@Override
+	public void deleteCompetition(Long competitionId) {
 		logger.info("leagues-service delete() invoked: " + competitionId);
 
 		competitionRepository.delete(competitionId);
@@ -97,11 +87,12 @@ public class CompetitionService {
 	}
 
 	// Add player to competition
-	public CompetitionDto addPlayerToCompetition(Long competitionId, Long playerId) {
+	@Override
+	public Competition addPlayerToCompetition(Long competitionId, Long playerId) {
 		logger.info("player-service addPlayerToCompetition() invoked. ");
 		
 		Competition competition = competitionRepository.findOne(competitionId);
-		Player player = playerService.findOne(playerId);
+		Player player = playerRepository.findOne(playerId);
 		if (competition.getPlayers() != null) {
 //			competition.getPlayers().add(new CompetitionPlayer(player, false));
 			competition.getPlayers().add(player);
@@ -111,17 +102,18 @@ public class CompetitionService {
 		
 		
 		logger.info("player-service addPlayerToCompetition() End. " + competition);
-		return competitionMapper.competitionToCompetitionDto(competition, new CycleAvoidMappingContext());
+		return competition;
 
 
 	}
 	
 	// Remove player from competition
-	public CompetitionDto removePlayerFromCompetition(Long competitionId, Long playerId) {
+	@Override
+	public Competition removePlayerFromCompetition(Long competitionId, Long playerId) {
 		logger.info("player-service removePlayerFromCompetition() invoked. ");
 		
 		Competition competition = competitionRepository.findOne(competitionId);
-		Player player = playerService.findOne(playerId);
+		Player player = playerRepository.findOne(playerId);
 		if (competition.getPlayers() != null) {
 			competition.getPlayers().remove(player);
 
@@ -130,12 +122,16 @@ public class CompetitionService {
 		
 		
 		logger.info("player-service removePlayerFromCompetition() End. " + competition);
-		return competitionMapper.competitionToCompetitionDto(competition, new CycleAvoidMappingContext());
+		return competition;
 
 
 	}
 	
 	// Generate competition
+	/* (non-Javadoc)
+	 * @see com.ds.microservices.sport.tabletennis.service.AdminCompetitionService#generateCompetition(java.lang.Long)
+	 */
+	@Override
 	public Competition generateCompetition(Long competitionId) {
 		// TODO
 		// 1. Read configuration for competition or use default
@@ -164,7 +160,7 @@ public class CompetitionService {
 
 //		Competition competition = competitionRepository.findOne(competitionId);
 //		Set<Player> playersCandidates = competition.getPlayers();
-		List<Player> playersCandidates = playerService.findCandidatesForCompetitionNoTransform();
+		List<Player> playersCandidates = playerRepository.findByActiveOrderByPointsDesc(true);
 		
 //		Seed players determination is put on hold, no solution at the moment; possible hibernate problem
 // 		List is mocked for time being.
@@ -187,6 +183,10 @@ public class CompetitionService {
 		for (CompetitionPlayer competitionPlayer : competition.getCompetitionPlayers()) {
 			logger.info(competitionPlayer.toString());
 		}
+		
+		Iterable<CompetitionPlayer> iter = competition.getCompetitionPlayers();
+		Iterable<CompetitionPlayer> cp = competitionPlayerRepository.save(iter);
+		competition.setCompetitionPlayers((List<CompetitionPlayer>)cp);
 		competition = competitionRepository.save(competition);
 		
 		return competition;

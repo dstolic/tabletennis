@@ -1,4 +1,4 @@
-package com.ds.microservices.sport.tabletennis.model;
+package com.ds.microservices.sport.tabletennis.entity;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -18,6 +18,9 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 
 @Entity
@@ -51,7 +54,8 @@ public class Competition implements Serializable {
 	@OneToMany(mappedBy="competition", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	private List<Game> games;
 
-	@OneToMany(mappedBy="competition")
+//	@NotFound(action=NotFoundAction.IGNORE)
+	@OneToMany(mappedBy="id.competition")
 	private List<CompetitionPlayer> competitionPlayers;
     
 	@Transient

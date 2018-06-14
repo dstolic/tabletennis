@@ -4,7 +4,7 @@ import org.mapstruct.Context;
 import org.mapstruct.Mapper;
 
 import com.ds.microservices.sport.tabletennis.dto.CompetitionDto;
-import com.ds.microservices.sport.tabletennis.model.Competition;
+import com.ds.microservices.sport.tabletennis.entity.Competition;
 
 @Mapper(componentModel = "spring", uses=PlayerMapper.class	)
 public interface CompetititonMapper {

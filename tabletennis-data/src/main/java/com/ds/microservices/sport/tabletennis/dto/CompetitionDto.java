@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
-import com.ds.microservices.sport.tabletennis.model.CompetitionPlayer;
-import com.ds.microservices.sport.tabletennis.model.CompetitionProperty;
-import com.ds.microservices.sport.tabletennis.model.Group;
+import com.ds.microservices.sport.tabletennis.entity.CompetitionPlayer;
+import com.ds.microservices.sport.tabletennis.entity.CompetitionProperty;
+import com.ds.microservices.sport.tabletennis.entity.Group;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName("Competition")

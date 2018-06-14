@@ -2,6 +2,7 @@ package com.ds.microservices.sport.tabletennis.controller;
 
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -16,8 +17,8 @@ import com.ds.microservices.sport.tabletennis.dto.PlayerDto;
 import com.ds.microservices.sport.tabletennis.mapper.CycleAvoidMappingContext;
 import com.ds.microservices.sport.tabletennis.mapper.PlayerMapper;
 import com.ds.microservices.sport.tabletennis.repository.PlayerRepository;
-import com.ds.microservices.sport.tabletennis.service.CompetitionService;
-import com.ds.microservices.sport.tabletennis.service.PlayerService;
+import com.ds.microservices.sport.tabletennis.service.BaseCompetitionService;
+import com.ds.microservices.sport.tabletennis.service.BasePlayerService;
 
 @RequestMapping("/admin")
 @RestController
@@ -27,25 +28,30 @@ public class PlayerController {
 	
 	protected PlayerRepository playerRepository;
 
-	protected PlayerService playerService;
+	protected BasePlayerService playerService;
 
-	protected CompetitionService competitionService;
+	protected BaseCompetitionService competitionService;
 	
 	@Autowired
 	private PlayerMapper playerMapper;
 
 	@Autowired
-	public PlayerController(PlayerService playerService) {
+	public PlayerController(BasePlayerService playerService) {
 		this.playerService = playerService;
 	}
 
 
 	// List of all players
 	@RequestMapping(value="/players", produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<List<PlayerDto>> all() {
+	public ResponseEntity<List<PlayerDto>> allPlayers() {
 		logger.info("player-controller findPlayers() invoked.");
 		
-		return ResponseEntity.ok(playerService.all());
+		return ResponseEntity.ok(
+				playerService.allPlayers()
+				.stream()
+				.map(player -> playerMapper.playerToPlayerDto(player, new CycleAvoidMappingContext()))
+				.collect(Collectors.toList())				
+				);
 	}
 
 	// Find player by id
@@ -62,7 +68,11 @@ public class PlayerController {
 	public ResponseEntity<PlayerDto> save(@RequestBody PlayerDto playerDto) {
 		logger.info("player-controller save() invoked. ");
 		
-		return ResponseEntity.ok(playerService.save(playerDto));
+		return ResponseEntity.ok(playerMapper.playerToPlayerDto(
+									playerService.savePlayer(
+											playerMapper.playerDtoToPlayer(playerDto, new CycleAvoidMappingContext())
+											), new CycleAvoidMappingContext()
+									));
 	}
 
 	// Activate/deactivate player
@@ -70,7 +80,10 @@ public class PlayerController {
 	public ResponseEntity<PlayerDto> activatePlayers(@RequestParam Long id, @RequestParam boolean active) {
 		logger.info("player-controller activatePlayer() invoked. ");
 		
-		return ResponseEntity.ok(playerService.activatePlayer(id, active));
+		return ResponseEntity.ok(playerMapper.playerToPlayerDto(playerService.activatePlayer(id, active), new CycleAvoidMappingContext()));
+//		return playerMapper.playerToPlayerDto(
+//				playerRepository.save(player), new CycleAvoidMappingContext());
+
 	}
 
 

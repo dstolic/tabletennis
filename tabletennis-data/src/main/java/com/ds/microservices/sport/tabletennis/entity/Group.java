@@ -1,15 +1,16 @@
-package com.ds.microservices.sport.tabletennis.model;
+package com.ds.microservices.sport.tabletennis.entity;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
+//@Entity
 public class Group implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-//	private Long competitionId;
-
+	@Id
 	private Long id;
 
 	private List<CompetitionPlayer> competitionPlayers;
@@ -33,9 +34,9 @@ public class Group implements Serializable {
 
 		if (competitionPlayers != null) {
 			for (CompetitionPlayer competitionPlayer : competitionPlayers) {
-				sum += competitionPlayer.getPlayer().getPoints();
-				if(maxPoints < competitionPlayer.getPlayer().getPoints()) {
-					maxPoints = competitionPlayer.getPlayer().getPoints();
+				sum += competitionPlayer.getId().getPlayer().getPoints();
+				if(maxPoints < competitionPlayer.getId().getPlayer().getPoints()) {
+					maxPoints = competitionPlayer.getId().getPlayer().getPoints();
 				}
 			}			
 		}

@@ -16,10 +16,11 @@ import com.ds.microservices.sport.tabletennis.config.CompetitionConfiguration;
 import com.ds.microservices.sport.tabletennis.dto.CompetitionDto;
 import com.ds.microservices.sport.tabletennis.dto.GameDto;
 import com.ds.microservices.sport.tabletennis.dto.PlayerDto;
-import com.ds.microservices.sport.tabletennis.model.Competition;
-import com.ds.microservices.sport.tabletennis.service.CompetitionService;
-import com.ds.microservices.sport.tabletennis.service.GameService;
-import com.ds.microservices.sport.tabletennis.service.PlayerService;;
+import com.ds.microservices.sport.tabletennis.entity.Competition;
+import com.ds.microservices.sport.tabletennis.mapper.GameMapper;
+import com.ds.microservices.sport.tabletennis.service.BaseCompetitionService;
+import com.ds.microservices.sport.tabletennis.service.BaseGameService;
+import com.ds.microservices.sport.tabletennis.service.BasePlayerService;;
 
 
 @RequestMapping("/admin")
@@ -29,16 +30,16 @@ public class GameController {
 	protected Logger logger = Logger.getLogger(GameController.class.getName());
 	
 	@Autowired
-	protected CompetitionService competitionService;
+	protected BaseCompetitionService competitionService;
 	
 	@Autowired
-	protected PlayerService playerService;
+	protected BasePlayerService playerService;
 	
 	@Autowired
-	protected GameService gameService;
+	protected BaseGameService gameService;
 	
 	@Autowired
-	public GameController(CompetitionService competitionService) {
+	public GameController(BaseCompetitionService competitionService) {
 		this.competitionService = competitionService;
 	}
 

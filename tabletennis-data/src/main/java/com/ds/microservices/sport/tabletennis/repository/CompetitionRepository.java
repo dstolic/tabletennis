@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-import com.ds.microservices.sport.tabletennis.model.Competition;
-import com.ds.microservices.sport.tabletennis.model.Player;
+import com.ds.microservices.sport.tabletennis.entity.Competition;
+import com.ds.microservices.sport.tabletennis.entity.Player;
 
 
 public interface CompetitionRepository extends PagingAndSortingRepository<Competition, Long> {

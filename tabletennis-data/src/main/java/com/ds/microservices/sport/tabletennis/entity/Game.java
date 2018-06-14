@@ -1,4 +1,4 @@
-package com.ds.microservices.sport.tabletennis.model;
+package com.ds.microservices.sport.tabletennis.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;

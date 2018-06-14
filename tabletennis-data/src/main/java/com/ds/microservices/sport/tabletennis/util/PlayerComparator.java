@@ -2,7 +2,7 @@ package com.ds.microservices.sport.tabletennis.util;
 
 import java.util.Comparator;
 
-import com.ds.microservices.sport.tabletennis.model.Player;
+import com.ds.microservices.sport.tabletennis.entity.Player;
 
 public class PlayerComparator implements Comparator<Player> {
 

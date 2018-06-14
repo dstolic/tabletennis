@@ -1,2 +1,7 @@
 /target/
 /bin/
+/.settings/
+.project
+.classpath
+j.bat
+m.bat

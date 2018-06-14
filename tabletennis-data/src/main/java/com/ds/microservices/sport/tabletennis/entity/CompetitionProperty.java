@@ -1,4 +1,4 @@
-package com.ds.microservices.sport.tabletennis.model;
+package com.ds.microservices.sport.tabletennis.entity;
 
 import java.io.Serializable;
 
@@ -12,7 +12,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 @Entity

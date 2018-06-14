@@ -21,6 +21,8 @@ public class CompetitionDto implements Serializable {
 
 	private boolean completed;
 
+	private boolean current;
+
 	private Set<PlayerDto> players;
 
 //	@JsonIgnore
@@ -105,18 +107,26 @@ public class CompetitionDto implements Serializable {
 		this.games = games;
 	}
 
-	@Override
-	public String toString() {
-		return "CompetitionDto [id=" + id + ", description=" + description + ", name=" + name + ", players=" + players
-				+ "]";
-	}
-
 	public List<CompetitionPlayer> getCompetitionPlayers() {
 		return competitionPlayers;
 	}
 
 	public void setCompetitionPlayers(List<CompetitionPlayer> competitionPlayers) {
 		this.competitionPlayers = competitionPlayers;
+	}
+
+	public boolean isCurrent() {
+		return current;
+	}
+
+	public void setCurrent(boolean current) {
+		this.current = current;
+	}
+
+	@Override
+	public String toString() {
+		return "CompetitionDto [id=" + id + ", description=" + description + ", name=" + name + ", players=" + players
+				+ "]";
 	}
 
 }

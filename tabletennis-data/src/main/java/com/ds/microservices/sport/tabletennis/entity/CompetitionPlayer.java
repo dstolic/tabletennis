@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 @Entity
 @Table(name="competition_player")
@@ -16,9 +18,13 @@ public class CompetitionPlayer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
+//	@JsonManagedReference
+	@JsonIgnoreProperties({"competition", "player"})
 	private CompetitionPlayerPK id;
 
 	private boolean seed;
+
+	private boolean active;
 
 	@Column(name="group_num")
 	private Long groupNum;
@@ -53,6 +59,14 @@ public class CompetitionPlayer implements Serializable {
 	@Override
 	public String toString() {
 		return "CompetitionPlayer [id=" + id + ", seed=" + seed + ", groupNum=" + groupNum + "]";
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
 

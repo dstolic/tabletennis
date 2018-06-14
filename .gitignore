@@ -1,2 +1,6 @@
 
 microservices-sport-tabletennis-data/.classpath
+mapstruct-examples/
+microservices-sport-tabletennis-data/
+tabletennis-eureka-server/
+tabletennis-web/

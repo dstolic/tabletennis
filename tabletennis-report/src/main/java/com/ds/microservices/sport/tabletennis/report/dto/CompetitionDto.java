@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
-import com.ds.microservices.sport.tabletennis.report.model.CompetitionPlayer;
-import com.ds.microservices.sport.tabletennis.report.model.CompetitionProperty;
-import com.ds.microservices.sport.tabletennis.report.model.Group;
+import com.ds.microservices.sport.tabletennis.report.entity.CompetitionPlayer;
+import com.ds.microservices.sport.tabletennis.report.entity.CompetitionProperty;
+import com.ds.microservices.sport.tabletennis.report.entity.Group;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName("Competition")
@@ -20,6 +20,8 @@ public class CompetitionDto implements Serializable {
 	private String name;
 
 	private boolean completed;
+
+	private boolean current;
 
 	private Set<PlayerDto> players;
 
@@ -105,18 +107,26 @@ public class CompetitionDto implements Serializable {
 		this.games = games;
 	}
 
-	@Override
-	public String toString() {
-		return "CompetitionDto [id=" + id + ", description=" + description + ", name=" + name + ", players=" + players
-				+ "]";
-	}
-
 	public List<CompetitionPlayer> getCompetitionPlayers() {
 		return competitionPlayers;
 	}
 
 	public void setCompetitionPlayers(List<CompetitionPlayer> competitionPlayers) {
 		this.competitionPlayers = competitionPlayers;
+	}
+
+	@Override
+	public String toString() {
+		return "CompetitionDto [id=" + id + ", description=" + description + ", name=" + name + ", players=" + players
+				+ "]";
+	}
+
+	public boolean isCurrent() {
+		return current;
+	}
+
+	public void setCurrent(boolean current) {
+		this.current = current;
 	}
 
 }

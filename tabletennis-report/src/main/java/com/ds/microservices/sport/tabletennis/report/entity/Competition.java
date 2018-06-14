@@ -1,4 +1,4 @@
-package com.ds.microservices.sport.tabletennis.report.model;
+package com.ds.microservices.sport.tabletennis.report.entity;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -35,6 +35,8 @@ public class Competition implements Serializable {
 	private String name;
 
 	private boolean completed;
+
+	private boolean current;
 
 //    @ManyToMany(fetch = FetchType.EAGER)
 //	@JoinTable(name="competition_player", 
@@ -177,6 +179,14 @@ public class Competition implements Serializable {
 	public String toString() {
 		return "Competition [id=" + id + ", description=" + description + ", name=" + name + ", players=" + players
 				+ "]";
+	}
+
+	public boolean isCurrent() {
+		return current;
+	}
+
+	public void setCurrent(boolean current) {
+		this.current = current;
 	}
 
 }

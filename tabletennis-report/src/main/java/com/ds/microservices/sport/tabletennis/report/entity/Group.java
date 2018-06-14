@@ -1,4 +1,4 @@
-package com.ds.microservices.sport.tabletennis.report.model;
+package com.ds.microservices.sport.tabletennis.report.entity;
 
 import java.io.Serializable;
 import java.util.List;

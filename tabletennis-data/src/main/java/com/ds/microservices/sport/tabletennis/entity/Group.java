@@ -15,6 +15,8 @@ public class Group implements Serializable {
 
 	private List<CompetitionPlayer> competitionPlayers;
 	
+	private String name;
+	
 	public Long getId() {
 		return id;
 	}
@@ -50,6 +52,14 @@ public class Group implements Serializable {
 
 	public void setCompetitionPlayers(List<CompetitionPlayer> competitionPlayers) {
 		this.competitionPlayers = competitionPlayers;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

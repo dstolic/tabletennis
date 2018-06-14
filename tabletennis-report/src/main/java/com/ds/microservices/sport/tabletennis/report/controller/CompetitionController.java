@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 //import com.ds.microservices.sport.tabletennis.report.config.CompetitionConfiguration;
 import com.ds.microservices.sport.tabletennis.report.dto.CompetitionDto;
+import com.ds.microservices.sport.tabletennis.report.mapper.CompetititonMapper;
+import com.ds.microservices.sport.tabletennis.report.mapper.CycleAvoidMappingContext;
 import com.ds.microservices.sport.tabletennis.report.service.CompetitionService;;
 
 
@@ -23,16 +25,19 @@ public class CompetitionController {
 	@Autowired
 	protected CompetitionService competitionService;
 	
-//	@Autowired
-//	protected CompetitionConfiguration competitionConfiguration;
-	
+	@Autowired
+	protected CompetititonMapper competitionMapper;
 
-	// Find competition by id
-	@RequestMapping(value="/competition/{id}", produces=MediaType.APPLICATION_JSON_UTF8_VALUE, method=RequestMethod.GET)
-	public ResponseEntity<CompetitionDto> findById(@PathVariable("id") Long id) {
-		logger.info("competetion-controller findById() invoked: " + id);
+	
+	// Find current competition
+	@RequestMapping(value="/competition", produces=MediaType.APPLICATION_JSON_UTF8_VALUE, method=RequestMethod.GET)
+	public ResponseEntity<CompetitionDto> findCurrentCompetition() {
+		logger.info("competetion-controller findCurrentCompetition() start");
 		
-		return ResponseEntity.ok(competitionService.findById(id));
+		return ResponseEntity.ok(
+				competitionMapper.competitionToCompetitionDto(
+						competitionService.findByCurrent(), new CycleAvoidMappingContext()
+					));
 
 	}
 	

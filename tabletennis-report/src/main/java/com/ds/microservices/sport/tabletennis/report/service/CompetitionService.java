@@ -5,10 +5,7 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ds.microservices.sport.tabletennis.report.mapper.CompetititonMapper;
-import com.ds.microservices.sport.tabletennis.report.dto.CompetitionDto;
-import com.ds.microservices.sport.tabletennis.report.mapper.CycleAvoidMappingContext;
-import com.ds.microservices.sport.tabletennis.report.model.Competition;
+import com.ds.microservices.sport.tabletennis.report.entity.Competition;
 import com.ds.microservices.sport.tabletennis.report.repository.CompetitionRepository;
 
 @Service
@@ -19,16 +16,11 @@ public class CompetitionService {
 	@Autowired
 	protected CompetitionRepository competitionRepository;
 
-	@Autowired
-	private CompetititonMapper competitionMapper;
-
-
-
 	// Find competition by id
-	public CompetitionDto findById(Long id) {
+	public Competition findById(Long id) {
 		logger.info("competition-service findById invoked. ");
 	
-		return competitionMapper.competitionToCompetitionDto(competitionRepository.findById(id).get(), new CycleAvoidMappingContext());
+		return competitionRepository.findById(id).get();
 	}
 
 	public Competition findByIdNoTransform(Long id) {
@@ -37,4 +29,9 @@ public class CompetitionService {
 		return competitionRepository.findById(id).get();
 	}
 
+	public Competition findByCurrent() {
+		logger.info("competition-service findById invoked. ");
+	
+		return competitionRepository.findByCurrent(true);
+	}
 }

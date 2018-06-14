@@ -27,7 +27,7 @@ public class GatewayController {
 	@RequestMapping(value="/competition", method = RequestMethod.GET)
 	public void competition(HttpServletResponse httpServletResponse) throws IOException {
 		logger.info("competition start");
-        httpServletResponse.sendRedirect("http://localhost:3333/competition/1");
+        httpServletResponse.sendRedirect("http://localhost:3333/competition");
 
 	}
 	

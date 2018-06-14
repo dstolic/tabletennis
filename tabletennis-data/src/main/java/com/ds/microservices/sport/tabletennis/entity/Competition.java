@@ -39,6 +39,8 @@ public class Competition implements Serializable {
 
 	private boolean completed;
 
+	private boolean current;
+
 //    @ManyToMany(fetch = FetchType.EAGER)
 //	@JoinTable(name="competition_player", 
 //			joinColumns = @JoinColumn(name="competition_id", referencedColumnName="id"),
@@ -57,12 +59,6 @@ public class Competition implements Serializable {
 //	@NotFound(action=NotFoundAction.IGNORE)
 	@OneToMany(mappedBy="id.competition")
 	private List<CompetitionPlayer> competitionPlayers;
-    
-	@Transient
-	private Map<String, CompetitionProperty> propertiesMap;
-	
-	@Transient
-	private Map<CompetitionPlayerPK, CompetitionPlayer> competitionPlayerMap;
     
 	@Transient
 	private List<Group> groups;
@@ -117,34 +113,6 @@ public class Competition implements Serializable {
 		this.properties = properties;
 	}
 
-	public Map<String, CompetitionProperty> getPropertiesMap() {
-		if(propertiesMap == null) {
-			propertiesMap = new ConcurrentHashMap<>();
-			if(this.getProperties() != null) {
-				this.getProperties().forEach(prop -> propertiesMap.put(prop.getName(), prop));
-			}
-		}
-		return propertiesMap;
-	}
-
-	public void setPropertiesMap(Map<String, CompetitionProperty> propertiesMap) {
-		this.propertiesMap = propertiesMap;
-	}
-
-	public Map<CompetitionPlayerPK, CompetitionPlayer> getCompetitionPlayersMap() {
-		if(competitionPlayerMap == null) {
-			competitionPlayerMap = new ConcurrentHashMap<>();
-			if(this.getCompetitionPlayers() != null) {
-				this.getCompetitionPlayers().forEach(cp -> competitionPlayerMap.put(cp.getId(), cp));
-			}
-		}
-		return competitionPlayerMap;
-	}
-
-	public void setCompetitionPlayersMap(Map<CompetitionPlayerPK, CompetitionPlayer> competitionPlayerMap) {
-		this.competitionPlayerMap = competitionPlayerMap;
-	}
-
     public List<Group> getGroups() {
 		return groups;
 	}
@@ -175,6 +143,14 @@ public class Competition implements Serializable {
 
 	public void setCompetitionPlayers(List<CompetitionPlayer> competitionPlayers) {
 		this.competitionPlayers = competitionPlayers;
+	}
+
+	public boolean isCurrent() {
+		return current;
+	}
+
+	public void setCurrent(boolean current) {
+		this.current = current;
 	}
 
 	@Override

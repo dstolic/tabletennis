@@ -29,7 +29,7 @@ public class PlayerService implements BasePlayerService {
 	// Find player by id
 	@Override
 	public Player findOne(Long id) {
-		return playerRepository.findOne(id);
+		return playerRepository.findById(id).get();
 	}
 
 	// Save/update player
@@ -45,7 +45,7 @@ public class PlayerService implements BasePlayerService {
 	public Player activatePlayer(Long id, boolean active) {
 		logger.info("player-service activatePlayer() invoked: ");
 		
-		Player player = playerRepository.findOne(id);
+		Player player = playerRepository.findById(id).get();
 		player.setActive(active);
 		
 		return playerRepository.save(player);

@@ -11,7 +11,7 @@ public class GameDto implements Serializable {
 
 	private Long id;
 
-	private byte finished;
+	private boolean finished;
 
 	private int pointsAway;
 
@@ -39,11 +39,11 @@ public class GameDto implements Serializable {
 		this.id = id;
 	}
 
-	public byte getFinished() {
+	public boolean getFinished() {
 		return this.finished;
 	}
 
-	public void setFinished(byte finished) {
+	public void setFinished(boolean finished) {
 		this.finished = finished;
 	}
 

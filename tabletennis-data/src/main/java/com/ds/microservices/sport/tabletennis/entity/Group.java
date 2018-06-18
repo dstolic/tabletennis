@@ -3,19 +3,41 @@ package com.ds.microservices.sport.tabletennis.entity;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
-//@Entity
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity
+@Table(name="competition_group")
+@NamedQuery(name="Group.findAll", query="SELECT g FROM Group g")
 public class Group implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 
+//	@OneToMany(mappedBy="group")
+	@JsonIgnore
+	@Transient
 	private List<CompetitionPlayer> competitionPlayers;
 	
 	private String name;
+	
+	@ManyToOne
+	@JoinColumn(name="competition_id")
+	@JsonIgnore
+	private Competition competition;
 	
 	public Long getId() {
 		return id;
@@ -60,6 +82,14 @@ public class Group implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Competition getCompetition() {
+		return competition;
+	}
+
+	public void setCompetition(Competition competition) {
+		this.competition = competition;
 	}
 
 }

@@ -46,21 +46,19 @@ public class Competition implements Serializable {
 //			joinColumns = @JoinColumn(name="competition_id", referencedColumnName="id"),
 //			inverseJoinColumns = @JoinColumn (name="player_id", referencedColumnName="id")
 //	)
-	@Transient
-	private Set<Player> players;
 
-	@OneToMany
-	@JoinColumn(name="competition_id")
+//	@JoinColumn(name="competition_id")
+	@OneToMany(mappedBy="competition")
     private Set<CompetitionProperty> properties;
 	
 	@OneToMany(mappedBy="competition", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	private List<Game> games;
 
-//	@NotFound(action=NotFoundAction.IGNORE)
 	@OneToMany(mappedBy="id.competition")
 	private List<CompetitionPlayer> competitionPlayers;
-    
-	@Transient
+
+	@OneToMany(mappedBy="competition")
+//	@Transient
 	private List<Group> groups;
     
 	public Competition() {
@@ -90,21 +88,6 @@ public class Competition implements Serializable {
 		this.name = name;
 	}
 
-	public Set<Player> getPlayers() {
-		return players;
-	}
-
-	public void setPlayers(Set<Player> players) {
-		this.players = players;
-	}
-
-	public void addPlayer(Player player) {
-		if (players == null) {
-			players = new HashSet<Player>();
-		}
-		players.add(player);
-	}
-	
 	public Set<CompetitionProperty> getProperties() {
 		return properties;
 	}
@@ -155,7 +138,7 @@ public class Competition implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Competition [id=" + id + ", description=" + description + ", name=" + name + ", players=" + players
+		return "Competition [id=" + id + ", description=" + description + ", name=" + name + ", competitionPlayers=" + competitionPlayers
 				+ "]";
 	}
 

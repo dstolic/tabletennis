@@ -5,6 +5,11 @@ Table tennis app contains 3 microservices.
 2. tabletennis-report - Client service. Shows data for current competition only.
 3. tabletennis-gateway - Gateway service.
 
+Commit 15/6:
+- Group as entity.
+- pom.xml changed to suppose Spring boot 2.0.2
+
+
 Commit 14/6:
 - 'model' package renamed to 'entity'
 - Added temporary solution in CompetitionService to avoid Hibernate save() problem.
@@ -19,6 +24,9 @@ Commit 13/6:
 	a) @EmbeddedId instead of @IdClass
 	b) Reference to Competition and Player instead of just id's
 	
+
+PROBLEMS: 
+- Hibernate problem with Group ID (in progress)
 	
 TODO: 
 - Group as entity.

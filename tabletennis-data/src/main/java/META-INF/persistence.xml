@@ -3,5 +3,9 @@
 	<persistence-unit name="Generator">
 		<class>com.ds.microservices.sport.tabletennis.entity.Player</class>
 		<class>com.ds.microservices.sport.tabletennis.entity.Competition</class>
+		<class>com.ds.microservices.sport.tabletennis.entity.CompetitionPlayerPK</class>
+		<class>com.ds.microservices.sport.tabletennis.entity.CompetitionProperty</class>
+		<class>com.ds.microservices.sport.tabletennis.entity.Game</class>
+		<class>com.ds.microservices.sport.tabletennis.entity.Group</class>
 	</persistence-unit>
 </persistence>

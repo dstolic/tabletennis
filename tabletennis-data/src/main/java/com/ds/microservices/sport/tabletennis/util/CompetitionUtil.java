@@ -121,6 +121,7 @@ public class CompetitionUtil {
 		List<CompetitionPlayer> sortedPlayers = competition.getCompetitionPlayers();
 		logger.info("sortedPlayers " + sortedPlayers.size());
 		logger.info("number_of_seeds " + number_of_seeds);
+		char groupName = 'A';
 		for (int i = 1; i <= number_of_seeds; i++) {
 			Group group = new Group();
 			Long groupId = new Long(i);
@@ -129,10 +130,14 @@ public class CompetitionUtil {
 			CompetitionPlayer competitionPlayer = sortedPlayers.get(i-1);
 			competitionPlayer.setSeed(true);
 			competitionPlayer.setActive(true);
-			competitionPlayer.setGroupNum(groupId);
+			competitionPlayer.setGroup(group);
+			
 			groupCompetitionPlayers.add(competitionPlayer);
 			group.setCompetitionPlayers(groupCompetitionPlayers);
-			group.setId(groupId);
+//			group.setId(groupId);
+			group.setName(""+groupName);
+			groupName++;
+			group.setCompetition(competition);
 			
 			groups.add(group);
 		}
@@ -166,7 +171,7 @@ public class CompetitionUtil {
 				int randomIndex = ThreadLocalRandom.current().nextInt(0, number_to_draw);
 				logger.info("randomIndex " + randomIndex);
 				CompetitionPlayer drawPlayer = sortedPlayers.get(indexes.get(randomIndex).intValue());
-				drawPlayer.setGroupNum(groups.get(number_to_draw-1).getId());
+				drawPlayer.setGroup(groups.get(number_to_draw-1));
 				groups.get(number_to_draw-1).getCompetitionPlayers().add(drawPlayer);
 				indexes.remove(randomIndex);
 				number_to_draw--;
@@ -241,7 +246,7 @@ public class CompetitionUtil {
 				Game game = new Game();
 				game.setPlayerHome(first.get(i).getId().getPlayer());
 				game.setPlayerAway(second.get(i).getId().getPlayer());
-				game.setGroupNum(group.getId());
+//				game.setGroupNum(group.getId());
 				game.setRound(round);
 				game.setCompetition(competition);
 				

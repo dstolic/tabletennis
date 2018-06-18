@@ -2,11 +2,9 @@ package com.ds.microservices.sport.tabletennis.repository;
 
 import java.util.List;
 
-import org.jboss.logging.annotations.Param;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-import com.ds.microservices.sport.tabletennis.entity.Game;
 import com.ds.microservices.sport.tabletennis.entity.Player;
 
 public interface PlayerRepository extends PagingAndSortingRepository<Player, Long> {

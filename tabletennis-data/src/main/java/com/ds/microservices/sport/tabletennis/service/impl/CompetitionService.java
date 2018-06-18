@@ -3,6 +3,9 @@ package com.ds.microservices.sport.tabletennis.service.impl;
 import java.util.List;
 import java.util.logging.Logger;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,8 +14,11 @@ import com.ds.microservices.sport.tabletennis.entity.CompetitionPlayer;
 import com.ds.microservices.sport.tabletennis.entity.Game;
 import com.ds.microservices.sport.tabletennis.entity.Group;
 import com.ds.microservices.sport.tabletennis.entity.Player;
+import com.ds.microservices.sport.tabletennis.exceptions.CompetitionNotCompletedException;
 import com.ds.microservices.sport.tabletennis.repository.CompetitionPlayerRepository;
 import com.ds.microservices.sport.tabletennis.repository.CompetitionRepository;
+import com.ds.microservices.sport.tabletennis.repository.GameRepository;
+import com.ds.microservices.sport.tabletennis.repository.GroupRepository;
 import com.ds.microservices.sport.tabletennis.repository.PlayerRepository;
 import com.ds.microservices.sport.tabletennis.service.BaseCompetitionService;
 import com.ds.microservices.sport.tabletennis.util.CompetitionUtil;
@@ -23,6 +29,10 @@ public class CompetitionService implements BaseCompetitionService {
 	protected Logger logger = Logger.getLogger(CompetitionService.class.getName());
 	
 	@Autowired
+//	@PersistenceContext(unitName = "Competition")
+	private EntityManager entityManager;
+	
+	@Autowired
 	protected CompetitionRepository competitionRepository;
 	
 	@Autowired
@@ -30,6 +40,12 @@ public class CompetitionService implements BaseCompetitionService {
 
 	@Autowired
 	protected PlayerRepository playerRepository;
+
+	@Autowired
+	protected GameRepository gameRepository;
+
+	@Autowired
+	protected GroupRepository groupRepository;
 
 
 	// List of all competitions
@@ -45,14 +61,14 @@ public class CompetitionService implements BaseCompetitionService {
 	public Competition findById(Long id) {
 		logger.info("competition-service findById invoked. ");
 	
-		return competitionRepository.findOne(id);
+		return competitionRepository.findById(id).get();
 	}
 
 	@Override
 	public Competition findByIdNoTransform(Long id) {
 		logger.info("competition-service findById invoked. ");
 	
-		return competitionRepository.findOne(id);
+		return competitionRepository.findById(id).get();
 	}
 
 	// Find competition by id
@@ -80,7 +96,7 @@ public class CompetitionService implements BaseCompetitionService {
 	public void deleteCompetition(Long competitionId) {
 		logger.info("leagues-service delete() invoked: " + competitionId);
 
-		competitionRepository.delete(competitionId);
+		competitionRepository.deleteById(competitionId);
 		
 		logger.info("leagues-service delete() done " + competitionId);
 
@@ -91,11 +107,11 @@ public class CompetitionService implements BaseCompetitionService {
 	public Competition addPlayerToCompetition(Long competitionId, Long playerId) {
 		logger.info("player-service addPlayerToCompetition() invoked. ");
 		
-		Competition competition = competitionRepository.findOne(competitionId);
-		Player player = playerRepository.findOne(playerId);
-		if (competition.getPlayers() != null) {
+		Competition competition = competitionRepository.findById(competitionId).get();
+		Player player = playerRepository.findById(playerId).get();
+		if (competition.getCompetitionPlayers() != null) {
 //			competition.getPlayers().add(new CompetitionPlayer(player, false));
-			competition.getPlayers().add(player);
+			competition.getCompetitionPlayers().add(new CompetitionPlayer(competition, player));
 
 			competition = competitionRepository.save(competition);
 		}
@@ -112,10 +128,10 @@ public class CompetitionService implements BaseCompetitionService {
 	public Competition removePlayerFromCompetition(Long competitionId, Long playerId) {
 		logger.info("player-service removePlayerFromCompetition() invoked. ");
 		
-		Competition competition = competitionRepository.findOne(competitionId);
-		Player player = playerRepository.findOne(playerId);
-		if (competition.getPlayers() != null) {
-			competition.getPlayers().remove(player);
+		Competition competition = competitionRepository.findById(competitionId).get();
+		Player player = playerRepository.findById(playerId).get();
+		if (competition.getCompetitionPlayers() != null) {
+			competition.getCompetitionPlayers().remove(new CompetitionPlayer(competition, player));
 
 			competition = competitionRepository.save(competition);
 		}
@@ -128,11 +144,8 @@ public class CompetitionService implements BaseCompetitionService {
 	}
 	
 	// Generate competition
-	/* (non-Javadoc)
-	 * @see com.ds.microservices.sport.tabletennis.service.AdminCompetitionService#generateCompetition(java.lang.Long)
-	 */
 	@Override
-	public Competition generateCompetition(Long competitionId) {
+	public Competition generateCompetition(Long competitionId) throws CompetitionNotCompletedException {
 		// TODO
 		// 1. Read configuration for competition or use default
 		// 2. Fill players list - up to NUMBER_OF_PLAYERS (optional)
@@ -173,6 +186,12 @@ public class CompetitionService implements BaseCompetitionService {
 //		List<Player> allPlayers = playerService.allClean();
 		// Number of players and seed players are fine, continue
 		if(utils.setupCompleted(competition, autogeneratedPlayers, autogeneratedSeeds)) {
+			List<Game> gamesCheck = gameRepository.findByFinished(false);
+			logger.info("gamesCheck.isEmpty() " + gamesCheck.isEmpty());
+			if (!gamesCheck.isEmpty()) {
+				throw new CompetitionNotCompletedException();
+			}
+			
 			// determine groups
 			List<Group> groups = utils.createGroups(competition, playersCandidates, autogeneratedPlayers, autogeneratedSeeds);
 			competition.setGroups(groups);
@@ -185,13 +204,23 @@ public class CompetitionService implements BaseCompetitionService {
 			logger.info(competitionPlayer.toString());
 		}
 		
-		// Za Gagu: sledeca 3 reda(191-3) resavaju problem. Provericemo od petka ili sledece nedelje kako da ga resimo
-		// Za sada ostavljam hack u kodu da bih imao podatke za dalji rad.
-		//	"exception": "org.springframework.orm.jpa.JpaObjectRetrievalFailureException",
-		//	"message": "Unable to find com.ds.microservices.sport.tabletennis.entity.CompetitionPlayer with id CompetitionPlayerPK [competitionId=1, playerId=2]; nested exception is javax.persistence.EntityNotFoundException: Unable to find com.ds.microservices.sport.tabletennis.entity.CompetitionPlayer with id CompetitionPlayerPK [competitionId=1, playerId=2]",
+		// Za Gagu:
+		// Ne znam da li je ovo resenje ili budzevina. Ostavicu ovako za sada uz komentar u README da bi trebalo pregeldati jos jednom pre finalne verzije.
+		// Sacuvao sam prvo grupu, pa competition-player, a tek onda citav competition.
+		List<Group> groups = competition.getGroups();
+		logger.info("Groups " + groups);
+		for (Group group : groups) {
+			groupRepository.save(group);
+			entityManager.flush();
+		}
+		Iterable<Group> groupsIter = groupRepository.saveAll(groups);
+//		competition.setGroups((List<Group>)groupsIter);
+
 		Iterable<CompetitionPlayer> iter = competition.getCompetitionPlayers();
-		Iterable<CompetitionPlayer> cp = competitionPlayerRepository.save(iter);
-		competition.setCompetitionPlayers((List<CompetitionPlayer>)cp);
+		Iterable<CompetitionPlayer> cp = competitionPlayerRepository.saveAll(iter);
+//		competition.setCompetitionPlayers((List<CompetitionPlayer>)cp);
+		
+		
 		competition = competitionRepository.save(competition);
 		
 		return competition;

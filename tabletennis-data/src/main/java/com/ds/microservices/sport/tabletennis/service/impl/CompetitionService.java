@@ -29,10 +29,6 @@ public class CompetitionService implements BaseCompetitionService {
 	protected Logger logger = Logger.getLogger(CompetitionService.class.getName());
 	
 	@Autowired
-//	@PersistenceContext(unitName = "Competition")
-	private EntityManager entityManager;
-	
-	@Autowired
 	protected CompetitionRepository competitionRepository;
 	
 	@Autowired
@@ -209,10 +205,7 @@ public class CompetitionService implements BaseCompetitionService {
 		// Sacuvao sam prvo grupu, pa competition-player, a tek onda citav competition.
 		List<Group> groups = competition.getGroups();
 		logger.info("Groups " + groups);
-		for (Group group : groups) {
-			groupRepository.save(group);
-			entityManager.flush();
-		}
+
 		Iterable<Group> groupsIter = groupRepository.saveAll(groups);
 //		competition.setGroups((List<Group>)groupsIter);
 

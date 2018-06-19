@@ -172,6 +172,7 @@ public class CompetitionUtil {
 				logger.info("randomIndex " + randomIndex);
 				CompetitionPlayer drawPlayer = sortedPlayers.get(indexes.get(randomIndex).intValue());
 				drawPlayer.setGroup(groups.get(number_to_draw-1));
+				drawPlayer.setActive(true);
 				groups.get(number_to_draw-1).getCompetitionPlayers().add(drawPlayer);
 				indexes.remove(randomIndex);
 				number_to_draw--;

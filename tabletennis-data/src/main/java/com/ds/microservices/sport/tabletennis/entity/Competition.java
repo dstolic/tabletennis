@@ -1,26 +1,17 @@
 package com.ds.microservices.sport.tabletennis.entity;
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-
-import org.hibernate.annotations.NotFound;
-import org.hibernate.annotations.NotFoundAction;
 
 
 @Entity
@@ -51,13 +42,13 @@ public class Competition implements Serializable {
 	@OneToMany(mappedBy="competition")
     private Set<CompetitionProperty> properties;
 	
-	@OneToMany(mappedBy="competition", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="competition", cascade=CascadeType.ALL)
 	private List<Game> games;
 
 	@OneToMany(mappedBy="id.competition")
 	private List<CompetitionPlayer> competitionPlayers;
 
-	@OneToMany(mappedBy="competition")
+	@OneToMany(mappedBy="competition", cascade=CascadeType.ALL)
 //	@Transient
 	private List<Group> groups;
     

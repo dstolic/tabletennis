@@ -13,24 +13,18 @@ import com.ds.microservices.sport.tabletennis.gateway.config.GatewayConfiguratio
 
 
 @RestController
-public class GatewayController {
+public class AdminController {
 
-	protected Logger logger = Logger.getLogger(GatewayController.class.getName());
+	protected Logger logger = Logger.getLogger(AdminController.class.getName());
+	
+	private String SERVER = GatewayConfiguration.ADMIN_SERVER;
 	
 	// Competition
-//	@RequestMapping(value="/admin/competition", method = RequestMethod.GET)
+	@RequestMapping(value="/admin/competition", method = RequestMethod.GET)
 	public void competitionAdmin(HttpServletResponse httpServletResponse) throws IOException {
 		logger.info("redirect to " + GatewayConfiguration.ADMIN_SERVER + "/admin/competition/1");
-        httpServletResponse.sendRedirect(GatewayConfiguration.ADMIN_SERVER + "/admin/competition/1");
+        httpServletResponse.sendRedirect(SERVER + "/admin/competition/1");
 
 	}
 
-	// Competition
-//	@RequestMapping(value="/competition", method = RequestMethod.GET)
-	public void competition(HttpServletResponse httpServletResponse) throws IOException {
-		logger.info("redirect to " + GatewayConfiguration.REPORT_SERVER + "/competition");
-        httpServletResponse.sendRedirect(GatewayConfiguration.REPORT_SERVER + "/competition");
-
-	}
-	
 }

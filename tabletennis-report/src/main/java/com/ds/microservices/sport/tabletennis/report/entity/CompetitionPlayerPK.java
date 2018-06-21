@@ -1,43 +1,54 @@
 package com.ds.microservices.sport.tabletennis.report.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
 
-/**
- * The primary key class for the competition_player database table.
- * 
- */
+import javax.persistence.Embeddable;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Embeddable
 public class CompetitionPlayerPK implements Serializable {
-	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="competition_id", insertable=false, updatable=false)
-	private Long competitionId;
+//	@JsonIgnore
+//	@JsonBackReference
+	@ManyToOne
+    @JoinColumn(name = "competition_id", insertable=false, updatable=false)
+	private Competition competition;
 
-	@Column(name="player_id", insertable=false, updatable=false)
-	private Long playerId;
+//	@JsonIgnore
+//	@JsonBackReference
+	@ManyToOne
+    @JoinColumn(name = "player_id", insertable=false, updatable=false)
+	private Player player;
 
 	public CompetitionPlayerPK() {
 	}
 
-	public CompetitionPlayerPK(Long competitionId, Long playerId) {
+	public CompetitionPlayerPK(Competition competition, Player player) {
 		super();
-		this.competitionId = competitionId;
-		this.playerId = playerId;
+		this.competition = competition;
+		this.player = player;
 	}
 	
-	public Long getCompetitionId() {
-		return this.competitionId;
+	public Competition getCompetition() {
+		return competition;
 	}
-	public void setCompetitionId(Long competitionId) {
-		this.competitionId = competitionId;
+
+	public void setCompetition(Competition competition) {
+		this.competition = competition;
 	}
-	public Long getPlayerId() {
-		return this.playerId;
+
+	public Player getPlayer() {
+		return player;
 	}
-	public void setPlayerId(Long playerId) {
-		this.playerId = playerId;
+
+	public void setPlayer(Player player) {
+		this.player = player;
 	}
 
 	public boolean equals(Object other) {
@@ -49,21 +60,21 @@ public class CompetitionPlayerPK implements Serializable {
 		}
 		CompetitionPlayerPK castOther = (CompetitionPlayerPK)other;
 		return 
-			this.competitionId.equals(castOther.competitionId)
-			&& this.playerId.equals(castOther.playerId);
+			this.competition.getId().equals(castOther.getCompetition().getId())
+			&& this.player.getId().equals(castOther.getPlayer().getId());
 	}
 
 	public int hashCode() {
 		final int prime = 31;
 		int hash = 17;
-		hash = hash * prime + this.competitionId.hashCode();
-		hash = hash * prime + this.playerId.hashCode();
+		hash = hash * prime + this.competition.getId().hashCode();
+		hash = hash * prime + this.player.getId().hashCode();
 		
 		return hash;
 	}
 
 	@Override
 	public String toString() {
-		return "CompetitionPlayerPK [competitionId=" + competitionId + ", playerId=" + playerId + "]";
+		return "CompetitionPlayerPK [competitionId=" + this.competition.getId() + ", playerId=" + this.player.getId() + "]";
 	}
 }

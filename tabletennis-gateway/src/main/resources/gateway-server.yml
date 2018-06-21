@@ -9,3 +9,8 @@ spring:
 server:
   port: 4444   # HTTP (Tomcat) port
 
+admin:
+  server: "http://localhost:2222" 
+  
+report:
+  server: "http://localhost:3333"

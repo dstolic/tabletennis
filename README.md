@@ -6,6 +6,15 @@ Table tennis app contains 3 microservices.
 3. tabletennis-gateway - Gateway service.
 
 
+Commit 21/6:
+- tabletennis-report: Added few simple Unit tests.
+- tabletennis-report/gateway: Added couple use cases. Working urls are:
+	http://localhost:4444/competition
+	http://localhost:4444/competition/players
+	http://localhost:4444/competition/games
+
+	
+
 Commit 16/6:
 - Hibernate problem with Group ID : SOLVED
 - Unit testing: JUnit & Mockito: STARTED

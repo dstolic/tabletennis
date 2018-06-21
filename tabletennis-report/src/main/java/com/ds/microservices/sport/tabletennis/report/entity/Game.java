@@ -1,15 +1,20 @@
 package com.ds.microservices.sport.tabletennis.report.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
-/**
- * The persistent class for the games database table.
- * 
- */
 @Entity
 @Table(name="games")
 @NamedQuery(name="Game.findAll", query="SELECT g FROM Game g")
@@ -20,7 +25,7 @@ public class Game implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 
-	private byte finished;
+	private boolean finished;
 
 	@Column(name="points_away")
 	private int pointsAway;
@@ -54,8 +59,8 @@ public class Game implements Serializable {
 //	@Transient
 //	private Player playerAway;
 
-	@Column(name="group_num")
-	private Long groupNum;
+//	@Column(name="group_num")
+//	private Long groupNum;
 
 	private int round;
 
@@ -70,11 +75,11 @@ public class Game implements Serializable {
 		this.id = id;
 	}
 
-	public byte getFinished() {
+	public boolean getFinished() {
 		return this.finished;
 	}
 
-	public void setFinished(byte finished) {
+	public void setFinished(boolean finished) {
 		this.finished = finished;
 	}
 
@@ -126,13 +131,13 @@ public class Game implements Serializable {
 		this.playerAway = playerAway;
 	}
 
-	public Long getGroupNum() {
-		return groupNum;
-	}
-
-	public void setGroupNum(Long groupNum) {
-		this.groupNum = groupNum;
-	}
+//	public Long getGroupNum() {
+//		return groupNum;
+//	}
+//
+//	public void setGroupNum(Long groupNum) {
+//		this.groupNum = groupNum;
+//	}
 
 	public int getRound() {
 		return round;
@@ -145,7 +150,7 @@ public class Game implements Serializable {
 	@Override
 	public String toString() {
 		return "Game [id=" + id + ", competition=" + competition.getId() + ", playerHome=" + playerHome + ", playerAway="
-				+ playerAway + ", groupNum=" + groupNum + ", round=" + round + "]";
+				+ playerAway + "," + ", round=" + round + "]";
 	}
 
 }

@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ds.microservices.sport.tabletennis.config.CompetitionConfiguration;
 import com.ds.microservices.sport.tabletennis.entity.Competition;
 import com.ds.microservices.sport.tabletennis.entity.CompetitionPlayer;
 import com.ds.microservices.sport.tabletennis.entity.Game;
@@ -43,6 +44,8 @@ public class CompetitionService implements BaseCompetitionService {
 	@Autowired
 	protected GroupRepository groupRepository;
 
+	@Autowired
+	protected CompetitionConfiguration competitionConfiguration;
 
 	// List of all competitions
 	@Override
@@ -56,16 +59,21 @@ public class CompetitionService implements BaseCompetitionService {
 	@Override
 	public Competition findById(Long id) {
 		logger.info("competition-service findById invoked. ");
+		
+		logger.info("competition-service CompetitionConfiguration.FORMAT: " + competitionConfiguration.FORMAT);
+		logger.info("competition-service CompetitionConfiguration.NUMBER_OF_PLAYERS: " + competitionConfiguration.NUMBER_OF_PLAYERS);
+		logger.info("competition-service CompetitionConfiguration.NUMBER_OF_SEEDS: " + competitionConfiguration.NUMBER_OF_SEEDS);
+		
 	
 		return competitionRepository.findById(id).get();
 	}
 
-	@Override
-	public Competition findByIdNoTransform(Long id) {
-		logger.info("competition-service findById invoked. ");
-	
-		return competitionRepository.findById(id).get();
-	}
+//	@Override
+//	public Competition findByIdNoTransform(Long id) {
+//		logger.info("competition-service findById invoked. ");
+//	
+//		return competitionRepository.findById(id).get();
+//	}
 
 	// Find competition by id
 //	@Override
@@ -161,7 +169,7 @@ public class CompetitionService implements BaseCompetitionService {
 		// Their status at the start determine competition (number of points will made them seed players and so on)
 		// Player's initial status will be used during competition.
 		
-		Competition competition = findByIdNoTransform(competitionId);
+		Competition competition = findById(competitionId);
 
 		CompetitionUtil utils = new CompetitionUtil();
 		utils.init(competition);

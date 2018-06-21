@@ -12,7 +12,7 @@ public interface BaseCompetitionService {
 	// Find competition by id
 	Competition findById(Long id);
 
-	Competition findByIdNoTransform(Long id);
+//	Competition findByIdNoTransform(Long id);
 
 	// Find competition by id
 //	Competition findPlayersForCompetition(Long id);

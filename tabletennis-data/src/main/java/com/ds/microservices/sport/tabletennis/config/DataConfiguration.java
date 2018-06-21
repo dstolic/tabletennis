@@ -15,7 +15,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @Configuration
 @ComponentScan("com.ds.microservices.sport.tabletennis")
 @EntityScan("com.ds.microservices.sport.tabletennis.entity")
-@EnableJpaRepositories(basePackages = {"com.ds.microservices.sport.tabletennis.entity", "com.ds.microservices.sport.tabletennis.repository"})
+@EnableJpaRepositories(basePackages = {
+		"com.ds.microservices.sport.tabletennis.entity", 
+		"com.ds.microservices.sport.tabletennis.repository"
+})
 @PropertySource("classpath:db-config.properties")
 public class DataConfiguration {
 

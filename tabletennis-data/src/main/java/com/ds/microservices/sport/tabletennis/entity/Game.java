@@ -6,10 +6,6 @@ import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
-/**
- * The persistent class for the games database table.
- * 
- */
 @Entity
 @Table(name="games")
 @NamedQuery(name="Game.findAll", query="SELECT g FROM Game g")

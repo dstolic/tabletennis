@@ -2,61 +2,44 @@ package com.ds.microservices.sport.tabletennis.report.entity;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
-@IdClass(CompetitionPlayerPK.class)
+@Table(name="competition_player")
+@NamedQuery(name="CompetitionPlayer.findAll", query="SELECT c FROM CompetitionPlayer c")
 public class CompetitionPlayer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	protected Long competitionId;
-	protected Long playerId;
-
-//	@EmbeddedId
-	@Id
+	@EmbeddedId
+//	@JsonManagedReference
+	@JsonIgnoreProperties({"competition", "player"})
 	private CompetitionPlayerPK id;
 
-	//bi-directional many-to-one association to Competition
-	@JsonIgnore
-	@ManyToOne
-    @JoinColumn(name = "competition_id", insertable=true, updatable=false)
-	private Competition competition;
-
-	//bi-directional many-to-one association to Player
-	@ManyToOne
-    @JoinColumn(name = "player_id", insertable=true, updatable=false)
-	private Player player;
-
-//	private Player player;
-	
 	private boolean seed;
 
-	@Column(name="group_num")
-	private Long groupNum;
+	private boolean active;
+
+	@ManyToOne
+	@JoinColumn(name="group_id")
+//	@JsonIgnore
+//	@Transient
+	private Group group;
 
 	public CompetitionPlayer() {
 	}
 	
-	public CompetitionPlayer(Player player, boolean seed) {
-		this.player = player;
-		this.seed = seed;
-	}
-
-	public Player getPlayer() {
-		return player;
-	}
-
-	public void setPlayer(Player player) {
-		this.player = player;
+	public CompetitionPlayer(Competition competition, Player player) {
+		this.id = new CompetitionPlayerPK(competition, player);
 	}
 
 	public boolean isSeed() {
@@ -67,14 +50,6 @@ public class CompetitionPlayer implements Serializable {
 		this.seed = seed;
 	}
 
-	public Long getGroupNum() {
-		return groupNum;
-	}
-
-	public void setGroupNum(Long groupNum) {
-		this.groupNum = groupNum;
-	}
-
 	public CompetitionPlayerPK getId() {
 		return id;
 	}
@@ -83,17 +58,25 @@ public class CompetitionPlayer implements Serializable {
 		this.id = id;
 	}
 
-	public Competition getCompetition() {
-		return competition;
-	}
-
-	public void setCompetition(Competition competition) {
-		this.competition = competition;
-	}
-
 	@Override
 	public String toString() {
-		return "CompetitionPlayer [id=" + id + ", seed=" + seed + ", groupNum=" + groupNum + "]";
+		return "CompetitionPlayer [id=" + id + ", seed=" + seed +  "]";
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public Group getGroup() {
+		return group;
+	}
+
+	public void setGroup(Group group) {
+		this.group = group;
 	}
 
 

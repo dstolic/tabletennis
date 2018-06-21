@@ -13,6 +13,8 @@ public class CompetitionPlayerDto implements Serializable {
 	private PlayerDto player;
 
 	private boolean seed;
+	
+	private boolean active;
 
 	private Long groupNum;
 
@@ -57,6 +59,14 @@ public class CompetitionPlayerDto implements Serializable {
 
 	public void setGroupNum(Long groupNum) {
 		this.groupNum = groupNum;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 	
 

@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -25,9 +26,8 @@ public class Group implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 
-//	@OneToMany(mappedBy="group")
+	@OneToMany(mappedBy="group")
 	@JsonIgnore
-	@Transient
 	private List<CompetitionPlayer> competitionPlayers;
 	
 	private String name;
@@ -43,11 +43,6 @@ public class Group implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	@Override
-	public String toString() {
-		return "Group [id=" + id + ", points=" + groupPoints() + ", players=" + competitionPlayers + "]";
 	}
 
 	public int groupPoints() {
@@ -88,6 +83,11 @@ public class Group implements Serializable {
 
 	public void setCompetition(Competition competition) {
 		this.competition = competition;
+	}
+
+	@Override
+	public String toString() {
+		return "Group [id=" + id + ", points=" + groupPoints() + ", players=" + competitionPlayers + "]";
 	}
 
 }

@@ -21,7 +21,7 @@
 
 	<properties>
 		<main.basedir>${basedir}/../..</main.basedir>
-		<start-class>com.ds.microservices.sport.tabletennis.PlayersServer</start-class>
+		<start-class>com.ds.microservices.sport.tabletennis.AdminServer</start-class>
 		<java.version>1.8</java.version>
 		<org.mapstruct.version>1.2.0.Final</org.mapstruct.version>
 		<m2e.apt.activation>jdt_apt</m2e.apt.activation>		

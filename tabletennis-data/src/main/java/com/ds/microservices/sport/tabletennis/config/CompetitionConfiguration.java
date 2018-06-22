@@ -22,6 +22,9 @@ public class CompetitionConfiguration {
 	@Value("${competition.default.NUMBER_OF_SEEDS}")
 	public int NUMBER_OF_SEEDS;
 
+	@Value("${competition.default.TYPE}")
+	public String TYPE;
+
 	public String getFORMAT() {
 		return FORMAT;
 	}
@@ -44,6 +47,14 @@ public class CompetitionConfiguration {
 
 	public void setNUMBER_OF_SEEDS(int nUMBER_OF_SEEDS) {
 		NUMBER_OF_SEEDS = nUMBER_OF_SEEDS;
+	}
+
+	public String getTYPE() {
+		return TYPE;
+	}
+
+	public void setTYPE(String tYPE) {
+		TYPE = tYPE;
 	}
 
 }

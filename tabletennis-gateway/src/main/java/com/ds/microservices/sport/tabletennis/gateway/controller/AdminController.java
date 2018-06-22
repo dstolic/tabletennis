@@ -21,10 +21,25 @@ public class AdminController {
 	
 	// Competition
 	@RequestMapping(value="/admin/competition", method = RequestMethod.GET)
-	public void competitionAdmin(HttpServletResponse httpServletResponse) throws IOException {
+	public void competition(HttpServletResponse httpServletResponse) throws IOException {
 		logger.info("redirect to " + GatewayConfiguration.ADMIN_SERVER + "/admin/competition/1");
         httpServletResponse.sendRedirect(SERVER + "/admin/competition/1");
 
 	}
 
+	// Competition
+	@RequestMapping(value="/admin/competition/{id}/generate", method = RequestMethod.GET)
+	public void generateCompetition(HttpServletResponse httpServletResponse) throws IOException {
+		logger.info("redirect to " + GatewayConfiguration.ADMIN_SERVER + "/admin/competition/1/generate");
+        httpServletResponse.sendRedirect(SERVER + "/admin/competition/1/generate");
+
+	}
+
+	// Competition
+	@RequestMapping(value="/admin/competition/{id}/generate2", method = RequestMethod.GET)
+	public void generateCompetition2(HttpServletResponse httpServletResponse) throws IOException {
+		logger.info("redirect to " + GatewayConfiguration.ADMIN_SERVER + "/admin/competition/1/generate2");
+        httpServletResponse.sendRedirect(SERVER + "/admin/competition/1/generate2");
+
+	}
 }

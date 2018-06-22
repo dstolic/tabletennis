@@ -8,26 +8,26 @@ import com.ds.microservices.sport.tabletennis.entity.Player;
 public class CompetitionPlayerPKDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private Competition competition;
+	private CompetitionDto competition;
 
-	private Player player;
+	private PlayerDto player;
 
 	public CompetitionPlayerPKDto() {
 	}
 
-	public Competition getCompetition() {
+	public CompetitionDto getCompetition() {
 		return competition;
 	}
 
-	public void setCompetition(Competition competition) {
+	public void setCompetition(CompetitionDto competition) {
 		this.competition = competition;
 	}
 
-	public Player getPlayer() {
+	public PlayerDto getPlayer() {
 		return player;
 	}
 
-	public void setPlayer(Player player) {
+	public void setPlayer(PlayerDto player) {
 		this.player = player;
 	}
 

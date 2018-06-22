@@ -279,6 +279,67 @@ public class CompetitionUtil {
 		return games;
 	}
 
+	public void generateSecondPart(Competition competition) {
+		logger.info("competition-util generateSecondPart() ");
+
+		logger.info("GROUPS  " + competition.getGroups().size());
+		logger.info("PLAYERS " + competition.getCompetitionPlayers().size());
+		logger.info("GAMES   " + competition.getGames().size());
+		
+		// temporary, for testing
+		generateResults(competition);
+		groupSort(competition);
+		
+		
+	}
+
+	public void generateResults(Competition competition) {
+		logger.info("GAMES   " + competition.getGames().size());
+		
+		for (Game game : competition.getGames()) {
+			generateGameResult(game);
+		}
+	}
+	
+	public void generateGameResult(Game game) {
+		Player home = game.getPlayerHome();
+		Player away = game.getPlayerAway();
+		
+		logger.info("Home " + home.getPoints());
+		logger.info("Away " + away.getPoints());
+		
+		int hPoints = home.getPoints().intValue();
+		int aPoints = away.getPoints().intValue();
+		
+		int number_to_draw = hPoints + aPoints;
+		int randomIndex = ThreadLocalRandom.current().nextInt(0, number_to_draw);
+		logger.info("randomIndex " + randomIndex);
+		
+		if (randomIndex < Math.min(hPoints, aPoints)) {
+			game.setPointsAway(3);
+		} else {
+			game.setPointsHome(3);
+		}
+		
+		if (game.getPointsAway() > game.getPointsHome()) {
+			logger.info("Game away win: " + away.getFirstName() + " " + away.getLastName() + " won 0:3");
+		} else {
+			logger.info("Game home win: " + home.getFirstName() + " " + home.getLastName() + " won 3:0");
+		}
+		
+		
+	}
+	
+	
+	public void groupSort(Competition competition) {
+		logger.info("groupSort  ");
+		List<Group> groups = competition.getGroups();
+		for (Group group : groups) {
+			logger.info("group  " + group);
+		}
+
+	}
+	
 	public static void main(String[] args) {
 
 		int rounds = 5;

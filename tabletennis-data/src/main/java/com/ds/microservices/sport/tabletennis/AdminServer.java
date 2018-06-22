@@ -11,13 +11,13 @@ import com.ds.microservices.sport.tabletennis.config.DataConfiguration;;
 
 @EnableAutoConfiguration
 @Import(DataConfiguration.class)
-public class PlayersServer {
+public class AdminServer {
 	
-	protected Logger logger = Logger.getLogger(PlayersServer.class.getName());
+	protected Logger logger = Logger.getLogger(AdminServer.class.getName());
 
 	public static void main(String[] args) {
-		System.setProperty("spring.config.name" , "players-server");
-		SpringApplication.run(PlayersServer.class, args);
+		System.setProperty("spring.config.name" , "admin-server");
+		SpringApplication.run(AdminServer.class, args);
 	}
 
 }

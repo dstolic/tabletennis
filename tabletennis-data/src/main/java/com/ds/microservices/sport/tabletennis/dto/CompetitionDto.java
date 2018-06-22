@@ -15,6 +15,8 @@ public class CompetitionDto implements Serializable {
 
 	private Long id;
 
+	private String type;
+
 	private String description;
 
 	private String name;
@@ -127,6 +129,14 @@ public class CompetitionDto implements Serializable {
 	public String toString() {
 		return "CompetitionDto [id=" + id + ", description=" + description + ", name=" + name + ", players=" + players
 				+ "]";
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 }

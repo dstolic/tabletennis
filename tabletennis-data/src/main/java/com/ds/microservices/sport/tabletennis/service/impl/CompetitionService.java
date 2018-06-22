@@ -150,6 +150,7 @@ public class CompetitionService implements BaseCompetitionService {
 	// Generate competition
 	@Override
 	public Competition generateCompetition(Long competitionId) throws CompetitionNotCompletedException {
+		logger.info("competition-service generateCompetition() ");
 		// TODO
 		// 1. Read configuration for competition or use default
 		// 2. Fill players list - up to NUMBER_OF_PLAYERS (optional)
@@ -223,6 +224,20 @@ public class CompetitionService implements BaseCompetitionService {
 		
 		
 		competition = competitionRepository.save(competition);
+		
+		return competition;
+	}
+
+
+	@Override
+	public Competition generateCompetition2(Long competitionId)  {
+		logger.info("competition-service generateCompetition2() ");
+		
+		Competition competition = findById(competitionId);
+
+		CompetitionUtil utils = new CompetitionUtil();
+		utils.generateSecondPart(competition);
+		
 		
 		return competition;
 	}

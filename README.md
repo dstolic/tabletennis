@@ -5,14 +5,16 @@ Table tennis app contains 3 microservices.
 2. tabletennis-report - Client service. Shows data for current competition only.
 3. tabletennis-gateway - Gateway service.
 
+Commit 22/6:
+- Second part of the competition (generate data after group phase - in progress)
+
 
 Commit 21/6:
 - tabletennis-report: Added few simple Unit tests.
 - tabletennis-report/gateway: Added couple use cases. Working urls are:
-	http://localhost:4444/competition
-	http://localhost:4444/competition/players
-	http://localhost:4444/competition/games
-
+	* http://localhost:4444/competition
+	* http://localhost:4444/competition/players
+	* http://localhost:4444/competition/games
 	
 
 Commit 16/6:
@@ -38,7 +40,6 @@ Commit 13/6:
 	
 
 TODO: 
-- Second part of the competition (after group phase)
 - Entity check if they need refactoring: Group (group name), Competition(remove competitionPlayers?), Game (remove groupNum?)
 - Remove Jackson annotations from Entity objects
 - Final check for Competition.save (CompetitionServiceImpl, rows 203-217)

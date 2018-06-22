@@ -32,4 +32,8 @@ public interface BaseCompetitionService {
 	// Generate competition
 	Competition generateCompetition(Long competitionId);
 
+	// Generate competition, second part
+	Competition generateCompetition2(Long competitionId);
+
+
 }

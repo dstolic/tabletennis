@@ -34,7 +34,7 @@ public class Main {
 		if (serverName.equals("registration") || serverName.equals("reg")) {
 //			ServiceRegistrationServer.main(args);
 		} else if (serverName.equals("players")) {
-			PlayersServer.main(args);
+			AdminServer.main(args);
 		} else if (serverName.equals("web")) {
 //			WebServer.main(args);
 		} else {

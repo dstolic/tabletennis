@@ -147,10 +147,10 @@ public class Game implements Serializable {
 		this.round = round;
 	}
 
-	@Override
-	public String toString() {
-		return "Game [id=" + id + ", competition=" + competition.getId() + ", playerHome=" + playerHome + ", playerAway="
-				+ playerAway + "," + ", round=" + round + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Game [id=" + id + ", competition=" + competition.getId() + ", playerHome=" + playerHome + ", playerAway="
+//				+ playerAway + "," + ", round=" + round + "]";
+//	}
 
 }

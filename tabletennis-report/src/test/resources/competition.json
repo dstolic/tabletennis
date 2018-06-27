@@ -1,0 +1,1403 @@
+{
+    "id": 1,
+    "description": "Test desc",
+    "name": "Test",
+    "completed": false,
+    "current": true,
+    "properties": [
+        {
+            "id": 6,
+            "name": "TYPE",
+            "value": "SENIOR"
+        },
+        {
+            "id": 5,
+            "name": "NUMBER_OF_PLAYERS",
+            "value": "32"
+        },
+        {
+            "id": 3,
+            "name": "FORMAT",
+            "value": "CUP"
+        },
+        {
+            "id": 4,
+            "name": "NUMBER_OF_SEEDS",
+            "value": "8"
+        }
+    ],
+    "competitionPlayers": [
+        {
+            "id": {},
+            "seed": true,
+            "active": true,
+            "group": {
+                "id": 58,
+                "name": "A"
+            }
+        },
+        {
+            "id": {},
+            "seed": true,
+            "active": true,
+            "group": {
+                "id": 59,
+                "name": "B"
+            }
+        },
+        {
+            "id": {},
+            "seed": true,
+            "active": true,
+            "group": {
+                "id": 60,
+                "name": "C"
+            }
+        },
+        {
+            "id": {},
+            "seed": true,
+            "active": true,
+            "group": {
+                "id": 61,
+                "name": "D"
+            }
+        },
+        {
+            "id": {},
+            "seed": true,
+            "active": true,
+            "group": {
+                "id": 62,
+                "name": "E"
+            }
+        },
+        {
+            "id": {},
+            "seed": true,
+            "active": true,
+            "group": {
+                "id": 63,
+                "name": "F"
+            }
+        },
+        {
+            "id": {},
+            "seed": true,
+            "active": true,
+            "group": {
+                "id": 64,
+                "name": "G"
+            }
+        },
+        {
+            "id": {},
+            "seed": true,
+            "active": true,
+            "group": {
+                "id": 65,
+                "name": "H"
+            }
+        },
+        {
+            "id": {},
+            "seed": false,
+            "active": true,
+            "group": {
+                "id": 63,
+                "name": "F"
+            }
+        },
+        {
+            "id": {},
+            "seed": false,
+            "active": true,
+            "group": {
+                "id": 61,
+                "name": "D"
+            }
+        },
+        {
+            "id": {},
+            "seed": false,
+            "active": true,
+            "group": {
+                "id": 58,
+                "name": "A"
+            }
+        },
+        {
+            "id": {},
+            "seed": false,
+            "active": true,
+            "group": {
+                "id": 59,
+                "name": "B"
+            }
+        },
+        {
+            "id": {},
+            "seed": false,
+            "active": true,
+            "group": {
+                "id": 62,
+                "name": "E"
+            }
+        },
+        {
+            "id": {},
+            "seed": false,
+            "active": true,
+            "group": {
+                "id": 65,
+                "name": "H"
+            }
+        },
+        {
+            "id": {},
+            "seed": false,
+            "active": true,
+            "group": {
+                "id": 60,
+                "name": "C"
+            }
+        },
+        {
+            "id": {},
+            "seed": false,
+            "active": true,
+            "group": {
+                "id": 64,
+                "name": "G"
+            }
+        },
+        {
+            "id": {},
+            "seed": false,
+            "active": true,
+            "group": {
+                "id": 62,
+                "name": "E"
+            }
+        },
+        {
+            "id": {},
+            "seed": false,
+            "active": true,
+            "group": {
+                "id": 60,
+                "name": "C"
+            }
+        },
+        {
+            "id": {},
+            "seed": false,
+            "active": true,
+            "group": {
+                "id": 63,
+                "name": "F"
+            }
+        },
+        {
+            "id": {},
+            "seed": false,
+            "active": true,
+            "group": {
+                "id": 58,
+                "name": "A"
+            }
+        },
+        {
+            "id": {},
+            "seed": false,
+            "active": true,
+            "group": {
+                "id": 65,
+                "name": "H"
+            }
+        },
+        {
+            "id": {},
+            "seed": false,
+            "active": true,
+            "group": {
+                "id": 59,
+                "name": "B"
+            }
+        },
+        {
+            "id": {},
+            "seed": false,
+            "active": true,
+            "group": {
+                "id": 61,
+                "name": "D"
+            }
+        },
+        {
+            "id": {},
+            "seed": false,
+            "active": true,
+            "group": {
+                "id": 64,
+                "name": "G"
+            }
+        },
+        {
+            "id": {},
+            "seed": false,
+            "active": true,
+            "group": {
+                "id": 59,
+                "name": "B"
+            }
+        },
+        {
+            "id": {},
+            "seed": false,
+            "active": true,
+            "group": {
+                "id": 58,
+                "name": "A"
+            }
+        },
+        {
+            "id": {},
+            "seed": false,
+            "active": true,
+            "group": {
+                "id": 61,
+                "name": "D"
+            }
+        },
+        {
+            "id": {},
+            "seed": false,
+            "active": true,
+            "group": {
+                "id": 63,
+                "name": "F"
+            }
+        },
+        {
+            "id": {},
+            "seed": false,
+            "active": true,
+            "group": {
+                "id": 62,
+                "name": "E"
+            }
+        },
+        {
+            "id": {},
+            "seed": false,
+            "active": true,
+            "group": {
+                "id": 64,
+                "name": "G"
+            }
+        },
+        {
+            "id": {},
+            "seed": false,
+            "active": true,
+            "group": {
+                "id": 60,
+                "name": "C"
+            }
+        },
+        {
+            "id": {},
+            "seed": false,
+            "active": true,
+            "group": {
+                "id": 65,
+                "name": "H"
+            }
+        }
+    ],
+    "groups": [
+        {
+            "id": 58
+        },
+        {
+            "id": 59
+        },
+        {
+            "id": 60
+        },
+        {
+            "id": 61
+        },
+        {
+            "id": 62
+        },
+        {
+            "id": 63
+        },
+        {
+            "id": 64
+        },
+        {
+            "id": 65
+        }
+    ],
+    "games": [
+        {
+            "id": 1633,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 2,
+                "active": true,
+                "firstName": "Dušan",
+                "lastName": "Trtica",
+                "points": 1740
+            },
+            "playerAway": {
+                "id": 27,
+                "active": true,
+                "firstName": "Mladen",
+                "lastName": "Stanojević",
+                "points": 110
+            },
+            
+            "round": 1
+        },
+        {
+            "id": 1634,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 12,
+                "active": true,
+                "firstName": "Nemanja",
+                "lastName": "Manot",
+                "points": 269
+            },
+            "playerAway": {
+                "id": 21,
+                "active": true,
+                "firstName": "Marko",
+                "lastName": "Milenković",
+                "points": 147
+            },
+            
+            "round": 1
+        },
+        {
+            "id": 1635,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 2,
+                "active": true,
+                "firstName": "Dušan",
+                "lastName": "Trtica",
+                "points": 1740
+            },
+            "playerAway": {
+                "id": 21,
+                "active": true,
+                "firstName": "Marko",
+                "lastName": "Milenković",
+                "points": 147
+            },
+            
+            "round": 2
+        },
+        {
+            "id": 1636,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 27,
+                "active": true,
+                "firstName": "Mladen",
+                "lastName": "Stanojević",
+                "points": 110
+            },
+            "playerAway": {
+                "id": 12,
+                "active": true,
+                "firstName": "Nemanja",
+                "lastName": "Manot",
+                "points": 269
+            },
+            
+            "round": 2
+        },
+        {
+            "id": 1637,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 2,
+                "active": true,
+                "firstName": "Dušan",
+                "lastName": "Trtica",
+                "points": 1740
+            },
+            "playerAway": {
+                "id": 12,
+                "active": true,
+                "firstName": "Nemanja",
+                "lastName": "Manot",
+                "points": 269
+            },
+            
+            "round": 3
+        },
+        {
+            "id": 1638,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 21,
+                "active": true,
+                "firstName": "Marko",
+                "lastName": "Milenković",
+                "points": 147
+            },
+            "playerAway": {
+                "id": 27,
+                "active": true,
+                "firstName": "Mladen",
+                "lastName": "Stanojević",
+                "points": 110
+            },
+            
+            "round": 3
+        },
+        {
+            "id": 1639,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 3,
+                "active": true,
+                "firstName": "Miloš",
+                "lastName": "Ignjatović",
+                "points": 828
+            },
+            "playerAway": {
+                "id": 26,
+                "active": true,
+                "firstName": "Nikola",
+                "lastName": "Ristivojević",
+                "points": 115
+            },
+            
+            "round": 1
+        },
+        {
+            "id": 1640,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 13,
+                "active": true,
+                "firstName": "Miloš",
+                "lastName": "Vulinović",
+                "points": 266
+            },
+            "playerAway": {
+                "id": 23,
+                "active": true,
+                "firstName": "Ivan",
+                "lastName": "Petrović",
+                "points": 136
+            },
+            
+            "round": 1
+        },
+        {
+            "id": 1641,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 3,
+                "active": true,
+                "firstName": "Miloš",
+                "lastName": "Ignjatović",
+                "points": 828
+            },
+            "playerAway": {
+                "id": 23,
+                "active": true,
+                "firstName": "Ivan",
+                "lastName": "Petrović",
+                "points": 136
+            },
+            
+            "round": 2
+        },
+        {
+            "id": 1642,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 26,
+                "active": true,
+                "firstName": "Nikola",
+                "lastName": "Ristivojević",
+                "points": 115
+            },
+            "playerAway": {
+                "id": 13,
+                "active": true,
+                "firstName": "Miloš",
+                "lastName": "Vulinović",
+                "points": 266
+            },
+            
+            "round": 2
+        },
+        {
+            "id": 1643,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 3,
+                "active": true,
+                "firstName": "Miloš",
+                "lastName": "Ignjatović",
+                "points": 828
+            },
+            "playerAway": {
+                "id": 13,
+                "active": true,
+                "firstName": "Miloš",
+                "lastName": "Vulinović",
+                "points": 266
+            },
+            
+            "round": 3
+        },
+        {
+            "id": 1644,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 23,
+                "active": true,
+                "firstName": "Ivan",
+                "lastName": "Petrović",
+                "points": 136
+            },
+            "playerAway": {
+                "id": 26,
+                "active": true,
+                "firstName": "Nikola",
+                "lastName": "Ristivojević",
+                "points": 115
+            },
+            
+            "round": 3
+        },
+        {
+            "id": 1645,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 4,
+                "active": true,
+                "firstName": "Marko",
+                "lastName": "Baračkov",
+                "points": 810
+            },
+            "playerAway": {
+                "id": 32,
+                "active": true,
+                "firstName": "Bojan",
+                "lastName": "Božović",
+                "points": 75
+            },
+            
+            "round": 1
+        },
+        {
+            "id": 1646,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 16,
+                "active": true,
+                "firstName": "Marko",
+                "lastName": "Zelenbaba",
+                "points": 197
+            },
+            "playerAway": {
+                "id": 19,
+                "active": true,
+                "firstName": "Ilija",
+                "lastName": "Ćeriman",
+                "points": 155
+            },
+            
+            "round": 1
+        },
+        {
+            "id": 1647,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 4,
+                "active": true,
+                "firstName": "Marko",
+                "lastName": "Baračkov",
+                "points": 810
+            },
+            "playerAway": {
+                "id": 19,
+                "active": true,
+                "firstName": "Ilija",
+                "lastName": "Ćeriman",
+                "points": 155
+            },
+            
+            "round": 2
+        },
+        {
+            "id": 1648,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 32,
+                "active": true,
+                "firstName": "Bojan",
+                "lastName": "Božović",
+                "points": 75
+            },
+            "playerAway": {
+                "id": 16,
+                "active": true,
+                "firstName": "Marko",
+                "lastName": "Zelenbaba",
+                "points": 197
+            },
+            
+            "round": 2
+        },
+        {
+            "id": 1649,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 4,
+                "active": true,
+                "firstName": "Marko",
+                "lastName": "Baračkov",
+                "points": 810
+            },
+            "playerAway": {
+                "id": 16,
+                "active": true,
+                "firstName": "Marko",
+                "lastName": "Zelenbaba",
+                "points": 197
+            },
+            
+            "round": 3
+        },
+        {
+            "id": 1650,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 19,
+                "active": true,
+                "firstName": "Ilija",
+                "lastName": "Ćeriman",
+                "points": 155
+            },
+            "playerAway": {
+                "id": 32,
+                "active": true,
+                "firstName": "Bojan",
+                "lastName": "Božović",
+                "points": 75
+            },
+            
+            "round": 3
+        },
+        {
+            "id": 1651,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 5,
+                "active": true,
+                "firstName": "Nenad",
+                "lastName": "Raković",
+                "points": 645
+            },
+            "playerAway": {
+                "id": 28,
+                "active": true,
+                "firstName": "Aleksandar",
+                "lastName": "Jocić",
+                "points": 100
+            },
+            
+            "round": 1
+        },
+        {
+            "id": 1652,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 11,
+                "active": true,
+                "firstName": "Stefan",
+                "lastName": "Stanojević",
+                "points": 270
+            },
+            "playerAway": {
+                "id": 24,
+                "active": true,
+                "firstName": "Danka",
+                "lastName": "Mihajlović",
+                "points": 135
+            },
+            
+            "round": 1
+        },
+        {
+            "id": 1653,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 5,
+                "active": true,
+                "firstName": "Nenad",
+                "lastName": "Raković",
+                "points": 645
+            },
+            "playerAway": {
+                "id": 24,
+                "active": true,
+                "firstName": "Danka",
+                "lastName": "Mihajlović",
+                "points": 135
+            },
+            
+            "round": 2
+        },
+        {
+            "id": 1654,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 28,
+                "active": true,
+                "firstName": "Aleksandar",
+                "lastName": "Jocić",
+                "points": 100
+            },
+            "playerAway": {
+                "id": 11,
+                "active": true,
+                "firstName": "Stefan",
+                "lastName": "Stanojević",
+                "points": 270
+            },
+            
+            "round": 2
+        },
+        {
+            "id": 1655,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 5,
+                "active": true,
+                "firstName": "Nenad",
+                "lastName": "Raković",
+                "points": 645
+            },
+            "playerAway": {
+                "id": 11,
+                "active": true,
+                "firstName": "Stefan",
+                "lastName": "Stanojević",
+                "points": 270
+            },
+            
+            "round": 3
+        },
+        {
+            "id": 1656,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 24,
+                "active": true,
+                "firstName": "Danka",
+                "lastName": "Mihajlović",
+                "points": 135
+            },
+            "playerAway": {
+                "id": 28,
+                "active": true,
+                "firstName": "Aleksandar",
+                "lastName": "Jocić",
+                "points": 100
+            },
+            
+            "round": 3
+        },
+        {
+            "id": 1657,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 6,
+                "active": true,
+                "firstName": "Vladimir",
+                "lastName": "Canić",
+                "points": 628
+            },
+            "playerAway": {
+                "id": 30,
+                "active": true,
+                "firstName": "Nikola",
+                "lastName": "Rahman",
+                "points": 89
+            },
+            
+            "round": 1
+        },
+        {
+            "id": 1658,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 14,
+                "active": true,
+                "firstName": "Dragomir",
+                "lastName": "Krstić",
+                "points": 265
+            },
+            "playerAway": {
+                "id": 18,
+                "active": true,
+                "firstName": "Aleksandar",
+                "lastName": "Marin",
+                "points": 173
+            },
+            
+            "round": 1
+        },
+        {
+            "id": 1659,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 6,
+                "active": true,
+                "firstName": "Vladimir",
+                "lastName": "Canić",
+                "points": 628
+            },
+            "playerAway": {
+                "id": 18,
+                "active": true,
+                "firstName": "Aleksandar",
+                "lastName": "Marin",
+                "points": 173
+            },
+            
+            "round": 2
+        },
+        {
+            "id": 1660,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 30,
+                "active": true,
+                "firstName": "Nikola",
+                "lastName": "Rahman",
+                "points": 89
+            },
+            "playerAway": {
+                "id": 14,
+                "active": true,
+                "firstName": "Dragomir",
+                "lastName": "Krstić",
+                "points": 265
+            },
+            
+            "round": 2
+        },
+        {
+            "id": 1661,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 6,
+                "active": true,
+                "firstName": "Vladimir",
+                "lastName": "Canić",
+                "points": 628
+            },
+            "playerAway": {
+                "id": 14,
+                "active": true,
+                "firstName": "Dragomir",
+                "lastName": "Krstić",
+                "points": 265
+            },
+            
+            "round": 3
+        },
+        {
+            "id": 1662,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 18,
+                "active": true,
+                "firstName": "Aleksandar",
+                "lastName": "Marin",
+                "points": 173
+            },
+            "playerAway": {
+                "id": 30,
+                "active": true,
+                "firstName": "Nikola",
+                "lastName": "Rahman",
+                "points": 89
+            },
+            
+            "round": 3
+        },
+        {
+            "id": 1663,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 7,
+                "active": true,
+                "firstName": "Miloš",
+                "lastName": "Šolaić",
+                "points": 518
+            },
+            "playerAway": {
+                "id": 29,
+                "active": true,
+                "firstName": "Milorad",
+                "lastName": "Čolović",
+                "points": 89
+            },
+            
+            "round": 1
+        },
+        {
+            "id": 1664,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 10,
+                "active": true,
+                "firstName": "Jovan",
+                "lastName": "Ćušić",
+                "points": 305
+            },
+            "playerAway": {
+                "id": 20,
+                "active": true,
+                "firstName": "Časlav",
+                "lastName": "Šabani",
+                "points": 150
+            },
+            
+            "round": 1
+        },
+        {
+            "id": 1665,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 7,
+                "active": true,
+                "firstName": "Miloš",
+                "lastName": "Šolaić",
+                "points": 518
+            },
+            "playerAway": {
+                "id": 20,
+                "active": true,
+                "firstName": "Časlav",
+                "lastName": "Šabani",
+                "points": 150
+            },
+            
+            "round": 2
+        },
+        {
+            "id": 1666,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 29,
+                "active": true,
+                "firstName": "Milorad",
+                "lastName": "Čolović",
+                "points": 89
+            },
+            "playerAway": {
+                "id": 10,
+                "active": true,
+                "firstName": "Jovan",
+                "lastName": "Ćušić",
+                "points": 305
+            },
+            
+            "round": 2
+        },
+        {
+            "id": 1667,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 7,
+                "active": true,
+                "firstName": "Miloš",
+                "lastName": "Šolaić",
+                "points": 518
+            },
+            "playerAway": {
+                "id": 10,
+                "active": true,
+                "firstName": "Jovan",
+                "lastName": "Ćušić",
+                "points": 305
+            },
+            
+            "round": 3
+        },
+        {
+            "id": 1668,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 20,
+                "active": true,
+                "firstName": "Časlav",
+                "lastName": "Šabani",
+                "points": 150
+            },
+            "playerAway": {
+                "id": 29,
+                "active": true,
+                "firstName": "Milorad",
+                "lastName": "Čolović",
+                "points": 89
+            },
+            
+            "round": 3
+        },
+        {
+            "id": 1669,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 8,
+                "active": true,
+                "firstName": "Miloš",
+                "lastName": "Dečov",
+                "points": 429
+            },
+            "playerAway": {
+                "id": 31,
+                "active": true,
+                "firstName": "Dejan",
+                "lastName": "Ilić",
+                "points": 80
+            },
+            
+            "round": 1
+        },
+        {
+            "id": 1670,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 17,
+                "active": true,
+                "firstName": "Dušan",
+                "lastName": "Nastić",
+                "points": 195
+            },
+            "playerAway": {
+                "id": 25,
+                "active": true,
+                "firstName": "Marko",
+                "lastName": "Krsmanović",
+                "points": 125
+            },
+            
+            "round": 1
+        },
+        {
+            "id": 1671,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 8,
+                "active": true,
+                "firstName": "Miloš",
+                "lastName": "Dečov",
+                "points": 429
+            },
+            "playerAway": {
+                "id": 25,
+                "active": true,
+                "firstName": "Marko",
+                "lastName": "Krsmanović",
+                "points": 125
+            },
+            
+            "round": 2
+        },
+        {
+            "id": 1672,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 31,
+                "active": true,
+                "firstName": "Dejan",
+                "lastName": "Ilić",
+                "points": 80
+            },
+            "playerAway": {
+                "id": 17,
+                "active": true,
+                "firstName": "Dušan",
+                "lastName": "Nastić",
+                "points": 195
+            },
+            
+            "round": 2
+        },
+        {
+            "id": 1673,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 8,
+                "active": true,
+                "firstName": "Miloš",
+                "lastName": "Dečov",
+                "points": 429
+            },
+            "playerAway": {
+                "id": 17,
+                "active": true,
+                "firstName": "Dušan",
+                "lastName": "Nastić",
+                "points": 195
+            },
+            
+            "round": 3
+        },
+        {
+            "id": 1674,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 25,
+                "active": true,
+                "firstName": "Marko",
+                "lastName": "Krsmanović",
+                "points": 125
+            },
+            "playerAway": {
+                "id": 31,
+                "active": true,
+                "firstName": "Dejan",
+                "lastName": "Ilić",
+                "points": 80
+            },
+            
+            "round": 3
+        },
+        {
+            "id": 1675,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 9,
+                "active": true,
+                "firstName": "Dejan",
+                "lastName": "Hadžiomerović",
+                "points": 408
+            },
+            "playerAway": {
+                "id": 33,
+                "active": true,
+                "firstName": "Branislav",
+                "lastName": "Caran",
+                "points": 70
+            },
+            
+            "round": 1
+        },
+        {
+            "id": 1676,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 15,
+                "active": true,
+                "firstName": "Goran",
+                "lastName": "Pantić",
+                "points": 257
+            },
+            "playerAway": {
+                "id": 22,
+                "active": true,
+                "firstName": "Nikola",
+                "lastName": "Gladović",
+                "points": 139
+            },
+            
+            "round": 1
+        },
+        {
+            "id": 1677,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 9,
+                "active": true,
+                "firstName": "Dejan",
+                "lastName": "Hadžiomerović",
+                "points": 408
+            },
+            "playerAway": {
+                "id": 22,
+                "active": true,
+                "firstName": "Nikola",
+                "lastName": "Gladović",
+                "points": 139
+            },
+            
+            "round": 2
+        },
+        {
+            "id": 1678,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 33,
+                "active": true,
+                "firstName": "Branislav",
+                "lastName": "Caran",
+                "points": 70
+            },
+            "playerAway": {
+                "id": 15,
+                "active": true,
+                "firstName": "Goran",
+                "lastName": "Pantić",
+                "points": 257
+            },
+            
+            "round": 2
+        },
+        {
+            "id": 1679,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 9,
+                "active": true,
+                "firstName": "Dejan",
+                "lastName": "Hadžiomerović",
+                "points": 408
+            },
+            "playerAway": {
+                "id": 15,
+                "active": true,
+                "firstName": "Goran",
+                "lastName": "Pantić",
+                "points": 257
+            },
+            
+            "round": 3
+        },
+        {
+            "id": 1680,
+            "finished": false,
+            "pointsAway": 0,
+            "pointsHome": 0,
+            "playerHome": {
+                "id": 22,
+                "active": true,
+                "firstName": "Nikola",
+                "lastName": "Gladović",
+                "points": 139
+            },
+            "playerAway": {
+                "id": 33,
+                "active": true,
+                "firstName": "Branislav",
+                "lastName": "Caran",
+                "points": 70
+            },
+            
+            "round": 3
+        }
+    ]
+}

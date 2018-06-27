@@ -24,7 +24,7 @@ public class GameDto implements Serializable {
 
 	private PlayerDto playerAway;
 
-	private Long groupNum;
+//	private Long groupNum;
 
 	private int round;
 
@@ -95,19 +95,19 @@ public class GameDto implements Serializable {
 		this.round = round;
 	}
 
-	public Long getGroupNum() {
-		return groupNum;
-	}
+//	public Long getGroupNum() {
+//		return groupNum;
+//	}
+//
+//	public void setGroupNum(Long groupNum) {
+//		this.groupNum = groupNum;
+//	}
 
-	public void setGroupNum(Long groupNum) {
-		this.groupNum = groupNum;
-	}
-
-	@Override
-	public String toString() {
-		return "GameDto [playerHome=" + playerHome + ", playerAway=" + playerAway + ", group=" + groupNum + ", round="
-				+ round + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "GameDto [playerHome=" + playerHome + ", playerAway=" + playerAway + ", round="
+//				+ round + "]";
+//	}
 
 //	public CompetitionPlayer getCompetitionPlayer1() {
 //		return this.competitionPlayer1;

@@ -75,6 +75,7 @@ public class CompetitionPlayerPK implements Serializable {
 
 	@Override
 	public String toString() {
-		return "CompetitionPlayerPK [competitionId=" + this.competition.getId() + ", playerId=" + this.player.getId() + "]";
+//		return "CompetitionPlayerPK [competitionId=" + this.competition.getId() + ", playerId=" + this.player.getId() + "]";
+		return "CompetitionPlayerPK [competitionId=" + this.competition + ", playerId=" + this.player + "]";
 	}
 }

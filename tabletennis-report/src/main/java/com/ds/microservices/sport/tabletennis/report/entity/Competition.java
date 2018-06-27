@@ -24,6 +24,8 @@ public class Competition implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 
+	private String type;
+
 	private String description;
 
 	private String name;
@@ -131,6 +133,14 @@ public class Competition implements Serializable {
 	public String toString() {
 		return "Competition [id=" + id + ", description=" + description + ", name=" + name + ", competitionPlayers=" + competitionPlayers
 				+ "]";
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 }

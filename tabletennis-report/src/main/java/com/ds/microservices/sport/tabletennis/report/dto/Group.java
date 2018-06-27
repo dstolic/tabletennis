@@ -11,7 +11,7 @@ public class Group implements Serializable {
 
 	private Long id;
 
-	private List<PlayerDto> players;
+	private List<CompetitionPlayerDto> competitionPlayers;
 	
 	public Long getId() {
 		return id;
@@ -21,29 +21,23 @@ public class Group implements Serializable {
 		this.id = id;
 	}
 
-	public List<PlayerDto> getPlayers() {
-		return players;
-	}
-
-	public void setPlayers(List<PlayerDto> players) {
-		this.players = players;
-	}
-
-	@Override
-	public String toString() {
-		return "Group [id=" + id + ", points=" + groupPoints() + ", players=" + players + "]";
-	}
+//	@Override
+//	public String toString() {
+////		return "Group [id=" + id + ", players=" + competitionPlayers + "]";
+//		return "Group [id=" + id + ", points=" + groupPoints() + ", players=" + competitionPlayers + "]";
+//	}
 
 	// for testing
 	public int groupPoints() {
 		int sum = 0;
 		Long maxPoints = 0l;
 
-		if (players != null) {
-			for (PlayerDto player : players) {
-				sum += player.getPoints();
-				if(maxPoints < player.getPoints()) {
-					maxPoints = player.getPoints();
+		if (competitionPlayers != null) {
+			for (CompetitionPlayerDto competitionPlayerDto : competitionPlayers) {
+				PlayerDto playerDto = competitionPlayerDto.getId().getPlayer();
+				sum += playerDto.getPoints();
+				if(maxPoints < playerDto.getPoints()) {
+					maxPoints = playerDto.getPoints();
 				}
 			}			
 		}

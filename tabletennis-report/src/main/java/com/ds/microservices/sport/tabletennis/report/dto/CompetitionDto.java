@@ -14,6 +14,8 @@ public class CompetitionDto implements Serializable {
 
 	private Long id;
 
+	private String type;
+
 	private String description;
 
 	private String name;
@@ -22,7 +24,7 @@ public class CompetitionDto implements Serializable {
 
 	private boolean current;
 
-	private Set<PlayerDto> players;
+//	private Set<PlayerDto> players;
 
 //	@JsonIgnore
 //	@JsonBackReference
@@ -62,17 +64,17 @@ public class CompetitionDto implements Serializable {
 		this.name = name;
 	}
 
-	public Set<PlayerDto> getPlayers() {
-		return players;
-	}
+//	public Set<PlayerDto> getPlayers() {
+//		return players;
+//	}
 
 //	public void setCompetitionPlayers(Set<PlayerDto> players) {
 //		this.players = players;
 //	}
 
-	public void setPlayers(Set<PlayerDto> players) {
-		this.players = players;
-	}
+//	public void setPlayers(Set<PlayerDto> players) {
+//		this.players = players;
+//	}
 
 	public Set<CompetitionProperty> getProperties() {
 		return properties;
@@ -122,10 +124,18 @@ public class CompetitionDto implements Serializable {
 		this.current = current;
 	}
 
-	@Override
-	public String toString() {
-		return "CompetitionDto [id=" + id + ", description=" + description + ", name=" + name + ", players=" + players
-				+ "]";
+//	@Override
+//	public String toString() {
+//		return "CompetitionDto [id=" + id + ", description=" + description + ", name=" + name
+//				+ "]";
+//	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 }

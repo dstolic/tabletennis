@@ -16,6 +16,9 @@ public interface BaseCompetitionService {
 	// Find players from competition
 	List<CompetitionPlayer> findPlayersFromCompetition();
 
+	// Find current competition
+	Competition findByCurrent();
+
 //	Competition findByIdNoTransform(Long id);
 
 	// Find competition by id

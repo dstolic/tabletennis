@@ -17,11 +17,15 @@ public class GameService implements BaseGameService {
 
 	protected Logger logger = Logger.getLogger(GameService.class.getName());
 	
-	@Autowired
-	protected CompetitionRepository competitionRepository;
+	private final CompetitionRepository competitionRepository;
+	private final GameRepository gameRepository;
+
 
 	@Autowired
-	protected GameRepository gameRepository;
+	public GameService(GameRepository gameRepository, CompetitionRepository competitionRepository) {
+		this.gameRepository = gameRepository;
+		this.competitionRepository = competitionRepository;
+	}
 
 
 	// Find games from competition

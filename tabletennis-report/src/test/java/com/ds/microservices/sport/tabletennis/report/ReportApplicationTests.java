@@ -13,8 +13,8 @@ import com.ds.microservices.sport.tabletennis.report.service.BaseCompetitionServ
 import org.junit.Assert;
 import org.junit.Ignore;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
+//@RunWith(SpringRunner.class)
+//@SpringBootTest
 public class ReportApplicationTests {
 	
 	@Autowired
@@ -23,7 +23,7 @@ public class ReportApplicationTests {
 	@Autowired
 	private CompetitionConfiguration competitionConfiguration;
 
-	@Test
+//	@Test
 	public void testCompetitionById() {
 		Competition competition = baseCompetitionService.findById(new Long(1)); 
 		
@@ -31,7 +31,7 @@ public class ReportApplicationTests {
 		Assert.assertTrue("Competition name doesn't contain 'Test'", competition.getName().contains("Test"));
 	}
 
-	@Test
+//	@Test
 	public void testCompetitionConfiguration() {
 		
 		Assert.assertTrue("FORMAT: CUP", competitionConfiguration.getFORMAT().contains("CUP"));

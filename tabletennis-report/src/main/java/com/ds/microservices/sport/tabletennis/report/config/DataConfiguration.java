@@ -21,7 +21,11 @@ public class DataConfiguration {
 
 	protected Logger logger = Logger.getLogger(DataConfiguration.class.getName());
 	
+	public static enum CompetitionType {SENIOR, MEDIOR};
+	
 	@Autowired
 	public DataSource dataSource;
+	
+	
 	
 }

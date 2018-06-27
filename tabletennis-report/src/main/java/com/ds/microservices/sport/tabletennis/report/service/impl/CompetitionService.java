@@ -18,28 +18,34 @@ public class CompetitionService implements BaseCompetitionService {
 
 	protected Logger logger = Logger.getLogger(CompetitionService.class.getName());
 	
-	@Autowired
-	protected CompetitionRepository competitionRepository;
-	
-	@Autowired
-	protected CompetitionPlayerRepository competitionPlayerRepository;
+	private final CompetitionRepository competitionRepository;
+	private final CompetitionPlayerRepository competitionPlayerRepository;
 	
 
-	// Find current competition
-	public Competition findByCurrent() {
-		logger.info("competition-service findById invoked. ");
-	
-		return competitionRepository.findByCurrent(true).get();
+	@Autowired
+	public CompetitionService(CompetitionRepository competitionRepository, CompetitionPlayerRepository competitionPlayerRepository) {
+		this.competitionRepository = competitionRepository;
+		this.competitionPlayerRepository = competitionPlayerRepository;
 	}
 
 	// Find competition by id
+	@Override
 	public Competition findById(Long id) {
 		logger.info("competition-service findById invoked. ");
 	
 		return competitionRepository.findById(id).get();
 	}
 
+	// Find current competition
+	@Override
+	public Competition findByCurrent() {
+		logger.info("competition-service findById invoked. ");
+	
+		return competitionRepository.findByCurrent(true).get();
+	}
+
 	// Find players from competition
+	@Override
 	public List<CompetitionPlayer> findPlayersFromCompetition() {
 		logger.info("competition-service findPlayersFromCompetition() invoked: ");
 
@@ -58,4 +64,5 @@ public class CompetitionService implements BaseCompetitionService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 }

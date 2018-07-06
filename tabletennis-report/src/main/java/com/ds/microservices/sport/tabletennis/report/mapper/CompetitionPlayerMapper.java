@@ -13,5 +13,5 @@ public interface CompetitionPlayerMapper {
 	public abstract CompetitionPlayer competitionPlayerDtoToCompetitionPlayer(CompetitionPlayerDto competitionPlayerDTO, @Context CycleAvoidMappingContext context);
     
     public abstract CompetitionPlayerDto competitionPlayerToCompetitionPlayerDto(CompetitionPlayer competitionPlayer, @Context CycleAvoidMappingContext context);
-
+    
 }

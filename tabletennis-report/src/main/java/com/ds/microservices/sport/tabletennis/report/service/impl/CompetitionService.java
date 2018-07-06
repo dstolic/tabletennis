@@ -1,6 +1,7 @@
 package com.ds.microservices.sport.tabletennis.report.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,7 @@ public class CompetitionService implements BaseCompetitionService {
 	public Competition findByCurrent() {
 		logger.info("competition-service findById invoked. ");
 	
-		return competitionRepository.findByCurrent(true).get();
+		return competitionRepository.findByCurrent(true);
 	}
 
 	// Find players from competition
@@ -49,7 +50,7 @@ public class CompetitionService implements BaseCompetitionService {
 	public List<CompetitionPlayer> findPlayersFromCompetition() {
 		logger.info("competition-service findPlayersFromCompetition() invoked: ");
 
-		Competition competition =  competitionRepository.findByCurrent(true).get();
+		Competition competition =  competitionRepository.findByCurrent(true);
 		CompetitionPlayerPK pk = new CompetitionPlayerPK(competition, null);
 		
 		List<CompetitionPlayer> players = competitionPlayerRepository.findByIdCompetitionId(competition.getId());

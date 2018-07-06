@@ -12,6 +12,7 @@ import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 @Entity
@@ -29,11 +30,9 @@ public class CompetitionPlayer implements Serializable {
 
 	private boolean active;
 
-	@ManyToOne
-	@JoinColumn(name="group_id")
-//	@JsonIgnore
-//	@Transient
-	private Group group;
+//	@ManyToOne
+//	@JoinColumn(name="group_id")
+//	private Group group;
 
 	public CompetitionPlayer() {
 	}
@@ -71,13 +70,13 @@ public class CompetitionPlayer implements Serializable {
 		this.active = active;
 	}
 
-	public Group getGroup() {
-		return group;
-	}
-
-	public void setGroup(Group group) {
-		this.group = group;
-	}
+//	public Group getGroup() {
+//		return group;
+//	}
+//
+//	public void setGroup(Group group) {
+//		this.group = group;
+//	}
 
 
 }

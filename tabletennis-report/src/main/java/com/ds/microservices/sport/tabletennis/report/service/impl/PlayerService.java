@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import com.ds.microservices.sport.tabletennis.report.entity.Player;
@@ -26,8 +28,20 @@ public class PlayerService implements BasePlayerService {
 	@Override
 	public List<Player> allPlayers() {
 		logger.info("player-service all() invoked: ");
+		
+		Player player = new Player();
+		player.setFirstName("Goran");
+		player.setActive(true);
 
-		return (List<Player>) playerRepository.findAll();
+		ExampleMatcher matcher = ExampleMatcher.matching()     
+				.withMatcher("firstname", match -> match.contains());                          
+
+//		Example<Player> example = Example.of(player, matcher);
+		Example<Player> example = Example.of(player);
+		
+		logger.info("EXAMPLE " + playerRepository.findAll(example));
+		
+		return (List<Player>) playerRepository.findAll(example);
 	}
 	
 	// Find player by id

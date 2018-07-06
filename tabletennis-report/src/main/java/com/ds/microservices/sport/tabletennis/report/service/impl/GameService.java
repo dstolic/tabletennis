@@ -33,7 +33,7 @@ public class GameService implements BaseGameService {
 	public List<Game> findGamesFromCompetition() {
 		logger.info("game-service findGamesFromCompetition() invoked: ");
 
-		Competition competition =  competitionRepository.findByCurrent(true).get();
+		Competition competition =  competitionRepository.findByCurrent(true);
 		
 		List<Game> games = gameRepository.findByCompetitionId(competition.getId());
 

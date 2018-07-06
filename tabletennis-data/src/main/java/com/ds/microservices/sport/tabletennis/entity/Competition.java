@@ -51,7 +51,6 @@ public class Competition implements Serializable {
 	private List<CompetitionPlayer> competitionPlayers;
 
 	@OneToMany(mappedBy="competition", cascade=CascadeType.ALL)
-//	@Transient
 	private List<Group> groups;
     
 	public Competition() {

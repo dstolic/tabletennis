@@ -2,6 +2,7 @@ package com.ds.microservices.sport.tabletennis.report.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
@@ -16,6 +17,8 @@ public interface CompetitionPlayerRepository extends PagingAndSortingRepository<
 	public long count();
 
 	public List<CompetitionPlayer> findByIdCompetitionId(Long id);
+	
+	public List<CompetitionPlayer> findAll(Example<CompetitionPlayer> competitionPlayer);
 
 
 }

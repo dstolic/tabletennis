@@ -6,6 +6,7 @@ import java.util.Set;
 
 import com.ds.microservices.sport.tabletennis.report.entity.CompetitionPlayer;
 import com.ds.microservices.sport.tabletennis.report.entity.CompetitionProperty;
+import com.ds.microservices.sport.tabletennis.report.entity.Player;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName("Competition")
@@ -24,15 +25,15 @@ public class CompetitionDto implements Serializable {
 
 	private boolean current;
 
-//	private Set<PlayerDto> players;
+	private Set<PlayerDto> players;
 
 //	@JsonIgnore
 //	@JsonBackReference
     private Set<CompetitionProperty> properties;
     
-	private List<CompetitionPlayer> competitionPlayers;
+	private List<CompetitionPlayerDto> competitionPlayers;
 
-	private List<Group> groups;
+	private List<GroupDto> groups;
     
 	private List<GameDto> games;
 
@@ -84,11 +85,11 @@ public class CompetitionDto implements Serializable {
 		this.properties = properties;
 	}
 
-	public List<Group> getGroups() {
+	public List<GroupDto> getGroups() {
 		return groups;
 	}
 
-	public void setGroups(List<Group> groups) {
+	public void setGroups(List<GroupDto> groups) {
 		this.groups = groups;
 	}
 
@@ -108,11 +109,11 @@ public class CompetitionDto implements Serializable {
 		this.games = games;
 	}
 
-	public List<CompetitionPlayer> getCompetitionPlayers() {
+	public List<CompetitionPlayerDto> getCompetitionPlayers() {
 		return competitionPlayers;
 	}
 
-	public void setCompetitionPlayers(List<CompetitionPlayer> competitionPlayers) {
+	public void setCompetitionPlayers(List<CompetitionPlayerDto> competitionPlayers) {
 		this.competitionPlayers = competitionPlayers;
 	}
 
@@ -136,6 +137,14 @@ public class CompetitionDto implements Serializable {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public Set<PlayerDto> getPlayers() {
+		return players;
+	}
+
+	public void setPlayers(Set<PlayerDto> players) {
+		this.players = players;
 	}
 
 }

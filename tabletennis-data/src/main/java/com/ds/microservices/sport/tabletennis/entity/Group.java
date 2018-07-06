@@ -3,11 +3,14 @@ package com.ds.microservices.sport.tabletennis.entity;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -26,9 +29,21 @@ public class Group implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 
-	@OneToMany(mappedBy="group")
-	@JsonIgnore
-	private List<CompetitionPlayer> competitionPlayers;
+//	@OneToMany(mappedBy="group")
+//	@JsonIgnore
+//	private List<CompetitionPlayer> competitionPlayers;
+
+//	@JoinTable(name="competition_player", 
+//	joinColumns = @JoinColumn(name="competition_id", referencedColumnName="id"),
+//	inverseJoinColumns = @JoinColumn (name="player_id", referencedColumnName="id")
+//	)
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(name="group_player",
+		joinColumns = @JoinColumn(name="group_id", referencedColumnName="id"),
+		inverseJoinColumns = @JoinColumn (name="player_id", referencedColumnName="id")
+	)
+	private List<Player> players;
 	
 	private String name;
 	
@@ -49,11 +64,11 @@ public class Group implements Serializable {
 		int sum = 0;
 		Long maxPoints = 0l;
 
-		if (competitionPlayers != null) {
-			for (CompetitionPlayer competitionPlayer : competitionPlayers) {
-				sum += competitionPlayer.getId().getPlayer().getPoints();
-				if(maxPoints < competitionPlayer.getId().getPlayer().getPoints()) {
-					maxPoints = competitionPlayer.getId().getPlayer().getPoints();
+		if (players != null) {
+			for (Player player : players) {
+				sum += player.getPoints();
+				if(maxPoints < player.getPoints()) {
+					maxPoints = player.getPoints();
 				}
 			}			
 		}
@@ -61,13 +76,13 @@ public class Group implements Serializable {
 		return sum - maxPoints.intValue();
 	}
 
-	public List<CompetitionPlayer> getCompetitionPlayers() {
-		return competitionPlayers;
-	}
-
-	public void setCompetitionPlayers(List<CompetitionPlayer> competitionPlayers) {
-		this.competitionPlayers = competitionPlayers;
-	}
+//	public List<CompetitionPlayer> getCompetitionPlayers() {
+//		return competitionPlayers;
+//	}
+//
+//	public void setCompetitionPlayers(List<CompetitionPlayer> competitionPlayers) {
+//		this.competitionPlayers = competitionPlayers;
+//	}
 
 	public String getName() {
 		return name;
@@ -87,7 +102,15 @@ public class Group implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Group [id=" + id + ", points=" + groupPoints() + ", players=" + competitionPlayers + "]";
+		return "Group [id=" + id + ", points=" + groupPoints() + ", players=" + players + "]";
+	}
+
+	public List<Player> getPlayers() {
+		return players;
+	}
+
+	public void setPlayers(List<Player> players) {
+		this.players = players;
 	}
 
 }

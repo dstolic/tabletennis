@@ -36,9 +36,6 @@ public class GameServiceTest {
 	
 	private GameService gameService;
 	
-	@Autowired
-	private GameMapper gameMapper;
-	
 	private Competition competitionJson;
 
 	@Before
@@ -60,14 +57,19 @@ public class GameServiceTest {
 	public void findGamesFromCompetition() {
 		logger.info("Test: games");
 		
-		Optional<Competition> competitionMock = Optional.of(competitionJson);
-		Mockito.when(gameRepository.findByCompetitionId(Mockito.anyLong())).thenReturn(competitionMock.get().getGames());
-		Mockito.when(competitionRepository.findByCurrent(Mockito.anyBoolean())).thenReturn(competitionMock);
+//		Competition competitionMock = Optional.of(competitionJson);
+		Mockito.when(gameRepository.findByCompetitionId(Mockito.anyLong())).thenReturn(competitionJson.getGames());
+		Mockito.when(competitionRepository.findByCurrent(Mockito.anyBoolean())).thenReturn(competitionJson);
 		
 		List<Game> games = gameService.findGamesFromCompetition();
 		
 		Assert.assertNotNull("Games doesn't exist.", games);
 		Assert.assertTrue("There should be 48 games in competition", games.size() == 48);
+
+		Mockito.when(gameRepository.findByCompetitionId(Mockito.anyLong())).thenReturn(null);
+		games = gameService.findGamesFromCompetition();
+
+		Assert.assertNull("Games doesn't exist.", games);
 	
 		return ;
 	}

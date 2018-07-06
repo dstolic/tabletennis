@@ -105,9 +105,13 @@ public class CompetitionUtil {
 //		List<Player> sortedPlayers = p.stream().collect(Collectors.toList());
 //		sortedPlayers.sort(new PlayerComparator());
 
-		for (CompetitionPlayer competitionPlayer : competition.getCompetitionPlayers()) {
-			logger.info("CompetitionPlayer " + competitionPlayer.getId().getPlayer());
-		}
+//		for (CompetitionPlayer competitionPlayer : competition.getCompetitionPlayers()) {
+//			logger.info("CompetitionPlayer " + competitionPlayer.getId().getPlayer());
+//		}
+		
+		competition.getCompetitionPlayers().forEach(competitionPlayer ->
+			logger.info("CompetitionPlayer " + competitionPlayer.getId().getPlayer())
+		);
 
 		// Create players pools 
 		logger.info("number_of_groups " + number_of_groups);
@@ -126,16 +130,15 @@ public class CompetitionUtil {
 			Group group = new Group();
 			Long groupId = new Long(i);
 
-			List<CompetitionPlayer> groupCompetitionPlayers = new ArrayList<CompetitionPlayer>();
+			List<Player> groupPlayers = new ArrayList<Player>();
 			CompetitionPlayer competitionPlayer = sortedPlayers.get(i-1);
 			competitionPlayer.setSeed(true);
 			competitionPlayer.setActive(true);
-			competitionPlayer.setGroup(group);
+//			competitionPlayer.setGroup(group);
 			
-			groupCompetitionPlayers.add(competitionPlayer);
-			group.setCompetitionPlayers(groupCompetitionPlayers);
-//			group.setId(groupId);
-			group.setName(""+groupName);
+			groupPlayers.add(competitionPlayer.getId().getPlayer());
+			group.setPlayers(groupPlayers);
+			group.setName(String.valueOf(groupName));
 			groupName++;
 			group.setCompetition(competition);
 			
@@ -171,9 +174,9 @@ public class CompetitionUtil {
 				int randomIndex = ThreadLocalRandom.current().nextInt(0, number_to_draw);
 				logger.info("randomIndex " + randomIndex);
 				CompetitionPlayer drawPlayer = sortedPlayers.get(indexes.get(randomIndex).intValue());
-				drawPlayer.setGroup(groups.get(number_to_draw-1));
+//				drawPlayer.setGroup(groups.get(number_to_draw-1));
 				drawPlayer.setActive(true);
-				groups.get(number_to_draw-1).getCompetitionPlayers().add(drawPlayer);
+				groups.get(number_to_draw-1).getPlayers().add(drawPlayer.getId().getPlayer());
 				indexes.remove(randomIndex);
 				number_to_draw--;
 			}
@@ -213,7 +216,7 @@ public class CompetitionUtil {
 		
 		List<Game> games = new ArrayList<Game>();
 
-		int number_of_players = group.getCompetitionPlayers().size();
+		int number_of_players = group.getPlayers().size();
 		// if we have odd number of players, we'll add 1 (bye)
 		if (number_of_players % 2 == 1) {
 			number_of_players++;
@@ -225,14 +228,14 @@ public class CompetitionUtil {
 		logger.info("number_of_rounds " + number_of_rounds);
 		logger.info("number_of_games " + number_of_games);
 
-		ArrayList<CompetitionPlayer> first = new ArrayList<CompetitionPlayer>();
-		ArrayList<CompetitionPlayer> second = new ArrayList<CompetitionPlayer>();
+		ArrayList<Player> first = new ArrayList<Player>();
+		ArrayList<Player> second = new ArrayList<Player>();
 
 		for (int i = 0; i < number_of_players; i++) {
 			if (i < number_of_players / 2) {
-				first.add(group.getCompetitionPlayers().get(i));
+				first.add(group.getPlayers().get(i));
 			} else {
-				second.add(0, group.getCompetitionPlayers().get(i));
+				second.add(0, group.getPlayers().get(i));
 			}
 		}
 
@@ -245,8 +248,8 @@ public class CompetitionUtil {
 				logger.info("" + first.get(i) + " : " + second.get(i));
 
 				Game game = new Game();
-				game.setPlayerHome(first.get(i).getId().getPlayer());
-				game.setPlayerAway(second.get(i).getId().getPlayer());
+				game.setPlayerHome(first.get(i));
+				game.setPlayerAway(second.get(i));
 //				game.setGroupNum(group.getId());
 				game.setRound(round);
 				game.setCompetition(competition);
@@ -256,9 +259,9 @@ public class CompetitionUtil {
 	
 			// first arrays transformation
 			// remove elements
-			CompetitionPlayer move_first = first.get(first.size()-1);
+			Player move_first = first.get(first.size()-1);
 			first.remove(first.size()-1);
-			CompetitionPlayer move_second = second.get(0);
+			Player move_second = second.get(0);
 			second.remove(0);
 			// add elements
 			first.add(1, move_second);

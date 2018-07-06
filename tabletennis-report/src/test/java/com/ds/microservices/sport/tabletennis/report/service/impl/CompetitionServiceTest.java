@@ -34,9 +34,6 @@ public class CompetitionServiceTest {
 
 	private CompetitionService competitionService;
 	
-	@Autowired
-	private CompetitionMapper competitionMapper;
-	
 	private Competition competitionJson;
 
 	@Before
@@ -74,8 +71,8 @@ public class CompetitionServiceTest {
 	public void findByCurrent() {
 		logger.info("competition-service-test: findByCurrent");
 	
-		Optional<Competition> competitionMock = Optional.of(competitionJson);
-		Mockito.when(competitionRepository.findByCurrent(Mockito.anyBoolean())).thenReturn(competitionMock);
+//		Optional<Competition> competitionMock = Optional.of(competitionJson);
+		Mockito.when(competitionRepository.findByCurrent(Mockito.anyBoolean())).thenReturn(competitionJson);
 
 		Competition competition = competitionService.findByCurrent();
 		

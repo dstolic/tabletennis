@@ -93,9 +93,6 @@ public class CompetitionService implements BaseCompetitionService {
 
 
 	// ???
-	/* (non-Javadoc)
-	 * @see com.ds.microservices.sport.tabletennis.service.AdminCompetitionService#delete(java.lang.Long)
-	 */
 	@Override
 	public void deleteCompetition(Long competitionId) {
 		logger.info("leagues-service delete() invoked: " + competitionId);

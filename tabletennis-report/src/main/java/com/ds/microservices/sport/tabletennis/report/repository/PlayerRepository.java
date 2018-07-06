@@ -2,6 +2,7 @@ package com.ds.microservices.sport.tabletennis.report.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
@@ -16,6 +17,8 @@ public interface PlayerRepository extends PagingAndSortingRepository<Player, Lon
 	public List<Player> findByActive(boolean active);
 
 	public List<Player> findByActiveOrderByPointsDesc(boolean active);
+
+	public List<Player> findAll(Example<Player> example);
 
 
 }

@@ -11,7 +11,8 @@ import com.ds.microservices.sport.tabletennis.report.entity.Player;
 public interface PlayerMapper {
 	
 	public abstract Player playerDtoToPlayer(PlayerDto playerDTO, @Context CycleAvoidMappingContext context);
-    
-    public abstract PlayerDto playerToPlayerDto(Player player, @Context CycleAvoidMappingContext context);
+	
+	public abstract PlayerDto playerToPlayerDto(Player player, @Context CycleAvoidMappingContext context);
 
+    
 }

@@ -40,8 +40,8 @@ public class CompetitionPlayerServiceTest {
 	public void testGames() {
 		logger.info("Test: competitionPlayer");
 		
-		Optional<Competition> competition = competitionRepository.findByCurrent(true);
-		List<CompetitionPlayer> players = competitionPlayerRepository.findByIdCompetitionId(competition.get().getId());
+		Competition competition = competitionRepository.findByCurrent(true);
+		List<CompetitionPlayer> players = competitionPlayerRepository.findByIdCompetitionId(competition.getId());
 		
 		Assert.assertNotNull(competition);
 		Assert.assertNotNull(players);

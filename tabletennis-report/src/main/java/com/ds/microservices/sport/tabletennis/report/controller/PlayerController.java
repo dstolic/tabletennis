@@ -19,7 +19,6 @@ import com.ds.microservices.sport.tabletennis.report.mapper.PlayerMapper;
 import com.ds.microservices.sport.tabletennis.report.service.BaseCompetitionService;
 import com.ds.microservices.sport.tabletennis.report.service.BasePlayerService;
 
-@RequestMapping("/admin")
 @RestController
 public class PlayerController {
 

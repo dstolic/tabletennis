@@ -5,27 +5,27 @@ import java.io.Serializable;
 public class CompetitionPlayerPKDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private CompetitionDto competition;
+	private Long competitionId;
 
-	private PlayerDto player;
+	private Long playerId;
 
 	public CompetitionPlayerPKDto() {
 	}
 
-	public CompetitionDto getCompetition() {
-		return competition;
+	public Long getCompetitionId() {
+		return competitionId;
 	}
 
-	public void setCompetition(CompetitionDto competition) {
-		this.competition = competition;
+	public void setCompetitionId(Long competitionId) {
+		this.competitionId = competitionId;
 	}
 
-	public PlayerDto getPlayer() {
-		return player;
+	public Long getPlayerId() {
+		return playerId;
 	}
 
-	public void setPlayer(PlayerDto player) {
-		this.player = player;
+	public void setPlayerId(Long playerId) {
+		this.playerId = playerId;
 	}
 
 

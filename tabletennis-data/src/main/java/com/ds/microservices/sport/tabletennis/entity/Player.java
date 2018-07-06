@@ -10,10 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 
 
-/**
- * The persistent class for the player database table.
- * 
- */
+
 @Entity
 @NamedQuery(name="Player.findAll", query="SELECT p FROM Player p")
 public class Player implements Serializable {
@@ -33,8 +30,6 @@ public class Player implements Serializable {
 
 	private Long points;
 	
-//	private boolean seed;
-
 	//bi-directional many-to-one association to CompetitionPlayer
 //	@OneToMany(mappedBy="player")
 //    @ManyToOne
@@ -84,14 +79,6 @@ public class Player implements Serializable {
 		this.active = active;
 	}
 
-
-//	public boolean isSeed() {
-//		return seed;
-//	}
-//
-//	public void setSeed(boolean seed) {
-//		this.seed = seed;
-//	}
 
 	@Override
 	public String toString() {

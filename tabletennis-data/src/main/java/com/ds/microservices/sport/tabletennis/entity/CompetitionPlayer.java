@@ -29,11 +29,11 @@ public class CompetitionPlayer implements Serializable {
 
 	private boolean active;
 
-	@ManyToOne
-	@JoinColumn(name="group_id")
+//	@ManyToOne
+//	@JoinColumn(name="group_id")
 //	@JsonIgnore
 //	@Transient
-	private Group group;
+//	private Group group;
 
 	public CompetitionPlayer() {
 	}
@@ -71,13 +71,13 @@ public class CompetitionPlayer implements Serializable {
 		this.active = active;
 	}
 
-	public Group getGroup() {
-		return group;
-	}
-
-	public void setGroup(Group group) {
-		this.group = group;
-	}
+//	public Group getGroup() {
+//		return group;
+//	}
+//
+//	public void setGroup(Group group) {
+//		this.group = group;
+//	}
 
 
 }

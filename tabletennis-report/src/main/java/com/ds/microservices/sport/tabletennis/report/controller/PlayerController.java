@@ -59,28 +59,4 @@ public class PlayerController {
 	}
 	
 
-	// Save/update player
-	@RequestMapping(value="/players/add", produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<PlayerDto> save(@RequestBody PlayerDto playerDto) {
-		logger.info("player-controller save() invoked. ");
-		
-		return ResponseEntity.ok(playerMapper.playerToPlayerDto(
-									playerService.savePlayer(
-											playerMapper.playerDtoToPlayer(playerDto, new CycleAvoidMappingContext())
-											), new CycleAvoidMappingContext()
-									));
-	}
-
-	// Activate/deactivate player
-	@RequestMapping(value="/players/activate", produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<PlayerDto> activatePlayers(@RequestParam Long id, @RequestParam boolean active) {
-		logger.info("player-controller activatePlayer() invoked. ");
-		
-		return ResponseEntity.ok(playerMapper.playerToPlayerDto(playerService.activatePlayer(id, active), new CycleAvoidMappingContext()));
-//		return playerMapper.playerToPlayerDto(
-//				playerRepository.save(player), new CycleAvoidMappingContext());
-
-	}
-
-
 }

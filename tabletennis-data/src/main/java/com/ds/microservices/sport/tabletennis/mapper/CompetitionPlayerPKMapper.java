@@ -1,12 +1,12 @@
-package com.ds.microservices.sport.tabletennis.report.mapper;
+package com.ds.microservices.sport.tabletennis.mapper;
 
 import org.mapstruct.Context;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
-import com.ds.microservices.sport.tabletennis.report.dto.CompetitionPlayerPKDto;
-import com.ds.microservices.sport.tabletennis.report.entity.CompetitionPlayerPK;
+import com.ds.microservices.sport.tabletennis.dto.CompetitionPlayerPKDto;
+import com.ds.microservices.sport.tabletennis.entity.CompetitionPlayerPK;
 
 
 @Mapper(componentModel = "spring")

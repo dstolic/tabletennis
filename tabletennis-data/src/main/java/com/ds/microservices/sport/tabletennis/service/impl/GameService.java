@@ -6,7 +6,9 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ds.microservices.sport.tabletennis.entity.Competition;
 import com.ds.microservices.sport.tabletennis.entity.Game;
+import com.ds.microservices.sport.tabletennis.repository.CompetitionRepository;
 import com.ds.microservices.sport.tabletennis.repository.GameRepository;
 import com.ds.microservices.sport.tabletennis.service.BaseGameService;
 
@@ -18,17 +20,40 @@ public class GameService implements BaseGameService {
 	@Autowired
 	protected GameRepository gameRepository;
 
+	@Autowired
+	protected CompetitionRepository competitionRepository;
 
-	// Find games from competition
+	@Override
+	public List<Game> findGamesFromCompetition() {
+		Competition competition =  competitionRepository.findByCurrent(true);
+		return gameRepository.findByCompetitionId(competition.getId());
+	}
+
 	@Override
 	public List<Game> findGamesFromCompetition(Long competitionId) {
-		logger.info("game-service findGamesFromCompetition() invoked: ");
+		return gameRepository.findByCompetitionId(competitionId);
+	}
 
-		List<Game> games = (List<Game>) gameRepository.findByCompetitionId(competitionId);
+	@Override
+	public List<Game> findFinishedGames() {
+		Competition competition =  competitionRepository.findByCurrent(true);
+		return gameRepository.findByCompetitionIdAndFinished(competition.getId(), true);
+	}
 
-		logger.info("game-service findGamesFromCompetition() found: " + games);
+	@Override
+	public List<Game> findFinishedGames(Long competitionId) {
+		return gameRepository.findByCompetitionIdAndFinished(competitionId, true);
+	}
 
-		return games;
+	@Override
+	public List<Game> findScheduledGames() {
+		Competition competition =  competitionRepository.findByCurrent(true);
+		return gameRepository.findByCompetitionIdAndFinished(competition.getId(), false);
+	}
+
+	@Override
+	public List<Game> findScheduledGames(Long competitionId) {
+		return gameRepository.findByCompetitionIdAndFinished(competitionId, false);
 	}
 
 }

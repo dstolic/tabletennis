@@ -18,14 +18,6 @@ public interface GameRepository extends PagingAndSortingRepository<Game, Long> {
 	
 	public List<Game> findByCompetitionId(Long competitionId);
 
-//	@Query("Select pl from Player pl where active = 1 and id in (select player_id from competition_player where competition_id=1) order by points desc 8")
-//	public List<Player> findSeedPlayers(Long competitionId);
-
-//	public Iterable<League> findAll();
-	
-//	public List<League> findByNameContainingIgnoreCase(String partialName);
-	
-//	public League save(League leagueDTO) ;
-	
+	public List<Game> findByCompetitionIdAndFinished(Long competitionId, boolean finished);
 
 }

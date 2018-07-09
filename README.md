@@ -5,6 +5,21 @@ Table tennis app contains 3 microservices.
 2. tabletennis-report - Client service. Shows data for current competition only.
 3. tabletennis-gateway - Gateway service.
 
+Commit 9/7:
+- tabletennis-gateway(4444)/date(2222)/report(3333) functionalities:
+	* competition (http://localhost:4444/competition)
+	* players 
+		- all (http://localhost:4444/competition/players)
+		- by ID (http://localhost:4444/players/2)
+	* games 
+		- all (http://localhost:4444/competition/games)
+		- finished (http://localhost:4444/competition/games/finished)
+		- scheduled (http://localhost:4444/competition/games/scheduled)
+	* groups 
+		- all, with players and games (http://localhost:4444/competition/group)
+		- single group by name/id (http://localhost:4444/competition/group/{name or id})
+
+
 Commit 6/7:
 - tabletennis-report/data: Group and CompetitionPlayer has no relationship.
 - tabletennis-report: Added groups list. 

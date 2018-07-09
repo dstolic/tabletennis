@@ -131,8 +131,8 @@ public class Competition implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Competition [id=" + id + ", description=" + description + ", name=" + name + ", competitionPlayers=" + competitionPlayers
-				+ "]";
+		return "Competition [id=" + id + ", description=" + description + ", name=" + name + "]";
+//		return "Competition [id=" + id + ", description=" + description + ", name=" + name + ", competitionPlayers=" + competitionPlayers + "]";
 	}
 
 	public String getType() {

@@ -24,7 +24,7 @@ public class GameDto implements Serializable {
 
 	private PlayerDto playerAway;
 
-//	private Long groupNum;
+	private Long groupId;
 
 	private int round;
 
@@ -93,6 +93,14 @@ public class GameDto implements Serializable {
 
 	public void setRound(int round) {
 		this.round = round;
+	}
+
+	public Long getGroupId() {
+		return groupId;
+	}
+
+	public void setGroupId(Long groupId) {
+		this.groupId = groupId;
 	}
 
 //	public Long getGroupNum() {

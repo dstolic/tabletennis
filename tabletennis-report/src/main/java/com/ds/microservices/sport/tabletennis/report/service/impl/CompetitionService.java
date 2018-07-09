@@ -46,24 +46,18 @@ public class CompetitionService implements BaseCompetitionService {
 	}
 
 	// Find players from competition
+	// TODO: Try to find optimized version. 'findByIdCompetitionId' produces one SELECT statement per competitionPlayer
 	@Override
 	public List<CompetitionPlayer> findPlayersFromCompetition() {
 		logger.info("competition-service findPlayersFromCompetition() invoked: ");
 
 		Competition competition =  competitionRepository.findByCurrent(true);
-		CompetitionPlayerPK pk = new CompetitionPlayerPK(competition, null);
 		
 		List<CompetitionPlayer> players = competitionPlayerRepository.findByIdCompetitionId(competition.getId());
 
 		logger.info("competition-service findPlayersFromCompetition() found: " + players);
 
 		return players;
-	}
-
-	@Override
-	public List<Competition> allCompetitions() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

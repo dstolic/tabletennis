@@ -5,6 +5,232 @@
     "name": "Test",
     "completed": false,
     "current": true,
+    "players": [
+        {
+            "id": 21,
+            "active": true,
+            "firstName": "Marko",
+            "lastName": "Milenković",
+            "points": 147
+        },
+        {
+            "id": 3,
+            "active": true,
+            "firstName": "Miloš",
+            "lastName": "Ignjatović",
+            "points": 828
+        },
+        {
+            "id": 7,
+            "active": true,
+            "firstName": "Miloš",
+            "lastName": "Šolaić",
+            "points": 518
+        },
+        {
+            "id": 5,
+            "active": true,
+            "firstName": "Nenad",
+            "lastName": "Raković",
+            "points": 645
+        },
+        {
+            "id": 9,
+            "active": true,
+            "firstName": "Dejan",
+            "lastName": "Hadžiomerović",
+            "points": 408
+        },
+        {
+            "id": 13,
+            "active": true,
+            "firstName": "Miloš",
+            "lastName": "Vulinović",
+            "points": 266
+        },
+        {
+            "id": 11,
+            "active": true,
+            "firstName": "Stefan",
+            "lastName": "Stanojević",
+            "points": 270
+        },
+        {
+            "id": 17,
+            "active": true,
+            "firstName": "Dušan",
+            "lastName": "Nastić",
+            "points": 195
+        },
+        {
+            "id": 12,
+            "active": true,
+            "firstName": "Nemanja",
+            "lastName": "Manot",
+            "points": 269
+        },
+        {
+            "id": 16,
+            "active": true,
+            "firstName": "Marko",
+            "lastName": "Zelenbaba",
+            "points": 197
+        },
+        {
+            "id": 2,
+            "active": true,
+            "firstName": "Dušan",
+            "lastName": "Trtica",
+            "points": 1740
+        },
+        {
+            "id": 22,
+            "active": true,
+            "firstName": "Nikola",
+            "lastName": "Gladović",
+            "points": 139
+        },
+        {
+            "id": 14,
+            "active": true,
+            "firstName": "Dragomir",
+            "lastName": "Krstić",
+            "points": 265
+        },
+        {
+            "id": 29,
+            "active": true,
+            "firstName": "Milorad",
+            "lastName": "Čolović",
+            "points": 89
+        },
+        {
+            "id": 20,
+            "active": true,
+            "firstName": "Časlav",
+            "lastName": "Šabani",
+            "points": 150
+        },
+        {
+            "id": 24,
+            "active": true,
+            "firstName": "Danka",
+            "lastName": "Mihajlović",
+            "points": 135
+        },
+        {
+            "id": 25,
+            "active": true,
+            "firstName": "Marko",
+            "lastName": "Krsmanović",
+            "points": 125
+        },
+        {
+            "id": 28,
+            "active": true,
+            "firstName": "Aleksandar",
+            "lastName": "Jocić",
+            "points": 100
+        },
+        {
+            "id": 31,
+            "active": true,
+            "firstName": "Dejan",
+            "lastName": "Ilić",
+            "points": 80
+        },
+        {
+            "id": 33,
+            "active": true,
+            "firstName": "Branislav",
+            "lastName": "Caran",
+            "points": 70
+        },
+        {
+            "id": 27,
+            "active": true,
+            "firstName": "Mladen",
+            "lastName": "Stanojević",
+            "points": 110
+        },
+        {
+            "id": 8,
+            "active": true,
+            "firstName": "Miloš",
+            "lastName": "Dečov",
+            "points": 429
+        },
+        {
+            "id": 15,
+            "active": true,
+            "firstName": "Goran",
+            "lastName": "Pantić",
+            "points": 257
+        },
+        {
+            "id": 19,
+            "active": true,
+            "firstName": "Ilija",
+            "lastName": "Ćeriman",
+            "points": 155
+        },
+        {
+            "id": 26,
+            "active": true,
+            "firstName": "Nikola",
+            "lastName": "Ristivojević",
+            "points": 115
+        },
+        {
+            "id": 32,
+            "active": true,
+            "firstName": "Bojan",
+            "lastName": "Božović",
+            "points": 75
+        },
+        {
+            "id": 6,
+            "active": true,
+            "firstName": "Vladimir",
+            "lastName": "Canić",
+            "points": 628
+        },
+        {
+            "id": 10,
+            "active": true,
+            "firstName": "Jovan",
+            "lastName": "Ćušić",
+            "points": 305
+        },
+        {
+            "id": 4,
+            "active": true,
+            "firstName": "Marko",
+            "lastName": "Baračkov",
+            "points": 810
+        },
+        {
+            "id": 18,
+            "active": true,
+            "firstName": "Aleksandar",
+            "lastName": "Marin",
+            "points": 173
+        },
+        {
+            "id": 23,
+            "active": true,
+            "firstName": "Ivan",
+            "lastName": "Petrović",
+            "points": 136
+        },
+        {
+            "id": 30,
+            "active": true,
+            "firstName": "Nikola",
+            "lastName": "Rahman",
+            "points": 89
+        }
+    ],
     "properties": [
         {
             "id": 3,

@@ -11,18 +11,10 @@ import com.ds.microservices.sport.tabletennis.report.entity.Group;
 
 public interface GroupRepository extends PagingAndSortingRepository<Group, Long> {
 
+	public List<Group> findByCompetitionId(Long competitionId);
+
 	public Optional<Group> findById(Long id);
 
-	public List<Group> findByCompetitionId(Long competitionId);
+	public Group findByCompetitionIdAndName(Long id, String name);
 	
-//	@Query("Select pl from Player pl where active = 1 and id in (select player_id from competition_player where competition_id=1) order by points desc 8")
-//	public List<Player> findSeedPlayers(Long competitionId);
-
-//	public Iterable<League> findAll();
-	
-//	public List<League> findByNameContainingIgnoreCase(String partialName);
-	
-//	public League save(League leagueDTO) ;
-	
-
 }

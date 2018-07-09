@@ -31,9 +31,9 @@ public class CompetitionDto implements Serializable {
 //	@JsonBackReference
     private Set<CompetitionProperty> properties;
     
-	private List<CompetitionPlayer> competitionPlayers;
+	private List<CompetitionPlayerDto> competitionPlayers;
 
-	private List<Group> groups;
+	private List<GroupDto> groups;
     
 	private List<GameDto> games;
 
@@ -85,11 +85,11 @@ public class CompetitionDto implements Serializable {
 		this.properties = properties;
 	}
 
-	public List<Group> getGroups() {
+	public List<GroupDto> getGroups() {
 		return groups;
 	}
 
-	public void setGroups(List<Group> groups) {
+	public void setGroups(List<GroupDto> groups) {
 		this.groups = groups;
 	}
 
@@ -109,11 +109,11 @@ public class CompetitionDto implements Serializable {
 		this.games = games;
 	}
 
-	public List<CompetitionPlayer> getCompetitionPlayers() {
+	public List<CompetitionPlayerDto> getCompetitionPlayers() {
 		return competitionPlayers;
 	}
 
-	public void setCompetitionPlayers(List<CompetitionPlayer> competitionPlayers) {
+	public void setCompetitionPlayers(List<CompetitionPlayerDto> competitionPlayers) {
 		this.competitionPlayers = competitionPlayers;
 	}
 

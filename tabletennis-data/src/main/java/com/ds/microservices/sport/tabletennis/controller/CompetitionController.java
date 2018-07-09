@@ -16,10 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ds.microservices.sport.tabletennis.config.CompetitionConfiguration;
 import com.ds.microservices.sport.tabletennis.dto.CompetitionDto;
-import com.ds.microservices.sport.tabletennis.dto.GameDto;
+import com.ds.microservices.sport.tabletennis.dto.CompetitionPlayerDto;
 import com.ds.microservices.sport.tabletennis.dto.PlayerDto;
 import com.ds.microservices.sport.tabletennis.entity.Competition;
-import com.ds.microservices.sport.tabletennis.mapper.CompetititonMapper;
+import com.ds.microservices.sport.tabletennis.mapper.CompetitionPlayerMapper;
+import com.ds.microservices.sport.tabletennis.mapper.CompetitionMapper;
 import com.ds.microservices.sport.tabletennis.mapper.CycleAvoidMappingContext;
 import com.ds.microservices.sport.tabletennis.mapper.GameMapper;
 import com.ds.microservices.sport.tabletennis.mapper.PlayerMapper;
@@ -44,7 +45,7 @@ public class CompetitionController {
 	protected BaseGameService gameService;
 	
 	@Autowired
-	private CompetititonMapper competitionMapper;
+	private CompetitionMapper competitionMapper;
 
 	@Autowired
 	private GameMapper gameMapper;
@@ -55,10 +56,13 @@ public class CompetitionController {
 	@Autowired
 	protected CompetitionConfiguration competitionConfiguration;
 
+	@Autowired
+	protected CompetitionPlayerMapper competitionPlayerMapper;
+
 
 	
 	// List of all competitions
-	@RequestMapping(value="/competition", produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value="/competitions", produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<List<CompetitionDto>> allCompetitions() {
 		logger.info("competition-controller allCompetitions() invoked.");
 
@@ -82,6 +86,18 @@ public class CompetitionController {
 
 	}
 	
+	// Find competition by id
+	@RequestMapping(value="/competition", produces=MediaType.APPLICATION_JSON_UTF8_VALUE, method=RequestMethod.GET)
+	public ResponseEntity<CompetitionDto> findByCurrent() {
+		logger.info("competetion-controller findByCurrent() invoked: ");
+		
+		return ResponseEntity.ok(
+				competitionMapper.competitionToCompetitionDto(
+						competitionService.findByCurrent(), new CycleAvoidMappingContext()
+						));
+
+	}
+
 	// Save/update competition
 	@RequestMapping(value="/competition/add", produces=MediaType.APPLICATION_JSON_UTF8_VALUE, method=RequestMethod.POST)
 	public ResponseEntity<CompetitionDto> save(@RequestBody CompetitionDto competitionDto) {
@@ -112,28 +128,29 @@ public class CompetitionController {
 
 	// Players from competition
 	@RequestMapping(value="/competition/{id}/players", produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<Set<PlayerDto>> findPlayersForCompetition(@PathVariable Long id) {
-		logger.info("game-controller findPlayersForCompetition() invoked: " + id);
-		
-//		CompetitionDto competitionDto = competitionService.findById(id); 
+	public ResponseEntity<List<CompetitionPlayerDto>> findPlayersFromCompetition(@PathVariable Long id) {
+		logger.info("player-controller findPlayersFromCompetition() invoked.");
 		
 		return ResponseEntity.ok(
-				competitionMapper.competitionToCompetitionDto(
-						competitionService.findById(id), new CycleAvoidMappingContext())
-						.getPlayers());
+				competitionService.findPlayersFromCompetition(id)
+				.stream()
+				.map(player -> competitionPlayerMapper.competitionPlayerToCompetitionPlayerDto(player, new CycleAvoidMappingContext()))
+				.collect(Collectors.toList()));
 	}
 
-	// Games from competition
-	@RequestMapping(value="/competition/{id}/games", produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<List<GameDto>> findGamesForCompetition(@PathVariable Long id) {
-		logger.info("game-controller findGamesForCompetition() invoked: " + id);
+	// Players from competition
+	@RequestMapping(value="/competition/players", produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<List<CompetitionPlayerDto>> findPlayersFromCompetition() {
+		logger.info("player-controller findPlayersFromCompetition() invoked.");
 		
-		return ResponseEntity.ok(gameService.findGamesFromCompetition(id).stream()
-				.map(game -> gameMapper.gameToGameDto(game, new CycleAvoidMappingContext()))
+		return ResponseEntity.ok(
+				competitionService.findPlayersFromCompetition()
+				.stream()
+				.map(player -> competitionPlayerMapper.competitionPlayerToCompetitionPlayerDto(player, new CycleAvoidMappingContext()))
 				.collect(Collectors.toList()));
-
 	}
 	
+
 	// Add player
 	@RequestMapping("/competition/{id}/add/{playerId}")
 	public ResponseEntity<CompetitionDto> addPlayerToCompetition(@PathVariable("id") Long competitionId, @PathVariable("playerId") Long playerId) {

@@ -1,4 +1,4 @@
-package com.ds.microservices.sport.tabletennis.report.mapper;
+package com.ds.microservices.sport.tabletennis.mapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,10 +8,10 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.ds.microservices.sport.tabletennis.report.dto.GameDto;
-import com.ds.microservices.sport.tabletennis.report.dto.GroupDto;
-import com.ds.microservices.sport.tabletennis.report.entity.Game;
-import com.ds.microservices.sport.tabletennis.report.entity.Group;
+import com.ds.microservices.sport.tabletennis.dto.GameDto;
+import com.ds.microservices.sport.tabletennis.dto.GroupDto;
+import com.ds.microservices.sport.tabletennis.entity.Game;
+import com.ds.microservices.sport.tabletennis.entity.Group;
 
 
 @Mapper(componentModel = "spring")

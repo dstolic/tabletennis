@@ -35,11 +35,23 @@ public class GameService implements BaseGameService {
 
 		Competition competition =  competitionRepository.findByCurrent(true);
 		
-		List<Game> games = gameRepository.findByCompetitionId(competition.getId());
+		return gameRepository.findByCompetitionId(competition.getId());
+	}
 
-		logger.info("game-service findGamesFromCompetition() found: " + games);
 
-		return games;
+	@Override
+	public List<Game> findFinishedGames() {
+		Competition competition =  competitionRepository.findByCurrent(true);
+		
+		return gameRepository.findByCompetitionIdAndFinished(competition.getId(), true);
+	}
+
+
+	@Override
+	public List<Game> findScheduledGames() {
+		Competition competition =  competitionRepository.findByCurrent(true);
+		
+		return gameRepository.findByCompetitionIdAndFinished(competition.getId(), false);
 	}
 
 }

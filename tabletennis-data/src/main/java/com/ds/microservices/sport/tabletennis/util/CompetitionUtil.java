@@ -250,7 +250,7 @@ public class CompetitionUtil {
 				Game game = new Game();
 				game.setPlayerHome(first.get(i));
 				game.setPlayerAway(second.get(i));
-//				game.setGroupNum(group.getId());
+				game.setGroupId(group.getId());
 				game.setRound(round);
 				game.setCompetition(competition);
 				

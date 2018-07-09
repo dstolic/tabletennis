@@ -1,4 +1,4 @@
-package com.ds.microservices.sport.tabletennis.report.mapper;
+package com.ds.microservices.sport.tabletennis.mapper;
 
 import java.util.HashSet;
 import java.util.List;
@@ -9,10 +9,10 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.ds.microservices.sport.tabletennis.report.dto.CompetitionDto;
-import com.ds.microservices.sport.tabletennis.report.dto.PlayerDto;
-import com.ds.microservices.sport.tabletennis.report.entity.Competition;
-import com.ds.microservices.sport.tabletennis.report.entity.CompetitionPlayer;
+import com.ds.microservices.sport.tabletennis.dto.CompetitionDto;
+import com.ds.microservices.sport.tabletennis.dto.PlayerDto;
+import com.ds.microservices.sport.tabletennis.entity.Competition;
+import com.ds.microservices.sport.tabletennis.entity.CompetitionPlayer;
 
 @Mapper(componentModel = "spring", uses= { PlayerMapper.class, CompetitionPlayerMapper.class})
 public abstract class CompetitionMapper {

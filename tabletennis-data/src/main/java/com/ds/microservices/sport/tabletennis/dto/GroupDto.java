@@ -1,4 +1,4 @@
-package com.ds.microservices.sport.tabletennis.report.dto;
+package com.ds.microservices.sport.tabletennis.dto;
 
 import java.io.Serializable;
 import java.util.List;

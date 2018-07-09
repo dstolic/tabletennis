@@ -2,13 +2,10 @@ package com.ds.microservices.sport.tabletennis.report.dto;
 
 import java.io.Serializable;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 
 public class CompetitionPlayerDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-//	@JsonIgnoreProperties({"competition", "player"})
 	private CompetitionPlayerPKDto id;
 
 	private boolean seed;

@@ -1,4 +1,4 @@
-package com.ds.microservices.sport.tabletennis.report.controller;
+package com.ds.microservices.sport.tabletennis.controller;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ds.microservices.sport.tabletennis.report.dto.GroupDto;
-import com.ds.microservices.sport.tabletennis.report.mapper.CycleAvoidMappingContext;
-import com.ds.microservices.sport.tabletennis.report.mapper.GroupMapper;
-import com.ds.microservices.sport.tabletennis.report.service.impl.GroupService;;
+import com.ds.microservices.sport.tabletennis.dto.GroupDto;
+import com.ds.microservices.sport.tabletennis.mapper.CycleAvoidMappingContext;
+import com.ds.microservices.sport.tabletennis.mapper.GroupMapper;
+import com.ds.microservices.sport.tabletennis.service.impl.GroupService;;
 
-
+@RequestMapping("/admin")
 @RestController
 public class GroupController {
 
@@ -33,6 +33,17 @@ public class GroupController {
 
 	
 	// Find groups 
+	@RequestMapping(value="/competition/{id}/group", produces=MediaType.APPLICATION_JSON_UTF8_VALUE, method=RequestMethod.GET)
+	public ResponseEntity<List<GroupDto>> findGroups(@PathVariable Long id) {
+		logger.info("competetion-controller findGroups() start");
+		
+		return ResponseEntity.ok(
+				groupMapper.groupToGroupDto(
+						groupService.findAllByCompetition(id), new CycleAvoidMappingContext()
+					));
+	}
+
+	// Find groups 
 	@RequestMapping(value="/competition/group", produces=MediaType.APPLICATION_JSON_UTF8_VALUE, method=RequestMethod.GET)
 	public ResponseEntity<List<GroupDto>> findGroups() {
 		logger.info("competetion-controller findGroups() start");
@@ -41,7 +52,17 @@ public class GroupController {
 				groupMapper.groupToGroupDto(
 						groupService.findAllByCompetition(), new CycleAvoidMappingContext()
 					));
+	}
 
+	// Find groups 
+	@RequestMapping(value="/competition/{id}/group/{name}", produces=MediaType.APPLICATION_JSON_UTF8_VALUE, method=RequestMethod.GET)
+	public ResponseEntity<GroupDto> findGroupByName(@PathVariable Long id, @PathVariable String name) {
+		logger.info("competetion-controller findGroupByName() start");
+		
+		return ResponseEntity.ok(
+				groupMapper.groupToGroupDto(
+						groupService.findByName(id, name), new CycleAvoidMappingContext()
+					));
 	}
 
 	// Find groups 
@@ -53,7 +74,5 @@ public class GroupController {
 				groupMapper.groupToGroupDto(
 						groupService.findByName(name), new CycleAvoidMappingContext()
 					));
-
 	}
-
 }

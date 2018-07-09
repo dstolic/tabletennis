@@ -2,25 +2,22 @@ package com.ds.microservices.sport.tabletennis.dto;
 
 import java.io.Serializable;
 
-import com.ds.microservices.sport.tabletennis.entity.Competition;
-import com.ds.microservices.sport.tabletennis.entity.Player;
-
 public class CompetitionPlayerPKDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private CompetitionDto competition;
+	private Long competitionId;
 
 	private PlayerDto player;
 
 	public CompetitionPlayerPKDto() {
 	}
 
-	public CompetitionDto getCompetition() {
-		return competition;
+	public Long getCompetitionId() {
+		return competitionId;
 	}
 
-	public void setCompetition(CompetitionDto competition) {
-		this.competition = competition;
+	public void setCompetitionId(Long competitionId) {
+		this.competitionId = competitionId;
 	}
 
 	public PlayerDto getPlayer() {
@@ -30,6 +27,5 @@ public class CompetitionPlayerPKDto implements Serializable {
 	public void setPlayer(PlayerDto player) {
 		this.player = player;
 	}
-
 
 }

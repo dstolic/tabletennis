@@ -23,7 +23,7 @@ public class CompetitionPlayer implements Serializable {
 
 	@EmbeddedId
 //	@JsonManagedReference
-	@JsonIgnoreProperties({"competition", "player"})
+//	@JsonIgnoreProperties({"competition", "player"})
 	private CompetitionPlayerPK id;
 
 	private boolean seed;

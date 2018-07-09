@@ -1,4 +1,4 @@
-package com.ds.microservices.sport.tabletennis.report.service.impl;
+package com.ds.microservices.sport.tabletennis.service.impl;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -6,12 +6,11 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ds.microservices.sport.tabletennis.report.entity.Competition;
-import com.ds.microservices.sport.tabletennis.report.entity.Group;
-import com.ds.microservices.sport.tabletennis.report.repository.CompetitionPlayerRepository;
-import com.ds.microservices.sport.tabletennis.report.repository.CompetitionRepository;
-import com.ds.microservices.sport.tabletennis.report.repository.GroupRepository;
-import com.ds.microservices.sport.tabletennis.report.service.BaseGroupService;
+import com.ds.microservices.sport.tabletennis.entity.Competition;
+import com.ds.microservices.sport.tabletennis.entity.Group;
+import com.ds.microservices.sport.tabletennis.repository.CompetitionRepository;
+import com.ds.microservices.sport.tabletennis.repository.GroupRepository;
+import com.ds.microservices.sport.tabletennis.service.BaseGroupService;
 
 @Service
 public class GroupService implements BaseGroupService {
@@ -40,15 +39,24 @@ public class GroupService implements BaseGroupService {
 	@Override
 	public List<Group> findAllByCompetition() {
 		Competition competition =  competitionRepository.findByCurrent(true);
-
 		return groupRepository.findByCompetitionId(competition.getId());
+	}
+
+	@Override
+	public List<Group> findAllByCompetition(Long competitionId) {
+		return groupRepository.findByCompetitionId(competitionId);
 	}
 
 	@Override
 	public Group findByName(String name) {
 		Competition competition =  competitionRepository.findByCurrent(true);
-
 		return groupRepository.findByCompetitionIdAndName(competition.getId(), name);
+	}
+
+	@Override
+	public Group findByName(Long competitionId, String name) {
+
+		return groupRepository.findByCompetitionIdAndName(competitionId, name);
 	}
 
 }

@@ -32,26 +32,13 @@ public class Game implements Serializable {
 	@JoinColumn(name="player_home")
 	private Player playerHome;
 	
-//	@Transient
-//	@JoinColumn(name="competition_id")
-//	private Competition competition;
-
 	@JsonIgnore // budzevina, resiti kasnije
     @ManyToOne
     @JoinColumn(name = "competition_id")
 	private Competition competition;
 
- //	@Column(name="competition_id")
-//	private Long competitionId;
-
-//	@Transient
-//	private Player playerHome;
-
-//	@Transient
-//	private Player playerAway;
-
-//	@Column(name="group_num")
-//	private Long groupNum;
+	@Column(name="group_id")
+	private Long groupId;
 
 	private int round;
 
@@ -122,14 +109,6 @@ public class Game implements Serializable {
 		this.playerAway = playerAway;
 	}
 
-//	public Long getGroupNum() {
-//		return groupNum;
-//	}
-//
-//	public void setGroupNum(Long groupNum) {
-//		this.groupNum = groupNum;
-//	}
-
 	public int getRound() {
 		return round;
 	}
@@ -141,7 +120,15 @@ public class Game implements Serializable {
 	@Override
 	public String toString() {
 		return "Game [id=" + id + ", competition=" + competition.getId() + ", playerHome=" + playerHome + ", playerAway="
-				+ playerAway + "," + ", round=" + round + "]";
+				+ playerAway + "," + ", round=" + round + ", groupId=" + groupId + "]";
+	}
+
+	public Long getGroupId() {
+		return groupId;
+	}
+
+	public void setGroupId(Long groupId) {
+		this.groupId = groupId;
 	}
 
 }

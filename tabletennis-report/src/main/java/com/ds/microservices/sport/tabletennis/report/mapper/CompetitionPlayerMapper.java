@@ -7,7 +7,7 @@ import com.ds.microservices.sport.tabletennis.report.dto.CompetitionPlayerDto;
 import com.ds.microservices.sport.tabletennis.report.entity.CompetitionPlayer;
 
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses= { CompetitionPlayerPKMapper.class})
 public interface CompetitionPlayerMapper {
 	
 	public abstract CompetitionPlayer competitionPlayerDtoToCompetitionPlayer(CompetitionPlayerDto competitionPlayerDTO, @Context CycleAvoidMappingContext context);

@@ -6,7 +6,13 @@ import com.ds.microservices.sport.tabletennis.entity.Game;
 
 public interface BaseGameService {
 
-	// Find games from competition
+	List<Game> findGamesFromCompetition();
 	List<Game> findGamesFromCompetition(Long competitionId);
+
+	List<Game> findFinishedGames();
+	List<Game> findFinishedGames(Long competitionId);
+
+	List<Game> findScheduledGames();
+	List<Game> findScheduledGames(Long competitionId);
 
 }

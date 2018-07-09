@@ -10,12 +10,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.ds.microservices.sport.tabletennis.report.entity.Competition;
-import com.ds.microservices.sport.tabletennis.report.mapper.CompetitionMapper;
 import com.ds.microservices.sport.tabletennis.report.repository.CompetitionPlayerRepository;
 import com.ds.microservices.sport.tabletennis.report.repository.CompetitionRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;

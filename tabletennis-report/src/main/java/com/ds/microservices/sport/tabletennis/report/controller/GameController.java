@@ -46,6 +46,32 @@ public class GameController {
 
 	}
 	
+	// Finished games
+	@RequestMapping(value="/competition/games/finished", produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<List<GameDto>> findFinishedGames() {
+		logger.info("game-controller findGamesForCompetition() invoked.");
+		
+		return ResponseEntity.ok(
+				gameService.findFinishedGames()
+				.stream()
+				.map(game -> gameMapper.gameToGameDto(game, new CycleAvoidMappingContext()))
+				.collect(Collectors.toList()));
+
+	}
+	
+	// Scheduled games
+	@RequestMapping(value="/competition/games/scheduled", produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<List<GameDto>> findScheduledGames() {
+		logger.info("game-controller findGamesForCompetition() invoked.");
+		
+		return ResponseEntity.ok(
+				gameService.findScheduledGames()
+				.stream()
+				.map(game -> gameMapper.gameToGameDto(game, new CycleAvoidMappingContext()))
+				.collect(Collectors.toList()));
+
+	}
+	
 
 
 }

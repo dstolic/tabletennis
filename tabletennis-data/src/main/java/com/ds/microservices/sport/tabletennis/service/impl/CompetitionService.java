@@ -10,12 +10,14 @@ import com.ds.microservices.sport.tabletennis.config.CompetitionConfiguration;
 import com.ds.microservices.sport.tabletennis.entity.Competition;
 import com.ds.microservices.sport.tabletennis.entity.CompetitionPlayer;
 import com.ds.microservices.sport.tabletennis.entity.Game;
+import com.ds.microservices.sport.tabletennis.entity.GameSet;
 import com.ds.microservices.sport.tabletennis.entity.Group;
 import com.ds.microservices.sport.tabletennis.entity.Player;
 import com.ds.microservices.sport.tabletennis.exceptions.CompetitionNotCompletedException;
 import com.ds.microservices.sport.tabletennis.repository.CompetitionPlayerRepository;
 import com.ds.microservices.sport.tabletennis.repository.CompetitionRepository;
 import com.ds.microservices.sport.tabletennis.repository.GameRepository;
+import com.ds.microservices.sport.tabletennis.repository.GameSetRepository;
 import com.ds.microservices.sport.tabletennis.repository.GroupRepository;
 import com.ds.microservices.sport.tabletennis.repository.PlayerRepository;
 import com.ds.microservices.sport.tabletennis.service.BaseCompetitionService;
@@ -37,6 +39,9 @@ public class CompetitionService implements BaseCompetitionService {
 
 	@Autowired
 	protected GameRepository gameRepository;
+
+	@Autowired
+	protected GameSetRepository gameSetRepository;
 
 	@Autowired
 	protected GroupRepository groupRepository;
@@ -231,8 +236,9 @@ public class CompetitionService implements BaseCompetitionService {
 //		logger.info("Groups " + groups);
 
 
-		Iterable<CompetitionPlayer> iter = competition.getCompetitionPlayers();
-		Iterable<CompetitionPlayer> cp = competitionPlayerRepository.saveAll(iter);
+		Iterable<CompetitionPlayer> cp = competitionPlayerRepository.saveAll(competition.getCompetitionPlayers());
+//		Iterable<CompetitionPlayer> iter = competition.getCompetitionPlayers();
+//		Iterable<CompetitionPlayer> cp = competitionPlayerRepository.saveAll(iter);
 //		competition.setCompetitionPlayers((List<CompetitionPlayer>)cp);
 		
 		
@@ -253,6 +259,32 @@ public class CompetitionService implements BaseCompetitionService {
 		
 		
 		return competition;
+	}
+
+	@Override
+	public Competition generateResults(Long competitionId) {
+		Competition competition = findById(competitionId);
+
+		CompetitionUtil utils = new CompetitionUtil();
+		utils.generateResults(competition);
+		
+//		competition = competitionRepository.save(competition);
+		List<Game> games = competition.getGames();
+		for (Game game : games) {
+			gameSetRepository.saveAll(game.getSets());
+			gameRepository.save(game);
+		}
+
+//		for (Game game : games) {
+//			if (game.getGroupId() == 98) {
+//				for (GameSet gameSet : game.getSets()) {
+//					logger.info("TEST " + gameSet);
+//				}
+//			}
+//		}
+		
+		return competition;
+		
 	}
 
 

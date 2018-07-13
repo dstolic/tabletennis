@@ -1,17 +1,20 @@
 package com.ds.microservices.sport.tabletennis.report.dto;
 
-import java.io.Serializable;
+import java.util.List;
 
+import com.ds.microservices.sport.tabletennis.report.entity.GameSet;
+//import com.ds.microservices.sport.tabletennis.report.util.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName("Game")
-public class GameDto implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class GameDto {
 
 	private Long id;
 
-	private boolean finished;
+	private int finished;
+
+	private GameStatus finishedStatus = GameStatus.SCHEDULED;
 
 	private int pointsAway;
 
@@ -28,6 +31,8 @@ public class GameDto implements Serializable {
 
 	private int round;
 
+	private List<GameSetDto> sets;
+	
 	public GameDto() {
 	} 
 	
@@ -39,11 +44,11 @@ public class GameDto implements Serializable {
 		this.id = id;
 	}
 
-	public boolean getFinished() {
+	public int getFinished() {
 		return this.finished;
 	}
 
-	public void setFinished(boolean finished) {
+	public void setFinished(int finished) {
 		this.finished = finished;
 	}
 
@@ -103,13 +108,21 @@ public class GameDto implements Serializable {
 		this.groupId = groupId;
 	}
 
-//	public Long getGroupNum() {
-//		return groupNum;
-//	}
-//
-//	public void setGroupNum(Long groupNum) {
-//		this.groupNum = groupNum;
-//	}
+	public GameStatus getFinishedStatus() {
+		return finishedStatus;
+	}
+
+	public void setFinishedStatus(GameStatus finishedStatus) {
+		this.finishedStatus = finishedStatus;
+	}
+
+	public List<GameSetDto> getSets() {
+		return sets;
+	}
+
+	public void setSets(List<GameSetDto> sets) {
+		this.sets = sets;
+	}
 
 //	@Override
 //	public String toString() {
@@ -117,20 +130,5 @@ public class GameDto implements Serializable {
 //				+ round + "]";
 //	}
 
-//	public CompetitionPlayer getCompetitionPlayer1() {
-//		return this.competitionPlayer1;
-//	}
-//
-//	public void setCompetitionPlayer1(CompetitionPlayer competitionPlayer1) {
-//		this.competitionPlayer1 = competitionPlayer1;
-//	}
-//
-//	public CompetitionPlayer getCompetitionPlayer2() {
-//		return this.competitionPlayer2;
-//	}
-//
-//	public void setCompetitionPlayer2(CompetitionPlayer competitionPlayer2) {
-//		this.competitionPlayer2 = competitionPlayer2;
-//	}
 
 }

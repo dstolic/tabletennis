@@ -38,6 +38,8 @@ public interface BaseCompetitionService {
 	// Find current competition
 	Competition findByCurrent();
 
+	Competition generateResults(Long competitionId);
+
 
 
 }

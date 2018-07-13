@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.ds.microservices.sport.tabletennis.report.entity.Competition;
 import com.ds.microservices.sport.tabletennis.report.entity.Group;
-import com.ds.microservices.sport.tabletennis.report.repository.CompetitionPlayerRepository;
 import com.ds.microservices.sport.tabletennis.report.repository.CompetitionRepository;
 import com.ds.microservices.sport.tabletennis.report.repository.GroupRepository;
 import com.ds.microservices.sport.tabletennis.report.service.BaseGroupService;

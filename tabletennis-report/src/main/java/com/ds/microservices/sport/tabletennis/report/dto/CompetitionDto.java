@@ -1,17 +1,13 @@
 package com.ds.microservices.sport.tabletennis.report.dto;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
-import com.ds.microservices.sport.tabletennis.report.entity.CompetitionPlayer;
 import com.ds.microservices.sport.tabletennis.report.entity.CompetitionProperty;
-import com.ds.microservices.sport.tabletennis.report.entity.Player;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName("Competition")
-public class CompetitionDto implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class CompetitionDto {
 
 	private Long id;
 

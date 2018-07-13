@@ -1,7 +1,22 @@
 package com.ds.microservices.sport.tabletennis.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -42,6 +57,15 @@ public class Game implements Serializable {
 
 	private int round;
 
+//	@OneToMany(cascade = CascadeType.ALL)
+//	@JoinTable(name="game_set",
+//		joinColumns = @JoinColumn(name="game_id", referencedColumnName="id")
+//	)
+//	@ElementCollection
+//	@CollectionTable(name="game_set", joinColumns = @JoinColumn(name="game_id"))
+	@OneToMany(mappedBy="id.game")
+	private List<GameSet> sets;
+	
 	public Game() {
 	}
 
@@ -129,6 +153,14 @@ public class Game implements Serializable {
 
 	public void setGroupId(Long groupId) {
 		this.groupId = groupId;
+	}
+
+	public List<GameSet> getSets() {
+		return sets;
+	}
+
+	public void setSets(List<GameSet> sets) {
+		this.sets = sets;
 	}
 
 }

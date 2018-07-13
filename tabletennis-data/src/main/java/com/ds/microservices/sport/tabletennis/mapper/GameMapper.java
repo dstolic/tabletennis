@@ -7,7 +7,7 @@ import com.ds.microservices.sport.tabletennis.dto.GameDto;
 import com.ds.microservices.sport.tabletennis.entity.Game;
 
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses= { GameSetMapper.class})
 public interface GameMapper {
 	
 	public abstract Game gameDtoToGame(GameDto gameDTO, @Context CycleAvoidMappingContext context);

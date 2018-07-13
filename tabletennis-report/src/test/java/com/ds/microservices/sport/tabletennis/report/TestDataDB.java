@@ -33,7 +33,7 @@ public class TestDataDB {
 		GameDto gameDto = new GameDto();
 		gameDto.setId(new Long(1));
 		gameDto.setCompetition(createCompetitionDto());
-		gameDto.setFinished(false);
+		gameDto.setFinished(1);
 		
 		return gameDto;
 	}

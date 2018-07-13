@@ -197,5 +197,18 @@ public class CompetitionController {
 
 	}
 	
+	// Return Competition (temporary). Return Dto in final version.
+	// Generate competition
+	@RequestMapping("/competition/{id}/generateres")
+	public ResponseEntity<CompetitionDto> generateResults(@PathVariable("id") Long competitionId) {
+		logger.info("competetion-controller generateCompetition2() invoked: " + competitionId);
+		
+		return ResponseEntity.ok(
+				competitionMapper.competitionToCompetitionDto(
+						competitionService.generateResults(competitionId), new CycleAvoidMappingContext()
+				));
+
+	}
+	
 
 }

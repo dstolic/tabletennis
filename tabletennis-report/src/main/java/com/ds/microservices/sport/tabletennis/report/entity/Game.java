@@ -1,6 +1,7 @@
 package com.ds.microservices.sport.tabletennis.report.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,8 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -25,7 +28,7 @@ public class Game implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 
-	private boolean finished;
+	private int finished;
 
 	@Column(name="points_away")
 	private int pointsAway;
@@ -51,6 +54,9 @@ public class Game implements Serializable {
 
 	private int round;
 
+	@OneToMany(mappedBy="id.game")
+	private List<GameSet> sets;
+	
 	public Game() {
 	}
 
@@ -62,11 +68,11 @@ public class Game implements Serializable {
 		this.id = id;
 	}
 
-	public boolean getFinished() {
+	public int getFinished() {
 		return this.finished;
 	}
 
-	public void setFinished(boolean finished) {
+	public void setFinished(int finished) {
 		this.finished = finished;
 	}
 
@@ -140,6 +146,14 @@ public class Game implements Serializable {
 
 	public void setGroupId(Long groupId) {
 		this.groupId = groupId;
+	}
+
+	public List<GameSet> getSets() {
+		return sets;
+	}
+
+	public void setSets(List<GameSet> sets) {
+		this.sets = sets;
 	}
 
 //	@Override

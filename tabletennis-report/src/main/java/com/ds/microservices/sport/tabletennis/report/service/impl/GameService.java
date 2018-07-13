@@ -35,6 +35,8 @@ public class GameService implements BaseGameService {
 
 		Competition competition =  competitionRepository.findByCurrent(true);
 		
+		List<Game> games = gameRepository.findByCompetitionId(competition.getId());
+		
 		return gameRepository.findByCompetitionId(competition.getId());
 	}
 

@@ -5,6 +5,11 @@ Table tennis app contains 3 microservices.
 2. tabletennis-report - Client service. Shows data for current competition only.
 3. tabletennis-gateway - Gateway service.
 
+Commit 16/7:
+- tabletennis-data:
+	* Added generateCheck - check if data generation for competition is allowed.
+	
+
 Commit 13/7:
 - tabletennis-gateway/data:
 	* Added GameSet (table, entity, dto) to store set results.

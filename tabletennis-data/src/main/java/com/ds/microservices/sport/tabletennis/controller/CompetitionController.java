@@ -2,6 +2,7 @@ package com.ds.microservices.sport.tabletennis.controller;
 
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -60,7 +61,10 @@ public class CompetitionController {
 	protected CompetitionPlayerMapper competitionPlayerMapper;
 
 
-	
+/* 
+ *  Common functions 
+ */
+		
 	// List of all competitions
 	@RequestMapping(value="/competitions", produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<List<CompetitionDto>> allCompetitions() {
@@ -150,7 +154,10 @@ public class CompetitionController {
 				.collect(Collectors.toList()));
 	}
 	
-
+/* 
+ *  Edit functions (admin only) 
+ */
+	
 	// Add player
 	@RequestMapping("/competition/{id}/add/{playerId}")
 	public ResponseEntity<CompetitionDto> addPlayerToCompetition(@PathVariable("id") Long competitionId, @PathVariable("playerId") Long playerId) {
@@ -200,13 +207,25 @@ public class CompetitionController {
 	// Return Competition (temporary). Return Dto in final version.
 	// Generate competition
 	@RequestMapping("/competition/{id}/generateres")
-	public ResponseEntity<CompetitionDto> generateResults(@PathVariable("id") Long competitionId) {
-		logger.info("competetion-controller generateCompetition2() invoked: " + competitionId);
+	public ResponseEntity<CompetitionDto> generateResults(@PathVariable("id") Long id) {
+		logger.log(Level.INFO, "competetion-controller generateCompetition2() invoked: {0}", id);
 		
 		return ResponseEntity.ok(
 				competitionMapper.competitionToCompetitionDto(
-						competitionService.generateResults(competitionId), new CycleAvoidMappingContext()
+						competitionService.generateResults(id), new CycleAvoidMappingContext()
 				));
+
+	}
+	
+	// Find competition by id
+	@RequestMapping(value="/competition/{id}/generatecheck", produces=MediaType.APPLICATION_JSON_UTF8_VALUE, method=RequestMethod.GET)
+	public ResponseEntity<CompetitionDto> generateCheck(@PathVariable("id") Long id) {
+		logger.log(Level.INFO, "competetion-controller findById() invoked: {0}", id);
+		
+		return ResponseEntity.ok(
+				competitionMapper.competitionToCompetitionDto(
+						competitionService.generateCheck(id), new CycleAvoidMappingContext()
+						));
 
 	}
 	

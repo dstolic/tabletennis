@@ -25,7 +25,7 @@ import com.ds.microservices.sport.tabletennis.entity.GameSetId;
 import com.ds.microservices.sport.tabletennis.entity.Group;
 import com.ds.microservices.sport.tabletennis.entity.Player;
 import com.ds.microservices.sport.tabletennis.exceptions.CompetitionAlreadyCompletedException;
-import com.ds.microservices.sport.tabletennis.exceptions.CompetitionDoesNotExistException;
+import com.ds.microservices.sport.tabletennis.exceptions.CompetitionNotFoundException;
 import com.ds.microservices.sport.tabletennis.exceptions.CompetitionNotCorrectNumberOfPlayersException;
 
 @Component
@@ -60,7 +60,7 @@ public class CompetitionUtil {
 		//		completed = (competition.getPlayers().size() == Long.parseLong(map.get("NUMBER_OF_SEEDS").getValue()))
 
 		// Check number of games - 0
-		setupCompleted = competition.getGames() != null && competition.getGames().size() > 0 ? true : false;
+		setupCompleted = competition.getGames() != null && !competition.getGames().isEmpty() ? true : false;
 		if (!setupCompleted) throw new CompetitionNotCorrectNumberOfPlayersException();
 
 	
@@ -400,7 +400,7 @@ public class CompetitionUtil {
 	private void checkIfEmpty(Optional<Competition> competition) {
 		
 		if (!competition.isPresent() || competition.get().getId() == null) {
-			 throw new CompetitionDoesNotExistException();
+			 throw new CompetitionNotFoundException();
 		}
 
 	}
@@ -415,7 +415,7 @@ public class CompetitionUtil {
 	
 	private void checkIfCompleted(Optional<Competition> competition) {
 
-		if (competition.get().isCompleted()) {
+		if (competition.isPresent() && competition.get().isCompleted()) {
 			 throw new CompetitionAlreadyCompletedException();
 		}
 

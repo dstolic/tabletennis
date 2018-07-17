@@ -12,10 +12,10 @@ import com.ds.microservices.sport.tabletennis.config.CompetitionConfiguration;
 import com.ds.microservices.sport.tabletennis.entity.Competition;
 import com.ds.microservices.sport.tabletennis.entity.CompetitionPlayer;
 import com.ds.microservices.sport.tabletennis.entity.Game;
-import com.ds.microservices.sport.tabletennis.entity.GameSet;
 import com.ds.microservices.sport.tabletennis.entity.Group;
 import com.ds.microservices.sport.tabletennis.entity.Player;
 import com.ds.microservices.sport.tabletennis.exceptions.CompetitionNotCompletedException;
+import com.ds.microservices.sport.tabletennis.exceptions.CompetitionNotFoundException;
 import com.ds.microservices.sport.tabletennis.repository.CompetitionPlayerRepository;
 import com.ds.microservices.sport.tabletennis.repository.CompetitionRepository;
 import com.ds.microservices.sport.tabletennis.repository.GameRepository;
@@ -57,7 +57,7 @@ public class CompetitionService implements BaseCompetitionService {
 	// List of all competitions
 	@Override
 	public List<Competition> allCompetitions() {
-		logger.info("competition-service all() invoked.");
+		logger.log(Level.INFO, "competition-service all() invoked.");
 		
 		return (List<Competition>)competitionRepository.findAll();
 	}
@@ -65,7 +65,7 @@ public class CompetitionService implements BaseCompetitionService {
 	// Find competition by id
 	@Override
 	public Competition findById(Long id) {
-		logger.info("competition-service findById invoked. ");
+		logger.log(Level.INFO, "competition-service findById invoked. ");
 		
 		return competitionRepository.findById(id).get();
 	}
@@ -90,30 +90,29 @@ public class CompetitionService implements BaseCompetitionService {
 	// ???
 	@Override
 	public void deleteCompetition(Long competitionId) {
-		logger.info("leagues-service delete() invoked: " + competitionId);
+		logger.log(Level.INFO, "leagues-service delete() invoked: {0}", competitionId);
 
 		competitionRepository.deleteById(competitionId);
 		
-		logger.info("leagues-service delete() done " + competitionId);
+		logger.log(Level.INFO, "leagues-service delete() done {0}", competitionId);
 
 	}
 
 	// Add player to competition
 	@Override
 	public Competition addPlayerToCompetition(Long competitionId, Long playerId) {
-		logger.info("player-service addPlayerToCompetition() invoked. ");
+		logger.log(Level.INFO, "player-service addPlayerToCompetition() invoked. ");
 		
 		Competition competition = competitionRepository.findById(competitionId).get();
 		Player player = playerRepository.findById(playerId).get();
 		if (competition.getCompetitionPlayers() != null) {
-//			competition.getPlayers().add(new CompetitionPlayer(player, false));
 			competition.getCompetitionPlayers().add(new CompetitionPlayer(competition, player));
 
 			competition = competitionRepository.save(competition);
 		}
 		
 		
-		logger.info("player-service addPlayerToCompetition() End. " + competition);
+		logger.log(Level.INFO, "player-service addPlayerToCompetition() End. {0}", competition);
 		return competition;
 
 
@@ -122,9 +121,9 @@ public class CompetitionService implements BaseCompetitionService {
 	// Remove player from competition
 	@Override
 	public Competition removePlayerFromCompetition(Long competitionId, Long playerId) {
-		logger.info("player-service removePlayerFromCompetition() invoked. ");
+		logger.log(Level.INFO, "player-service removePlayerFromCompetition() invoked. ");
 		
-		Competition competition = competitionRepository.findById(competitionId).get();
+		Competition competition = competitionRepository.findById(competitionId).orElse(new Competition());
 		Player player = playerRepository.findById(playerId).get();
 		if (competition.getCompetitionPlayers() != null) {
 			competition.getCompetitionPlayers().remove(new CompetitionPlayer(competition, player));
@@ -133,7 +132,7 @@ public class CompetitionService implements BaseCompetitionService {
 		}
 		
 		
-		logger.info("player-service removePlayerFromCompetition() End. " + competition);
+		logger.log(Level.INFO, "player-service removePlayerFromCompetition() End. {0}", competition);
 		return competition;
 
 
@@ -143,11 +142,11 @@ public class CompetitionService implements BaseCompetitionService {
 	// TODO: Try to find optimized version. 'findByIdCompetitionId' produces one SELECT statement per competitionPlayer
 	@Override
 	public List<CompetitionPlayer> findPlayersFromCompetition(Long competitionId) {
-		logger.info("competition-service findPlayersFromCompetition() invoked: ");
+		logger.log(Level.INFO, "competition-service findPlayersFromCompetition() invoked: ");
 
 		List<CompetitionPlayer> players = competitionPlayerRepository.findByIdCompetitionId(competitionId);
 
-		logger.info("competition-service findPlayersFromCompetition() found: " + players);
+		logger.log(Level.INFO, "competition-service findPlayersFromCompetition() found: {0}", players);
 
 		return players;
 	}
@@ -189,7 +188,7 @@ public class CompetitionService implements BaseCompetitionService {
 		// Their status at the start determine competition (number of points will made them seed players and so on)
 		// Player's initial status will be used during competition.
 		
-		Competition competition = findById(competitionId);
+		Competition competition = competitionRepository.findById(competitionId).get();
 
 //		CompetitionUtil competitionUtil = new CompetitionUtil();
 		competitionUtil.init(competition);
@@ -240,7 +239,7 @@ public class CompetitionService implements BaseCompetitionService {
 	public Competition generateCompetition2(Long competitionId)  {
 		logger.info("competition-service generateCompetition2() ");
 		
-		Competition competition = findById(competitionId);
+		Competition competition = competitionRepository.findById(competitionId).get();
 
 
 		competitionUtil.generateSecondPart(competition);
@@ -275,8 +274,9 @@ public class CompetitionService implements BaseCompetitionService {
 		boolean check = competitionUtil.generateCheck(competition);
 		logger.log(Level.INFO, "Generate allowed {0}", check);
 		
+		competition = Optional.empty();
 
-		return competition.get();
+		return competition.orElseThrow(() -> new CompetitionNotFoundException());
 	}
 
 
@@ -288,8 +288,9 @@ public class CompetitionService implements BaseCompetitionService {
 
 		boolean check = competitionUtil.generateCheck(competition);
 		
+//		competition = Optional.empty();
 
-		return competition.get();
+		return competition.orElse(new Competition());
 	}
 
 }

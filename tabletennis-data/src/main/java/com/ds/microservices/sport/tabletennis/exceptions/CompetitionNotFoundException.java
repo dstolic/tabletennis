@@ -6,7 +6,7 @@ public class CompetitionNotFoundException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 
 	public CompetitionNotFoundException() {
-		super("Competition does not exist.");
+		super("Competition not found.");
 	}
 	
 	public CompetitionNotFoundException(String message) {

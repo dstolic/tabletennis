@@ -6,6 +6,12 @@ Table tennis app contains 3 microservices.
 3. tabletennis-gateway - Gateway service.
 
 Commit 17/7:
+- tabletennis-report:
+	* Competition type attribute changed to 'category'
+- tabletennis-data:
+	* Added getGame i addGameResult.
+	
+Commit 17/7:
 - tabletennis-data:
 	* Added ExceptionMapper - handle exceptions in controller/service.
 	

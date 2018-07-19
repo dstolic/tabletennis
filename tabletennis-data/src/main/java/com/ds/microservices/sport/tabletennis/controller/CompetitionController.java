@@ -7,6 +7,8 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,8 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ds.microservices.sport.tabletennis.config.CompetitionConfiguration;
 import com.ds.microservices.sport.tabletennis.dto.CompetitionDto;
 import com.ds.microservices.sport.tabletennis.dto.CompetitionPlayerDto;
+import com.ds.microservices.sport.tabletennis.dto.GameDto;
 import com.ds.microservices.sport.tabletennis.dto.PlayerDto;
 import com.ds.microservices.sport.tabletennis.entity.Competition;
+import com.ds.microservices.sport.tabletennis.entity.Game;
 import com.ds.microservices.sport.tabletennis.mapper.CompetitionPlayerMapper;
 import com.ds.microservices.sport.tabletennis.mapper.CompetitionMapper;
 import com.ds.microservices.sport.tabletennis.mapper.CycleAvoidMappingContext;
@@ -81,7 +85,7 @@ public class CompetitionController {
 	// Find competition by id
 	@RequestMapping(value="/competition/{id}", produces=MediaType.APPLICATION_JSON_UTF8_VALUE, method=RequestMethod.GET)
 	public ResponseEntity<CompetitionDto> findById(@PathVariable("id") Long id) {
-		logger.info("competetion-controller findById() invoked: " + id);
+		logger.log(Level.INFO, "competetion-controller findById() invoked: {0}", id);
 		
 		return ResponseEntity.ok(
 				competitionMapper.competitionToCompetitionDto(
@@ -93,7 +97,7 @@ public class CompetitionController {
 	// Find competition by id
 	@RequestMapping(value="/competition", produces=MediaType.APPLICATION_JSON_UTF8_VALUE, method=RequestMethod.GET)
 	public ResponseEntity<CompetitionDto> findByCurrent() {
-		logger.info("competetion-controller findByCurrent() invoked: ");
+		logger.log(Level.INFO, "competetion-controller findByCurrent() invoked: ");
 		
 		return ResponseEntity.ok(
 				competitionMapper.competitionToCompetitionDto(
@@ -105,7 +109,7 @@ public class CompetitionController {
 	// Save/update competition
 	@RequestMapping(value="/competition/add", produces=MediaType.APPLICATION_JSON_UTF8_VALUE, method=RequestMethod.POST)
 	public ResponseEntity<CompetitionDto> save(@RequestBody CompetitionDto competitionDto) {
-		logger.info("competetion-controller save() invoked. ");
+		logger.log(Level.INFO, "competetion-controller save() invoked. ");
 		
 		return ResponseEntity.ok(
 				competitionMapper.competitionToCompetitionDto(
@@ -118,7 +122,7 @@ public class CompetitionController {
 	// Find players-candidates for competition
 	@RequestMapping(value="/competition/{id}/candidates", produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<List<PlayerDto>> findCandidatesForCompetition(@PathVariable Long id) {
-		logger.info("player-controller findCandidatesForCompetition() invoked: " + id);
+		logger.log(Level.INFO, "player-controller findCandidatesForCompetition() invoked: {0}", id);
 		
 		return ResponseEntity.ok(
 				playerService.findCandidatesForCompetition()
@@ -161,21 +165,31 @@ public class CompetitionController {
 	// Add player
 	@RequestMapping("/competition/{id}/add/{playerId}")
 	public ResponseEntity<CompetitionDto> addPlayerToCompetition(@PathVariable("id") Long competitionId, @PathVariable("playerId") Long playerId) {
-		logger.info("competetion-controller findPlayers() invoked: " + competitionId + " : " + playerId);
+		logger.log(Level.INFO, "competetion-controller addPlayerToCompetition() invoked: {0} : {1}", new Object[] {competitionId, playerId} );
 		
 		return ResponseEntity.ok(
 				competitionMapper.competitionToCompetitionDto(
 						competitionService.addPlayerToCompetition(competitionId, playerId), new CycleAvoidMappingContext()
 				));
-
-
 	}
 
+	// Add player
+	@RequestMapping("/competition/add/{playerId}")
+	public ResponseEntity<List<PlayerDto>> addPlayerToCurrentCompetition(@PathVariable("playerId") Long playerId) {
+		logger.log(Level.INFO, "competetion-controller addPlayerToCurrentCompetition() invoked: {0}", playerId );
+		
+		return ResponseEntity.ok(
+						competitionService.addPlayerToCompetition(playerId)
+						.stream()
+						.map(player -> playerMapper.playerToPlayerDto(player, new CycleAvoidMappingContext()))
+						.collect(Collectors.toList())
+				);
+	}
 
 	// Remove player
 	@RequestMapping("/competition/{id}/remove/{playerId}")
 	public ResponseEntity<CompetitionDto> removePlayerFromCompetition(@PathVariable("id") Long competitionId, @PathVariable("playerId") Long playerId) {
-		logger.info("competetion-controller findPlayers() invoked: " + competitionId + " : " + playerId);
+		logger.log(Level.INFO, "competetion-controller removePlayerFromCompetition() invoked: {0} : {1}", new Object[] {competitionId, playerId} );
 		
 		return ResponseEntity.ok(
 				competitionMapper.competitionToCompetitionDto(
@@ -186,9 +200,19 @@ public class CompetitionController {
 
 	// Return Competition (temporary). Return Dto in final version.
 	// Generate competition
+	@RequestMapping("/competition/generate")
+	public ResponseEntity<Competition> generateCompetition() {
+		logger.log(Level.INFO, "competetion-controller generateCompetition() invoked: ");
+		
+		return ResponseEntity.ok(competitionService.generateCompetition());
+
+	}
+	
+	// Return Competition (temporary). Return Dto in final version.
+	// Generate competition
 	@RequestMapping("/competition/{id}/generate")
 	public ResponseEntity<Competition> generateCompetition(@PathVariable("id") Long competitionId) {
-		logger.info("competetion-controller generateCompetition() invoked: " + competitionId);
+		logger.log(Level.INFO, "competetion-controller generateCompetition() invoked: {0}", competitionId);
 		
 		return ResponseEntity.ok(competitionService.generateCompetition(competitionId));
 
@@ -198,7 +222,7 @@ public class CompetitionController {
 	// Generate competition
 	@RequestMapping("/competition/{id}/generate2")
 	public ResponseEntity<Competition> generateCompetition2(@PathVariable("id") Long competitionId) {
-		logger.info("competetion-controller generateCompetition2() invoked: " + competitionId);
+		logger.log(Level.INFO, "competetion-controller generateCompetition2() invoked: {0}", competitionId);
 		
 		return ResponseEntity.ok(competitionService.generateCompetition2(competitionId));
 

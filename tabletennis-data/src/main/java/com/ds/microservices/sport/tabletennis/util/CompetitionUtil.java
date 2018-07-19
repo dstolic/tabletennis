@@ -25,6 +25,7 @@ import com.ds.microservices.sport.tabletennis.entity.GameSetId;
 import com.ds.microservices.sport.tabletennis.entity.Group;
 import com.ds.microservices.sport.tabletennis.entity.Player;
 import com.ds.microservices.sport.tabletennis.exceptions.CompetitionAlreadyCompletedException;
+import com.ds.microservices.sport.tabletennis.exceptions.CompetitionNotCompletedException;
 import com.ds.microservices.sport.tabletennis.exceptions.CompetitionNotFoundException;
 import com.ds.microservices.sport.tabletennis.exceptions.CompetitionNotCorrectNumberOfPlayersException;
 
@@ -45,29 +46,6 @@ public class CompetitionUtil {
 		createCompetitionPlayersMap(competition);
 	}
 	
-	// Check if competition has all elements for generating games (players, seeds...)
-	public boolean setupCompleted(Competition competition) {
-		
-		boolean setupCompleted = true;
-
-		// Check number of players
-		if (!competitionConfiguration.isAutogeneratePlayers()) {
-			setupCompleted = ((competition.getCompetitionPlayers() == null) ? 0 : competition.getCompetitionPlayers().size()) == competitionConfiguration.getNumberOfPlayers();
-			if (!setupCompleted) throw new CompetitionNotCorrectNumberOfPlayersException();
-		}
-		
-		// Check number of seeds - 8
-		//		completed = (competition.getPlayers().size() == Long.parseLong(map.get("NUMBER_OF_SEEDS").getValue()))
-
-		// Check number of games - 0
-		setupCompleted = competition.getGames() != null && !competition.getGames().isEmpty() ? true : false;
-		if (!setupCompleted) throw new CompetitionNotCorrectNumberOfPlayersException();
-
-	
-		logger.info("Setup completed " + setupCompleted);
-		return setupCompleted;
-	}
-
 	public List<Group> createGroups(Competition competition, List<Player> candidates) {
 		logger.info("createGroups START");
 		
@@ -100,7 +78,7 @@ public class CompetitionUtil {
 						}
 					}
 				}
-				noMorePlayers = true;
+//				noMorePlayers = true;
 			}
 		}
 		
@@ -394,30 +372,26 @@ public class CompetitionUtil {
 		
 		checkNumberOfPlayers(competition.get().getCompetitionPlayers());
 		
+		checkNumberOfGames(competition.get().getGames());
+		
 		return true;
 	}
 	
 	private void checkIfEmpty(Optional<Competition> competition) {
 		
-		if (!competition.isPresent() || competition.get().getId() == null) {
-			 throw new CompetitionNotFoundException();
-		}
+		if (!competition.isPresent() ) throw new CompetitionNotFoundException();
 
 	}
 
 	private void checkIfInProgress(Optional<Competition> competition) {
 
-		if (!competition.get().isCurrent() || competition.get().isCompleted()) {
-			 throw new CompetitionAlreadyCompletedException();
-		}
+		if (competition.isPresent() && competition.get().isCompleted()) throw new CompetitionAlreadyCompletedException();
 
 	}
 	
 	private void checkIfCompleted(Optional<Competition> competition) {
 
-		if (competition.isPresent() && competition.get().isCompleted()) {
-			 throw new CompetitionAlreadyCompletedException();
-		}
+		if (competition.isPresent() && competition.get().isCompleted()) throw new CompetitionAlreadyCompletedException();
 
 	}
 	
@@ -431,6 +405,13 @@ public class CompetitionUtil {
 		}
 
 	}
+	
+	private void checkNumberOfGames(List<Game> games) {
+
+		if(games != null && !games.isEmpty()) throw new CompetitionNotCompletedException();
+
+	}
+
 	
 	// Check if competition has all elements for generating games (players, seeds...)
 	public boolean activateCheck(Competition competition) {

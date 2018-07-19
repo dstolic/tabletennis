@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.ds.microservices.sport.tabletennis.entity.Competition;
 import com.ds.microservices.sport.tabletennis.entity.CompetitionPlayer;
+import com.ds.microservices.sport.tabletennis.entity.Game;
+import com.ds.microservices.sport.tabletennis.entity.Player;
 
 public interface BaseCompetitionService {
 
@@ -15,10 +17,12 @@ public interface BaseCompetitionService {
 
 	void deleteCompetition(Long competitionId);
 
+	List<Player> addPlayerToCompetition(Long playerId);
 	Competition addPlayerToCompetition(Long competitionId, Long playerId);
 
 	Competition removePlayerFromCompetition(Long competitionId, Long playerId);
 
+	Competition generateCompetition();
 	Competition generateCompetition(Long competitionId);
 
 	Competition generateCompetition2(Long competitionId);

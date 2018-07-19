@@ -11,7 +11,7 @@ public class CompetitionDto {
 
 	private Long id;
 
-	private String type;
+	private String category;
 
 	private String description;
 
@@ -127,20 +127,20 @@ public class CompetitionDto {
 //				+ "]";
 //	}
 
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
 	public Set<PlayerDto> getPlayers() {
 		return players;
 	}
 
 	public void setPlayers(Set<PlayerDto> players) {
 		this.players = players;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 }

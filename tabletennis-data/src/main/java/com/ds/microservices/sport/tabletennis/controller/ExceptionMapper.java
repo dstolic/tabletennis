@@ -1,7 +1,6 @@
 package com.ds.microservices.sport.tabletennis.controller;
 
 import java.util.Locale;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +18,8 @@ import com.ds.microservices.sport.tabletennis.exceptions.CompetitionAlreadyCompl
 import com.ds.microservices.sport.tabletennis.exceptions.CompetitionNotCompletedException;
 import com.ds.microservices.sport.tabletennis.exceptions.CompetitionNotCorrectNumberOfPlayersException;
 import com.ds.microservices.sport.tabletennis.exceptions.CompetitionNotFoundException;
+import com.ds.microservices.sport.tabletennis.exceptions.GameNotFoundException;
+import com.ds.microservices.sport.tabletennis.exceptions.PlayerNotFoundException;
 
 @ControllerAdvice
 @Component
@@ -57,4 +58,17 @@ public class ExceptionMapper extends ResponseEntityExceptionHandler {
                 HttpStatus.BAD_REQUEST);
 	}
 
+	@ExceptionHandler(PlayerNotFoundException.class)
+	public ResponseEntity<ApiResponseDto<ErrorDto>> handlePlayerNotFoundExceptionException() {
+		return new ResponseEntity<>(
+                new ApiResponseDto<>(new ErrorDto(messageSource.getMessage("error.player.notfound", null, Locale.getDefault()), HttpStatus.BAD_REQUEST.value())),
+                HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(GameNotFoundException.class)
+	public ResponseEntity<ApiResponseDto<ErrorDto>> handleGameNotFoundException() {
+		return new ResponseEntity<>(
+                new ApiResponseDto<>(new ErrorDto(messageSource.getMessage("error.game.notfound", null, Locale.getDefault()), HttpStatus.BAD_REQUEST.value())),
+                HttpStatus.BAD_REQUEST);
+	}
 }

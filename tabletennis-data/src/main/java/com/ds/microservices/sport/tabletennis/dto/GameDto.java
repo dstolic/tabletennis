@@ -1,7 +1,9 @@
 package com.ds.microservices.sport.tabletennis.dto;
 
 import java.io.Serializable;
+import java.util.List;
 
+import com.ds.microservices.sport.tabletennis.dto.GameSetDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
@@ -28,6 +30,8 @@ public class GameDto implements Serializable {
 
 	private int round;
 
+	private List<GameSetDto> sets;
+	
 	public GameDto() {
 	} 
 	
@@ -106,6 +110,14 @@ public class GameDto implements Serializable {
 
 	public void setGroupId(Long groupId) {
 		this.groupId = groupId;
+	}
+
+	public List<GameSetDto> getSets() {
+		return sets;
+	}
+
+	public void setSets(List<GameSetDto> sets) {
+		this.sets = sets;
 	}
 
 

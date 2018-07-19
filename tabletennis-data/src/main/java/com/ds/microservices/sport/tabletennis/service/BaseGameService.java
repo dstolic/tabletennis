@@ -2,6 +2,7 @@ package com.ds.microservices.sport.tabletennis.service;
 
 import java.util.List;
 
+import com.ds.microservices.sport.tabletennis.dto.GameDto;
 import com.ds.microservices.sport.tabletennis.entity.Game;
 
 public interface BaseGameService {
@@ -14,5 +15,10 @@ public interface BaseGameService {
 
 	List<Game> findScheduledGames();
 	List<Game> findScheduledGames(Long competitionId);
+
+	Game getGame(Long id);
+//	Game addGameResult(Long id);
+	Game addGameResult(Long id, GameDto gameDto);
+
 
 }

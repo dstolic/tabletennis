@@ -31,8 +31,6 @@ public class CompetitionPlayer implements Serializable {
 
 //	@ManyToOne
 //	@JoinColumn(name="group_id")
-//	@JsonIgnore
-//	@Transient
 //	private Group group;
 
 	public CompetitionPlayer() {

@@ -1,6 +1,5 @@
 package com.ds.microservices.sport.tabletennis.dto;
 
-import java.io.Serializable;
 import java.util.List;
 
 import com.ds.microservices.sport.tabletennis.dto.GameSetDto;
@@ -8,12 +7,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName("Game")
-public class GameDto implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class GameDto {
 
 	private Long id;
 
-	private boolean finished;
+	private int finished;
+
+	private GameStatus finishedStatus = GameStatus.SCHEDULED;
 
 	private int pointsAway;
 
@@ -43,11 +43,11 @@ public class GameDto implements Serializable {
 		this.id = id;
 	}
 
-	public boolean getFinished() {
+	public int getFinished() {
 		return this.finished;
 	}
 
-	public void setFinished(boolean finished) {
+	public void setFinished(int finished) {
 		this.finished = finished;
 	}
 
@@ -99,11 +99,6 @@ public class GameDto implements Serializable {
 		this.round = round;
 	}
 
-	@Override
-	public String toString() {
-		return "GameDto [playerHome=" + playerHome + ", playerAway=" + playerAway + ", group=" + groupId + ", round=" + round + ", groupId=" + groupId +"]";
-	}
-
 	public Long getGroupId() {
 		return groupId;
 	}
@@ -112,12 +107,25 @@ public class GameDto implements Serializable {
 		this.groupId = groupId;
 	}
 
+	public GameStatus getFinishedStatus() {
+		return finishedStatus;
+	}
+
+	public void setFinishedStatus(GameStatus finishedStatus) {
+		this.finishedStatus = finishedStatus;
+	}
+
 	public List<GameSetDto> getSets() {
 		return sets;
 	}
 
 	public void setSets(List<GameSetDto> sets) {
 		this.sets = sets;
+	}
+
+	@Override
+	public String toString() {
+		return "GameDto [playerHome=" + playerHome + ", playerAway=" + playerAway + ", group=" + groupId + ", round=" + round + ", groupId=" + groupId +"]";
 	}
 
 

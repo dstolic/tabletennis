@@ -1,9 +1,6 @@
 package com.ds.microservices.sport.tabletennis.dto;
 
-import java.io.Serializable;
-
-public class CompetitionPlayerPKDto implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class CompetitionPlayerPKDto {
 
 	private Long competitionId;
 

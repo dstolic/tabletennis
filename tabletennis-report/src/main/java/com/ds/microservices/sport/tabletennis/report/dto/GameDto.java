@@ -3,7 +3,6 @@ package com.ds.microservices.sport.tabletennis.report.dto;
 import java.util.List;
 
 import com.ds.microservices.sport.tabletennis.report.entity.GameSet;
-//import com.ds.microservices.sport.tabletennis.report.util.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
@@ -124,11 +123,10 @@ public class GameDto {
 		this.sets = sets;
 	}
 
-//	@Override
-//	public String toString() {
-//		return "GameDto [playerHome=" + playerHome + ", playerAway=" + playerAway + ", round="
-//				+ round + "]";
-//	}
+	@Override
+	public String toString() {
+		return "GameDto [playerHome=" + playerHome + ", playerAway=" + playerAway + ", group=" + groupId + ", round=" + round + ", groupId=" + groupId +"]";
+	}
 
 
 }

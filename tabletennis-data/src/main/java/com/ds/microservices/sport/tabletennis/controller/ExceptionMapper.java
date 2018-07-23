@@ -1,7 +1,6 @@
 package com.ds.microservices.sport.tabletennis.controller;
 
 import java.util.Locale;
-import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -24,8 +23,6 @@ import com.ds.microservices.sport.tabletennis.exceptions.PlayerNotFoundException
 @ControllerAdvice
 @Component
 public class ExceptionMapper extends ResponseEntityExceptionHandler {
-	
-	protected Logger logger = Logger.getLogger(ExceptionMapper.class.getName());
 	
 	@Autowired
 	private MessageSource messageSource;

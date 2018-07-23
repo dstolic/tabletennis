@@ -76,14 +76,6 @@ public class Group implements Serializable {
 		return sum - maxPoints.intValue();
 	}
 
-//	public List<CompetitionPlayer> getCompetitionPlayers() {
-//		return competitionPlayers;
-//	}
-//
-//	public void setCompetitionPlayers(List<CompetitionPlayer> competitionPlayers) {
-//		this.competitionPlayers = competitionPlayers;
-//	}
-
 	public String getName() {
 		return name;
 	}

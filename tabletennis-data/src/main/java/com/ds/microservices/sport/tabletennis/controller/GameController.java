@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ds.microservices.sport.tabletennis.config.CompetitionConfiguration;
@@ -55,7 +54,6 @@ public class GameController {
 	// Games from competition
 	@RequestMapping(value="/competition/games", produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<List<GameDto>> findGamesForCompetition() {
-		
 		return ResponseEntity.ok(gameService.findGamesFromCompetition().stream()
 				.map(game -> gameMapper.gameToGameDto(game, new CycleAvoidMappingContext()))
 				.collect(Collectors.toList()));
@@ -64,7 +62,6 @@ public class GameController {
 	// Games from competition
 	@RequestMapping(value="/competition/{id}/games", produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<List<GameDto>> findGamesForCompetition(@PathVariable Long id) {
-		
 		return ResponseEntity.ok(gameService.findGamesFromCompetition(id).stream()
 				.map(game -> gameMapper.gameToGameDto(game, new CycleAvoidMappingContext()))
 				.collect(Collectors.toList()));
@@ -73,7 +70,6 @@ public class GameController {
 	// Finished games
 	@RequestMapping(value="/competition/games/finished", produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<List<GameDto>> findFinishedGames() {
-		
 		return ResponseEntity.ok(
 				gameService.findFinishedGames()
 				.stream()
@@ -84,8 +80,6 @@ public class GameController {
 	// Finished games
 	@RequestMapping(value="/competition/{id}/games/finished", produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<List<GameDto>> findFinishedGames(@PathVariable Long id) {
-		logger.info("game-controller findGamesForCompetition() invoked.");
-		
 		return ResponseEntity.ok(
 				gameService.findFinishedGames(id)
 				.stream()
@@ -96,7 +90,6 @@ public class GameController {
 	// Scheduled games
 	@RequestMapping(value="/competition/games/scheduled", produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<List<GameDto>> findScheduledGames() {
-		
 		return ResponseEntity.ok(
 				gameService.findScheduledGames()
 				.stream()
@@ -107,7 +100,6 @@ public class GameController {
 	// Scheduled games
 	@RequestMapping(value="/competition/{id}/games/scheduled", produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<List<GameDto>> findScheduledGames(@PathVariable Long id) {
-		
 		return ResponseEntity.ok(
 				gameService.findScheduledGames(id)
 				.stream()
@@ -122,8 +114,6 @@ public class GameController {
 	// Get game 
 	@RequestMapping(value="/competition/game/{gameid}", produces=MediaType.APPLICATION_JSON_UTF8_VALUE )
 	public ResponseEntity<GameDto> getGame(@PathVariable("gameid") Long id) {
-		logger.log(Level.INFO, "competetion-controller getGame() invoked: {0}", id );
-		
 		return ResponseEntity.ok(
 				gameMapper.gameToGameDto(
 						gameService.getGame(id), 
@@ -132,7 +122,7 @@ public class GameController {
 	}
 
 	// Add game result
-	@RequestMapping(value="/competition/game/{gameid}/result", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE )
+	@RequestMapping(value="/competition/game/{gameid}/result", produces=MediaType.APPLICATION_JSON_UTF8_VALUE, method=RequestMethod.POST)
 	public ResponseEntity<GameDto> addGameResult(@PathVariable("gameid") Long id, @RequestBody GameDto gameDto) {
 		logger.log(Level.INFO, "competetion-controller addGameResult() invoked: {0}", id );
 		
@@ -167,11 +157,12 @@ public class GameController {
 		game.setPointsHome(homeWinSets);
 		game.setPointsAway(awayWinSets);
 		
-		
 		return ResponseEntity.ok(
 				gameMapper.gameToGameDto(
-						gameService.addGameResult(id, game), 
-						new CycleAvoidMappingContext()
+						gameService.addGameResult(id, 
+								gameMapper.gameDtoToGame(game, new CycleAvoidMappingContext())
+								)
+						, new CycleAvoidMappingContext()
 				));
 	}
 

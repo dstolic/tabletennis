@@ -30,8 +30,6 @@ public class GroupService implements BaseGroupService {
 	// Find competition by id
 	@Override
 	public Group findById(Long id) {
-		logger.info("competition-service findById invoked. ");
-	
 //		return competitionRepository.findById(id).get();
 		return null;
 	}
@@ -55,7 +53,6 @@ public class GroupService implements BaseGroupService {
 
 	@Override
 	public Group findByName(Long competitionId, String name) {
-
 		return groupRepository.findByCompetitionIdAndName(competitionId, name);
 	}
 

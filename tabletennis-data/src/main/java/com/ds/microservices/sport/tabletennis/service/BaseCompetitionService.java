@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.ds.microservices.sport.tabletennis.entity.Competition;
 import com.ds.microservices.sport.tabletennis.entity.CompetitionPlayer;
-import com.ds.microservices.sport.tabletennis.entity.Game;
 import com.ds.microservices.sport.tabletennis.entity.Player;
 
 public interface BaseCompetitionService {

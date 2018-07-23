@@ -1,17 +1,13 @@
 package com.ds.microservices.sport.tabletennis.dto;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
-import com.ds.microservices.sport.tabletennis.entity.CompetitionPlayer;
 import com.ds.microservices.sport.tabletennis.entity.CompetitionProperty;
-import com.ds.microservices.sport.tabletennis.entity.Group;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName("Competition")
-public class CompetitionDto implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class CompetitionDto {
 
 	private Long id;
 
@@ -63,18 +59,6 @@ public class CompetitionDto implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public Set<PlayerDto> getPlayers() {
-		return players;
-	}
-
-//	public void setCompetitionPlayers(Set<PlayerDto> players) {
-//		this.players = players;
-//	}
-
-	public void setPlayers(Set<PlayerDto> players) {
-		this.players = players;
 	}
 
 	public Set<CompetitionProperty> getProperties() {
@@ -129,6 +113,14 @@ public class CompetitionDto implements Serializable {
 	public String toString() {
 		return "CompetitionDto [id=" + id + ", description=" + description + ", name=" + name + ", players=" + players
 				+ "]";
+	}
+
+	public Set<PlayerDto> getPlayers() {
+		return players;
+	}
+
+	public void setPlayers(Set<PlayerDto> players) {
+		this.players = players;
 	}
 
 	public String getCategory() {

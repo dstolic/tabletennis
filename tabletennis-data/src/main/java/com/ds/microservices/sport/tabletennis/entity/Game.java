@@ -31,7 +31,7 @@ public class Game implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 
-	private boolean finished;
+	private int finished;
 
 	@Column(name="points_away")
 	private int pointsAway;
@@ -57,12 +57,6 @@ public class Game implements Serializable {
 
 	private int round;
 
-//	@OneToMany(cascade = CascadeType.ALL)
-//	@JoinTable(name="game_set",
-//		joinColumns = @JoinColumn(name="game_id", referencedColumnName="id")
-//	)
-//	@ElementCollection
-//	@CollectionTable(name="game_set", joinColumns = @JoinColumn(name="game_id"))
 	@OneToMany(mappedBy="id.game")
 	private List<GameSet> sets;
 	
@@ -77,11 +71,11 @@ public class Game implements Serializable {
 		this.id = id;
 	}
 
-	public boolean getFinished() {
+	public int getFinished() {
 		return this.finished;
 	}
 
-	public void setFinished(boolean finished) {
+	public void setFinished(int finished) {
 		this.finished = finished;
 	}
 
@@ -109,14 +103,6 @@ public class Game implements Serializable {
 		this.competition = competition;
 	}
 
-//	public Long getCompetitionId() {
-//		return competitionId;
-//	}
-//
-//	public void setCompetitionId(Long competitionId) {
-//		this.competitionId = competitionId;
-//	}
-
 	public Player getPlayerHome() {
 		return playerHome;
 	}
@@ -141,12 +127,6 @@ public class Game implements Serializable {
 		this.round = round;
 	}
 
-	@Override
-	public String toString() {
-		return "Game [id=" + id + ", competition=" + competition.getId() + ", playerHome=" + playerHome + ", playerAway="
-				+ playerAway + "," + ", round=" + round + ", groupId=" + groupId + "]";
-	}
-
 	public Long getGroupId() {
 		return groupId;
 	}
@@ -161,6 +141,12 @@ public class Game implements Serializable {
 
 	public void setSets(List<GameSet> sets) {
 		this.sets = sets;
+	}
+
+	@Override
+	public String toString() {
+		return "Game [id=" + id + ", competition=" + competition.getId() + ", playerHome=" + playerHome + ", playerAway="
+				+ playerAway + "," + ", round=" + round + ", groupId=" + groupId + "]";
 	}
 
 }

@@ -9,8 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 
-
-
 @Entity
 @NamedQuery(name="Player.findAll", query="SELECT p FROM Player p")
 public class Player implements Serializable {
@@ -30,15 +28,6 @@ public class Player implements Serializable {
 
 	private Long points;
 	
-	//bi-directional many-to-one association to CompetitionPlayer
-//	@OneToMany(mappedBy="player")
-//    @ManyToOne
-//    @JoinColumn(name = "competition_id")
-//	private Competition competition;
-
-	public Player() {
-	}
-
 	public Long getId() {
 		return this.id;
 	}
@@ -85,12 +74,4 @@ public class Player implements Serializable {
 		return "Player [id=" + id + ", active=" + active + ", firstName=" + firstName + ", lastName=" + lastName + ", points=" + points + "]";
 	}
 
-//	@Override
-//	public int compareTo(Player o) {
-//		if(this.points > o.getPoints()) return -1;
-//		else if (this.points > o.getPoints()) return 1;
-//		
-//		return 0;
-//	}
-//
 }

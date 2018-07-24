@@ -34,13 +34,6 @@ public class Competition implements Serializable {
 
 	private boolean current;
 
-//    @ManyToMany(fetch = FetchType.EAGER)
-//	@JoinTable(name="competition_player", 
-//			joinColumns = @JoinColumn(name="competition_id", referencedColumnName="id"),
-//			inverseJoinColumns = @JoinColumn (name="player_id", referencedColumnName="id")
-//	)
-
-//	@JoinColumn(name="competition_id")
 	@OneToMany(mappedBy="competition")
     private Set<CompetitionProperty> properties;
 	
@@ -53,8 +46,6 @@ public class Competition implements Serializable {
 	@OneToMany(mappedBy="competition", cascade=CascadeType.ALL)
 	private List<Group> groups;
     
-	public Competition() {
-	}
 
 	public Long getId() {
 		return this.id;

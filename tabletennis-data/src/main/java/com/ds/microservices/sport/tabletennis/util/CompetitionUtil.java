@@ -1,7 +1,6 @@
 package com.ds.microservices.sport.tabletennis.util;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -26,8 +25,9 @@ import com.ds.microservices.sport.tabletennis.entity.Group;
 import com.ds.microservices.sport.tabletennis.entity.Player;
 import com.ds.microservices.sport.tabletennis.exceptions.CompetitionAlreadyCompletedException;
 import com.ds.microservices.sport.tabletennis.exceptions.CompetitionNotCompletedException;
-import com.ds.microservices.sport.tabletennis.exceptions.CompetitionNotFoundException;
 import com.ds.microservices.sport.tabletennis.exceptions.CompetitionNotCorrectNumberOfPlayersException;
+import com.ds.microservices.sport.tabletennis.exceptions.CompetitionNotFoundException;
+import com.ds.microservices.sport.tabletennis.exceptions.GamesNotGeneratedException;
 
 @Component
 public class CompetitionUtil {
@@ -47,18 +47,21 @@ public class CompetitionUtil {
 	}
 	
 	public List<Group> createGroups(Competition competition, List<Player> candidates) {
-		logger.info("createGroups START");
-		
 		int numberOfSeeds = competitionConfiguration.getNumberOfSeeds();
 		int numberOfPlayers = competitionConfiguration.getNumberOfPlayers();
 		int numberOfGroups = numberOfPlayers / numberOfSeeds ;
 		List<Group> groups = new ArrayList<>();
 
+		// we are able to add players to competition manually, the rest of them well be added automaticaly
 		int addedPlayers = CollectionUtils.isEmpty(competition.getCompetitionPlayers()) ? 0 : competition.getCompetitionPlayers().size();
+		// number of players needed for competition (read from configuration)  
 		int totalPlayers = competitionConfiguration.getNumberOfPlayers();
+		// we will add as many players as needed to reach totalPlayers  
 		int missingPlayers = totalPlayers - addedPlayers;
 		
 		// Add players to competition according to their points (first 'number_of_players')
+		// Configuration parameter 'autogeneratePlayers=true' allowing us to automatically add players to competition
+		// Add active players to CompetitionPlayer list until missing players is 0
 		if (missingPlayers > 0 && competitionConfiguration.isAutogeneratePlayers()) {
 			for (Player player : candidates) {
 				if ((player.isActive() && missingPlayers > 0) && !this.getCompetitionPlayerMap().containsKey(new CompetitionPlayerPK(competition, player))) {
@@ -75,7 +78,10 @@ public class CompetitionUtil {
 		}
 		
 		// Add seed players
+		// Players are sorted by rating points. 
+		// Add first 'numberOfSeeds'(8 by default) players each of them to next group 
 		List<CompetitionPlayer> sortedPlayers = competition.getCompetitionPlayers();
+		// Groups are named 'A'-'H' (8 groups by default)
 		char groupName = 'A';
 		for (int i = 1; i <= numberOfSeeds; i++) {
 			Group group = new Group();
@@ -92,8 +98,11 @@ public class CompetitionUtil {
 			
 			groups.add(group);
 		}
+
 		
 		// Draw
+		// Add other members of the groups.
+		// Members are divided by ration points to 3 groups (seeds are already added to groups)
 		int drawStart = 1;
 		int drawEnd = 1;
 		
@@ -105,6 +114,9 @@ public class CompetitionUtil {
 			ArrayList<Long> indexes = new ArrayList<>(); 
 			drawStart = (numberOfSeeds * (i+1));
 			drawEnd = (numberOfSeeds * (i+2))-1;
+			// indexes as array
+			// by default we are choosing 3 groups of players
+			// so values for 'indexes' will be as above: [8..15], [16..23], [24..31]
 			for (int j = drawStart; j <= drawEnd; j++) {
 				indexes.add(Long.valueOf(j));
 			}
@@ -112,6 +124,7 @@ public class CompetitionUtil {
 			// number_of_seeds 0-7
 			for (int j = 0; j < numberOfSeeds; j++) {
 				int randomIndex = ThreadLocalRandom.current().nextInt(0, numberToDraw);
+				// Draw random player index (0-7), add player with that index to group and then remove that index from 'indexes' array
 				CompetitionPlayer drawPlayer = sortedPlayers.get(indexes.get(randomIndex).intValue());
 				drawPlayer.setActive(true);
 				groups.get(numberToDraw-1).getPlayers().add(drawPlayer.getId().getPlayer());
@@ -122,12 +135,13 @@ public class CompetitionUtil {
 		}
 		
 		checkBalanceOfPower(groups);
-		logger.info("createGroups END");
 		return groups;
 	}
 
 	// Checking group coef (balance of power: proportion between max and min sum of players points)
 	// If it is too high, groups are not balanced. 
+	// At this moment, there will be only one line in log to show balance
+	// For future use: possible usage is after competition generation, so you may cancel it if balance is too high (not balanced groups)
 	public void checkBalanceOfPower(List<Group> groups) {
 		float minPoints = 9999;
 		float maxPoints = 0;
@@ -150,19 +164,35 @@ public class CompetitionUtil {
 	}
 	
 	
-	// Round robin tournament games. Check if this may be double round robin.
+	// Round robin tournament games. Check later if this may be double round robin.
 	public List<Game> generateGamesForGroup(Competition competition, Group group) {
 		logger.info("generateGamesForGroup START");
 		
 		List<Game> games = new ArrayList<>();
 
 		int numberOfPlayers = group.getPlayers().size();
-		// if we have odd number of players, we'll add 1 (bye)
+		// if we have odd number of players, we'll add 1 ('BYE': when you are paired with BYE, you'll have pause in that round)
 		if (numberOfPlayers % 2 == 1) {
 			numberOfPlayers++;
 		}
 		int numberOfRounds = numberOfPlayers - 1;
-//		int numberOfGames = numberOfPlayers * numberOfRounds;
+
+/* 
+ *    Small modification of Berger system to generate all games for group of players
+ *    Default example: we divide list of group players in two lists. First player from first list is fixed, he will not change position. 
+ *    In default case: [0,1], [3,2]. Pairs that make games are determined by index: (0, 3), (1, 2)
+ *    Then, we'll transform initial lists.
+ *     TRANSFORMATION first list: first player for second list -> second player in first list (other members of first list shifts to the right).
+ *    TRANSFORMATION second list: last one from first list -> last one in second list (other members of second list shifts to the left)
+ *    Example with 14 players is more descriptive:
+ *     First list: { 1,  2,  3,  4,  5,  6,  7} 
+ *    Second list: {14, 13, 12, 11, 10,  9,  8} 
+ *    Games are (1, 14), (2, 13) and so on... 
+ *    After first transformation: 
+ *     First list: { 1, 14,  2,  3,  4,  5,  6} 
+ *    Second list: {13, 12, 11, 10,  9,  8,  7} 
+ *    Games are (1, 13), (14, 12) and so on...		 
+ */
 
 		List<Player> first = new ArrayList<>();
 		List<Player> second = new ArrayList<>();
@@ -174,9 +204,10 @@ public class CompetitionUtil {
 				second.add(0, group.getPlayers().get(i));
 			}
 		}
-
+		logger.log(Level.INFO, " First initial {0}", first);
+		logger.log(Level.INFO, "Second initial {0}", second);
+		
 		for (int round = 1; round <= numberOfRounds; round++) {
-			// Round x
 			for (int i = 0; i < numberOfPlayers/2; i++) {
 				Game game = new Game();
 				game.setPlayerHome(first.get(i));
@@ -198,6 +229,8 @@ public class CompetitionUtil {
 			first.add(1, moveSecond);
 			second.add(moveFirst);
 
+			logger.log(Level.INFO, " First after round {0}: {1}", new Object[]{round, first});
+			logger.log(Level.INFO, "Second after round {0}: {1}", new Object[]{round, second});
 		}
 
 		logger.info("generateGamesForGroup END");
@@ -209,37 +242,76 @@ public class CompetitionUtil {
 
 		// temporary, for testing
 		generateResults(competition);
-//		groupSort(competition);
 	}
 
-//	public void groupSort(Competition competition) {
-//		logger.info("groupSort  ");
-//		List<Group> groups = competition.getGroups();
-//		for (Group group : groups) {
-//			logger.info("group  " + group);
-//		}
-//
-//	}
-	
-
-	
 	public void generateResults(Competition competition) {
-//		competition.getGames().forEach(game -> generateGameResult(game));
 		competition.getGames().forEach(this::generateGameResult);
 	}
 	
+	
+	
+	// Check if competition has all elements for generating games (players, seeds...)
+	public boolean checkIfCompetitionGenerateIsAllowed(Optional<Competition> competition) {
+		
+		checkIfEmpty(competition);
+		
+		checkIfCompleted(competition);
+		
+		checkNumberOfPlayers(competition.get().getCompetitionPlayers());
+		
+		checkNumberOfGames(competition.get().getGames());
+		
+		return true;
+	}
+	
+	// If competiton not found 
+	private void checkIfEmpty(Optional<Competition> competition) {
+		if (!competition.isPresent() ) throw new CompetitionNotFoundException();
+	}
+
+	// If competiton is completed
+	private void checkIfCompleted(Optional<Competition> competition) {
+		if (competition.isPresent() && competition.get().isCompleted()) throw new CompetitionAlreadyCompletedException();
+	}
+	
+	// If number of players in competiton is not correct (different from value in configuration: NUMBER_OF_PLAYERS)
+	private void checkNumberOfPlayers(List<CompetitionPlayer> competitionPlayers) {
+		if (!competitionConfiguration.isAutogeneratePlayers() 
+			&& (competitionPlayers == null || (competitionPlayers.size() != competitionConfiguration.getNumberOfPlayers()) ) 
+		) {
+				throw new CompetitionNotCorrectNumberOfPlayersException();
+		}
+	}
+	
+	// If already exists games in competiton
+	private void checkNumberOfGames(List<Game> games) {
+		if(games != null && !games.isEmpty()) throw new CompetitionNotCompletedException();
+	}
+
+	
+	// Check if competition has all elements for generating games (players, seeds...)
+	public boolean checkIfCompetitionActivationIsAllowed(Optional<Competition> competition) {
+		
+		checkIfEmpty(competition);
+		
+		checkIfCompleted(competition);
+		
+		checkNumberOfPlayers(competition.get().getCompetitionPlayers());
+		
+		checkIfGamesExist(competition.get().getGames());
+		
+		return true;
+	}
+	
+	// If already exists games in competiton
+	private void checkIfGamesExist(List<Game> games) {
+		if(games == null || games.isEmpty()) throw new GamesNotGeneratedException();
+	}
+
+	// For testing: delete in final version
 	public void generateGameResult(Game game) {
 		Player home = game.getPlayerHome();
 		Player away = game.getPlayerAway();
-		
-		logger.info("Home " + home.getFirstName() + " " + home.getLastName() + "(" + home.getPoints() + ")");
-		logger.info("Away " + away.getFirstName() + " " + away.getLastName() + "(" + away.getPoints() + ")");
-		
-//		int hPoints = home.getPoints().intValue();
-//		int aPoints = away.getPoints().intValue();
-		
-//		int numberToDraw = hPoints + aPoints;
-//		int randomIndex = ThreadLocalRandom.current().nextInt(0, numberToDraw);
 		
 		int[] setPointsHome = new int[5];
 		int[] setPointsAway = new int[5];
@@ -287,108 +359,9 @@ public class CompetitionUtil {
 			}
 		}
 
-//		logger.info("Sets home 1: " + Arrays.toString(set_points_home) );
-//		logger.info("Sets away 1: " + Arrays.toString(set_points_away) );
-
-		if (game.getPointsAway() > game.getPointsHome()) {
-			logger.info("Game away win: " + away.getFirstName() + " " + away.getLastName() + " won " + game.getPointsHome() + " : " + game.getPointsAway() );
-		} else {
-			logger.info("Game home win: " + home.getFirstName() + " " + home.getLastName() + " won " + game.getPointsHome() + " : " + game.getPointsAway() );
-		}
-
 	}
 
 	
-	// Check if competition has all elements for generating games (players, seeds...)
-	public boolean checkIfCompetitionGenerateIsAllowed(Optional<Competition> competition) {
-		
-		checkIfEmpty(competition);
-		
-		checkIfCompleted(competition);
-		
-		checkNumberOfPlayers(competition.get().getCompetitionPlayers());
-		
-		checkNumberOfGames(competition.get().getGames());
-		
-		return true;
-	}
-	
-	// If competiton not found 
-	private void checkIfEmpty(Optional<Competition> competition) {
-		if (!competition.isPresent() ) throw new CompetitionNotFoundException();
-	}
-
-	// If competiton is completed
-	private void checkIfCompleted(Optional<Competition> competition) {
-		if (competition.isPresent() && competition.get().isCompleted()) throw new CompetitionAlreadyCompletedException();
-	}
-	
-	// If number of players in competiton is not correct (different from value in configuration: NUMBER_OF_PLAYERS)
-	private void checkNumberOfPlayers(List<CompetitionPlayer> competitionPlayers) {
-		if (!competitionConfiguration.isAutogeneratePlayers() 
-			&& (competitionPlayers == null || (competitionPlayers.size() != competitionConfiguration.getNumberOfPlayers()) ) 
-		) {
-				throw new CompetitionNotCorrectNumberOfPlayersException();
-		}
-	}
-	
-	// If already exists games in competiton
-	private void checkNumberOfGames(List<Game> games) {
-		if(games != null && !games.isEmpty()) throw new CompetitionNotCompletedException();
-	}
-
-	
-	// TODO: activate competition (check first if current competition may be finished) 
-	// Check if competition has all elements for generating games (players, seeds...)
-	public boolean activateCheck(Competition competition) {
-		
-		// Check number of players
-		boolean setupCompleted = ((competition.getCompetitionPlayers() == null) ? 0 : competition.getCompetitionPlayers().size()) == competitionConfiguration.getNumberOfPlayers();
-		if (!setupCompleted) throw new CompetitionNotCorrectNumberOfPlayersException();
-		
-		// Check number of seeds - 8
-		//		completed = (competition.getPlayers().size() == Long.parseLong(map.get("NUMBER_OF_SEEDS").getValue()))
-
-		// Check number of games - 0
-		setupCompleted = competition.getGames().isEmpty();
-		if (!setupCompleted) throw new CompetitionNotCorrectNumberOfPlayersException();
-
-	
-		logger.log(Level.INFO, "Setup completed {0}", setupCompleted);
-		return setupCompleted;
-	}
-
-	public static void main(String[] args) {
-
-		int rounds = 5;
-		int numberOfPlayers = 6;
-		
-		List<Integer> first = new ArrayList<>();
-		List<Integer> second = new ArrayList<>();
-
-		for (int i = 1; i <= numberOfPlayers; i++) {
-			if (i <= numberOfPlayers / 2) {
-				first.add(Integer.valueOf(i));
-			} else {
-				second.add(0, Integer.valueOf(i));
-			}
-		}
-
-		for (int x = 1; x <= rounds; x++) {
-			// Round x
-			// first arrays transformation
-			// remove elements
-			Integer moveFirst = first.get(first.size()-1);
-			first.remove(first.size()-1);
-			Integer moveSecond = second.get(0);
-			second.remove(0);
-			// add elements
-			first.add(1, moveSecond);
-			second.add(moveFirst);
-
-		}
-	}
-
 	public Map<CompetitionPlayerPK, CompetitionPlayer> getCompetitionPlayerMap() {
 		return competitionPlayerMap;
 	}
@@ -406,5 +379,6 @@ public class CompetitionUtil {
 		}
 		return competitionPlayerMap;
 	}
+
 
 }

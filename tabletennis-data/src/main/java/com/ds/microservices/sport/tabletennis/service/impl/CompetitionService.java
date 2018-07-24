@@ -196,6 +196,7 @@ public class CompetitionService implements BaseCompetitionService {
 		return competition;
 	}
 
+	// Delete in final version
 	@Override
 	public Competition generateResults(Long competitionId) {
 		Competition competition = findById(competitionId);
@@ -223,11 +224,11 @@ public class CompetitionService implements BaseCompetitionService {
 
 	@Override
 	public Competition activateCheck(Long competitionId) {
-		Competition competition = competitionRepository.findById(competitionId).orElseThrow(CompetitionNotFoundException::new);
+		Optional<Competition> optionalCompetition = competitionRepository.findById(competitionId);
 
-		boolean check = competitionUtil.activateCheck(competition);
+		boolean check = competitionUtil.checkIfCompetitionActivationIsAllowed(optionalCompetition);
 		
-		return competition;
+		return optionalCompetition.orElseThrow(CompetitionNotFoundException::new);
 	}
 
 }

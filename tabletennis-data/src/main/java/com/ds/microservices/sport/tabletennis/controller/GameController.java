@@ -139,7 +139,7 @@ public class GameController {
 			GameSetDto gameSet = new GameSetDto();
 			GameSetIdDto gameSetId = new GameSetIdDto();
 			gameSetId.setGameId(id);
-			gameSetId.setSetNo(new Long(i+1));
+			gameSetId.setSetNo(Long.valueOf(i+1));
 			
 			gameSet.setId(gameSetId);
 			gameSet.setPointsHome(homeGamePoints[i]);

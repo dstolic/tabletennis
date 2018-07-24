@@ -4,13 +4,9 @@ import java.io.Serializable;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
@@ -21,17 +17,12 @@ public class CompetitionPlayer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
-//	@JsonManagedReference
 	@JsonIgnoreProperties({"competition", "player"})
 	private CompetitionPlayerPK id;
 
 	private boolean seed;
 
 	private boolean active;
-
-//	@ManyToOne
-//	@JoinColumn(name="group_id")
-//	private Group group;
 
 	public CompetitionPlayer() {
 	}
@@ -68,14 +59,5 @@ public class CompetitionPlayer implements Serializable {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
-
-//	public Group getGroup() {
-//		return group;
-//	}
-//
-//	public void setGroup(Group group) {
-//		this.group = group;
-//	}
-
 
 }

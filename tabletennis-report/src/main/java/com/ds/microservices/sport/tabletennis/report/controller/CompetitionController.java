@@ -1,7 +1,6 @@
 package com.ds.microservices.sport.tabletennis.report.controller;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -15,9 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 //import com.ds.microservices.sport.tabletennis.report.config.CompetitionConfiguration;
 import com.ds.microservices.sport.tabletennis.report.dto.CompetitionDto;
 import com.ds.microservices.sport.tabletennis.report.dto.CompetitionPlayerDto;
-import com.ds.microservices.sport.tabletennis.report.dto.PlayerDto;
-import com.ds.microservices.sport.tabletennis.report.mapper.CompetitionPlayerMapper;
 import com.ds.microservices.sport.tabletennis.report.mapper.CompetitionMapper;
+import com.ds.microservices.sport.tabletennis.report.mapper.CompetitionPlayerMapper;
 import com.ds.microservices.sport.tabletennis.report.mapper.CycleAvoidMappingContext;
 import com.ds.microservices.sport.tabletennis.report.service.impl.CompetitionService;;
 

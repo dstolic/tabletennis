@@ -11,8 +11,8 @@ import com.ds.microservices.sport.tabletennis.report.entity.Competition;
 
 public interface CompetitionRepository extends PagingAndSortingRepository<Competition, Long> {
 
-//	@Query("SELECT count(*) from Competition")
-//	public long count();
+	@Query("SELECT count(*) from Competition")
+	public long count();
 
 	public Optional<Competition> findById(Long id);
 

@@ -1,6 +1,7 @@
 package com.ds.microservices.sport.tabletennis.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.ds.microservices.sport.tabletennis.entity.Competition;
 import com.ds.microservices.sport.tabletennis.entity.CompetitionPlayer;
@@ -11,6 +12,11 @@ public interface BaseCompetitionService {
 	List<Competition> allCompetitions();
 
 	Competition findById(Long id);
+
+	List<CompetitionPlayer> findPlayersFromCompetition();
+	List<CompetitionPlayer> findPlayersFromCompetition(Long competitionId);
+
+	Competition findByCurrent();
 
 	Competition saveCompetition(Competition competition);
 
@@ -25,11 +31,6 @@ public interface BaseCompetitionService {
 	Competition generateCompetition(Long competitionId);
 
 	Competition generateCompetition2(Long competitionId);
-
-	List<CompetitionPlayer> findPlayersFromCompetition();
-	List<CompetitionPlayer> findPlayersFromCompetition(Long competitionId);
-
-	Competition findByCurrent();
 
 	Competition generateResults(Long competitionId);
 

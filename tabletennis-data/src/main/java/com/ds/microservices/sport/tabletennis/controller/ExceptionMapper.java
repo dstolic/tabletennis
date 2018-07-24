@@ -19,6 +19,7 @@ import com.ds.microservices.sport.tabletennis.exceptions.CompetitionNotCorrectNu
 import com.ds.microservices.sport.tabletennis.exceptions.CompetitionNotFoundException;
 import com.ds.microservices.sport.tabletennis.exceptions.GameNotFoundException;
 import com.ds.microservices.sport.tabletennis.exceptions.PlayerNotFoundException;
+import com.ds.microservices.sport.tabletennis.exceptions.GamesNotGeneratedException;
 
 @ControllerAdvice
 @Component
@@ -68,4 +69,12 @@ public class ExceptionMapper extends ResponseEntityExceptionHandler {
                 new ApiResponseDto<>(new ErrorDto(messageSource.getMessage("error.game.notfound", null, Locale.getDefault()), HttpStatus.BAD_REQUEST.value())),
                 HttpStatus.BAD_REQUEST);
 	}
+
+	@ExceptionHandler(GamesNotGeneratedException.class)
+	public ResponseEntity<ApiResponseDto<ErrorDto>> handleGamesNotGeneratedException() {
+		return new ResponseEntity<>(
+                new ApiResponseDto<>(new ErrorDto(messageSource.getMessage("error.game.notgenerated", null, Locale.getDefault()), HttpStatus.BAD_REQUEST.value())),
+                HttpStatus.BAD_REQUEST);
+	}
+
 }

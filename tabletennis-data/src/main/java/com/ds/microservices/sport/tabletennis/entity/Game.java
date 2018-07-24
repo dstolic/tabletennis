@@ -3,16 +3,12 @@ package com.ds.microservices.sport.tabletennis.entity;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.CollectionTable;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -47,7 +43,7 @@ public class Game implements Serializable {
 	@JoinColumn(name="player_home")
 	private Player playerHome;
 	
-	@JsonIgnore // budzevina, resiti kasnije
+	@JsonIgnore
     @ManyToOne
     @JoinColumn(name = "competition_id")
 	private Competition competition;

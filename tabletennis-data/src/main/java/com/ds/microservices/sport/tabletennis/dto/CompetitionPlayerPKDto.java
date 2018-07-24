@@ -6,9 +6,6 @@ public class CompetitionPlayerPKDto {
 
 	private PlayerDto player;
 
-	public CompetitionPlayerPKDto() {
-	}
-
 	public Long getCompetitionId() {
 		return competitionId;
 	}

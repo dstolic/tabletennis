@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
-import com.ds.microservices.sport.tabletennis.report.config.CompetitionConfiguration;
-
 
 @Configuration
 @PropertySource("classpath:competition-default.properties")
@@ -15,37 +13,86 @@ public class CompetitionConfiguration {
 
 	protected Logger logger = Logger.getLogger(CompetitionConfiguration.class.getName());
 
-	@Value("${competition.default.FORMAT}")
-	public String FORMAT ;
+	// For future use. 
+	// Default value is 'CUP'. Competition format may be also 'LEAGUE' and 'LEAGUE+CUP'
+	@Value("${competition.default.format}")
+	private String format ;
 	
-	@Value("${competition.default.NUMBER_OF_PLAYERS}")
-	public int NUMBER_OF_PLAYERS;
+	@Value("${competition.default.number.players}")
+	private int numberOfPlayers = 32;
 	
-	@Value("${competition.default.NUMBER_OF_SEEDS}")
-	public int NUMBER_OF_SEEDS;
+	@Value("${competition.default.number.seeds}")
+	private int numberOfSeeds;
 
-	public String getFORMAT() {
-		return FORMAT;
+	// Level of tournaments. Expected values are 'SENIOR' and 'MEDIOR'
+	@Value("${competition.default.category}")
+	private String category;
+
+	// Set parameter to 'true' if you want to add all or some of seed players to competition automatically.
+	// If value is 'false', app expects to enter all seed players manually.
+	@Value("${competition.autogenerate.seeds}")
+	private boolean autogenerateSeeds;
+	
+	// Set parameter to 'true' if you want to add all or some of players to competition automatically.
+	// If value is 'false', app expects to enter all players manually.
+	@Value("${competition.autogenerate.players}")
+	private boolean autogeneratePlayers;
+
+	public Logger getLogger() {
+		return logger;
 	}
 
-	public void setFORMAT(String fORMAT) {
-		FORMAT = fORMAT;
+	public void setLogger(Logger logger) {
+		this.logger = logger;
 	}
 
-	public int getNUMBER_OF_PLAYERS() {
-		return NUMBER_OF_PLAYERS;
+	public String getFormat() {
+		return format;
 	}
 
-	public void setNUMBER_OF_PLAYERS(int nUMBER_OF_PLAYERS) {
-		NUMBER_OF_PLAYERS = nUMBER_OF_PLAYERS;
+	public void setFormat(String format) {
+		this.format = format;
 	}
 
-	public int getNUMBER_OF_SEEDS() {
-		return NUMBER_OF_SEEDS;
+	public int getNumberOfPlayers() {
+		return numberOfPlayers;
 	}
 
-	public void setNUMBER_OF_SEEDS(int nUMBER_OF_SEEDS) {
-		NUMBER_OF_SEEDS = nUMBER_OF_SEEDS;
+	public void setNumberOfPlayers(int numberOfPlayers) {
+		this.numberOfPlayers = numberOfPlayers;
 	}
+
+	public int getNumberOfSeeds() {
+		return numberOfSeeds;
+	}
+
+	public void setNumberOfSeeds(int numberOfSeeds) {
+		this.numberOfSeeds = numberOfSeeds;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public boolean isAutogenerateSeeds() {
+		return autogenerateSeeds;
+	}
+
+	public void setAutogenerateSeeds(boolean autogenerateSeeds) {
+		this.autogenerateSeeds = autogenerateSeeds;
+	}
+
+	public boolean isAutogeneratePlayers() {
+		return autogeneratePlayers;
+	}
+
+	public void setAutogeneratePlayers(boolean autogeneratePlayers) {
+		this.autogeneratePlayers = autogeneratePlayers;
+	}
+	
 
 }

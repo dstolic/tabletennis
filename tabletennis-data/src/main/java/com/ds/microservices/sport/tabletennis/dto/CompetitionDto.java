@@ -23,8 +23,6 @@ public class CompetitionDto {
 
 	private Set<PlayerDto> players;
 
-//	@JsonIgnore
-//	@JsonBackReference
     private Set<CompetitionProperty> properties;
     
 	private List<CompetitionPlayerDto> competitionPlayers;
@@ -34,9 +32,6 @@ public class CompetitionDto {
 	private List<GameDto> games;
 
 	
-	public CompetitionDto() {
-	}
-
 	public Long getId() {
 		return this.id;
 	}

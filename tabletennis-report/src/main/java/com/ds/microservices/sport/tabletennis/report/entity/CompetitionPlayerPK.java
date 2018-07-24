@@ -3,25 +3,17 @@ package com.ds.microservices.sport.tabletennis.report.entity;
 import java.io.Serializable;
 
 import javax.persistence.Embeddable;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Embeddable
 public class CompetitionPlayerPK implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-//	@JsonIgnore
-//	@JsonBackReference
 	@ManyToOne
     @JoinColumn(name = "competition_id", insertable=false, updatable=false)
 	private Competition competition;
 
-//	@JsonIgnore
-//	@JsonBackReference
 	@ManyToOne
     @JoinColumn(name = "player_id", insertable=false, updatable=false)
 	private Player player;

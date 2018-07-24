@@ -32,9 +32,6 @@ public class GameDto {
 
 	private List<GameSetDto> sets;
 	
-	public GameDto() {
-	} 
-	
 	public Long getId() {
 		return this.id;
 	}

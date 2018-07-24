@@ -13,6 +13,8 @@ public class CompetitionConfiguration {
 
 	protected Logger logger = Logger.getLogger(CompetitionConfiguration.class.getName());
 
+	// For future use. 
+	// Default value is 'CUP'. Competition format may be also 'LEAGUE' and 'LEAGUE+CUP'
 	@Value("${competition.default.format}")
 	private String format ;
 	
@@ -22,12 +24,17 @@ public class CompetitionConfiguration {
 	@Value("${competition.default.number.seeds}")
 	private int numberOfSeeds;
 
+	// Level of tournaments. Expected values are 'SENIOR' and 'MEDIOR'
 	@Value("${competition.default.category}")
 	private String category;
 
+	// Set parameter to 'true' if you want to add all or some of seed players to competition automatically.
+	// If value is 'false', app expects to enter all seed players manually.
 	@Value("${competition.autogenerate.seeds}")
 	private boolean autogenerateSeeds;
 	
+	// Set parameter to 'true' if you want to add all or some of players to competition automatically.
+	// If value is 'false', app expects to enter all players manually.
 	@Value("${competition.autogenerate.players}")
 	private boolean autogeneratePlayers;
 

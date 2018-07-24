@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-import com.ds.microservices.sport.tabletennis.entity.Game;
 import com.ds.microservices.sport.tabletennis.entity.Group;
 
 

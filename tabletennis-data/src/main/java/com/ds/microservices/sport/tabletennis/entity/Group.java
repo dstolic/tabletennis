@@ -9,13 +9,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -28,15 +26,6 @@ public class Group implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-
-//	@OneToMany(mappedBy="group")
-//	@JsonIgnore
-//	private List<CompetitionPlayer> competitionPlayers;
-
-//	@JoinTable(name="competition_player", 
-//	joinColumns = @JoinColumn(name="competition_id", referencedColumnName="id"),
-//	inverseJoinColumns = @JoinColumn (name="player_id", referencedColumnName="id")
-//	)
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(name="group_player",
@@ -76,6 +65,14 @@ public class Group implements Serializable {
 		return sum - maxPoints.intValue();
 	}
 
+	public List<Player> getPlayers() {
+		return players;
+	}
+
+	public void setPlayers(List<Player> players) {
+		this.players = players;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -97,12 +94,5 @@ public class Group implements Serializable {
 		return "Group [id=" + id + ", points=" + groupPoints() + ", players=" + players + "]";
 	}
 
-	public List<Player> getPlayers() {
-		return players;
-	}
-
-	public void setPlayers(List<Player> players) {
-		this.players = players;
-	}
 
 }

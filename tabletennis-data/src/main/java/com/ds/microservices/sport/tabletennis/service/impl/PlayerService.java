@@ -40,7 +40,7 @@ public class PlayerService implements BasePlayerService {
 	// Activate/deactivate player (to check: could we use save() method for both activation also) 
 	@Override
 	public Player activatePlayer(Long id, boolean active) {
-		Player player = playerRepository.findById(id).orElseThrow(PlayerNotFoundException::new);;
+		Player player = playerRepository.findById(id).orElseThrow(PlayerNotFoundException::new);
 		player.setActive(active);
 		
 		return playerRepository.save(player);

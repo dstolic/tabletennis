@@ -28,7 +28,7 @@ CREATE TABLE `competition` (
   `description` varchar(255) DEFAULT '',
   `completed` tinyint(4) NOT NULL DEFAULT '0',
   `current` tinyint(4) NOT NULL DEFAULT '0',
-  `type` varchar(45) DEFAULT NULL,
+  `category` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -57,7 +57,7 @@ CREATE TABLE `competition_group` (
   PRIMARY KEY (`id`),
   KEY `fk_comp_idx` (`competition_id`),
   CONSTRAINT `fk_comp` FOREIGN KEY (`competition_id`) REFERENCES `competition` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=154 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,7 +66,7 @@ CREATE TABLE `competition_group` (
 
 LOCK TABLES `competition_group` WRITE;
 /*!40000 ALTER TABLE `competition_group` DISABLE KEYS */;
-INSERT INTO `competition_group` VALUES (82,1,'A'),(83,1,'B'),(84,1,'C'),(85,1,'D'),(86,1,'E'),(87,1,'F'),(88,1,'G'),(89,1,'H');
+INSERT INTO `competition_group` VALUES (146,1,'A'),(147,1,'B'),(148,1,'C'),(149,1,'D'),(150,1,'E'),(151,1,'F'),(152,1,'G'),(153,1,'H');
 /*!40000 ALTER TABLE `competition_group` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -81,7 +81,6 @@ CREATE TABLE `competition_player` (
   `competition_id` bigint(20) NOT NULL,
   `player_id` bigint(20) NOT NULL,
   `seed` tinyint(4) NOT NULL DEFAULT '0',
-  `group_id` bigint(20) DEFAULT NULL,
   `active` tinyint(4) NOT NULL DEFAULT '1',
   PRIMARY KEY (`competition_id`,`player_id`),
   UNIQUE KEY `fk_comp_player` (`competition_id`,`player_id`),
@@ -98,7 +97,7 @@ CREATE TABLE `competition_player` (
 
 LOCK TABLES `competition_player` WRITE;
 /*!40000 ALTER TABLE `competition_player` DISABLE KEYS */;
-INSERT INTO `competition_player` VALUES (1,2,1,NULL,1),(1,3,1,NULL,1),(1,4,1,NULL,1),(1,5,1,NULL,1),(1,6,1,NULL,1),(1,7,1,NULL,1),(1,8,1,NULL,1),(1,9,1,NULL,1),(1,10,0,NULL,1),(1,11,0,NULL,1),(1,12,0,NULL,1),(1,13,0,NULL,1),(1,14,0,NULL,1),(1,15,0,NULL,1),(1,16,0,NULL,1),(1,17,0,NULL,1),(1,18,0,NULL,1),(1,19,0,NULL,1),(1,20,0,NULL,1),(1,21,0,NULL,1),(1,22,0,NULL,1),(1,23,0,NULL,1),(1,24,0,NULL,1),(1,25,0,NULL,1),(1,26,0,NULL,1),(1,27,0,NULL,1),(1,28,0,NULL,1),(1,29,0,NULL,1),(1,30,0,NULL,1),(1,31,0,NULL,1),(1,32,0,NULL,1),(1,33,0,NULL,1);
+INSERT INTO `competition_player` VALUES (1,2,1,1),(1,3,1,1),(1,4,1,1),(1,5,1,1),(1,6,1,1),(1,7,1,1),(1,8,1,1),(1,9,1,1),(1,10,0,1),(1,11,0,1),(1,12,0,1),(1,13,0,1),(1,14,0,1),(1,15,0,1),(1,16,0,1),(1,17,0,1),(1,18,0,1),(1,19,0,1),(1,20,0,1),(1,21,0,1),(1,22,0,1),(1,23,0,1),(1,24,0,1),(1,25,0,1),(1,26,0,1),(1,27,0,1),(1,28,0,1),(1,29,0,1),(1,30,0,1),(1,31,0,1),(1,32,0,1),(1,33,0,1);
 /*!40000 ALTER TABLE `competition_player` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -126,8 +125,34 @@ CREATE TABLE `competition_properties` (
 
 LOCK TABLES `competition_properties` WRITE;
 /*!40000 ALTER TABLE `competition_properties` DISABLE KEYS */;
-INSERT INTO `competition_properties` VALUES (3,1,'FORMAT','CUP'),(4,1,'NUMBER_OF_SEEDS','8'),(5,1,'NUMBER_OF_PLAYERS','32'),(6,1,'TYPE','SENIOR');
+INSERT INTO `competition_properties` VALUES (3,1,'FORMAT','CUP'),(4,1,'NUMBER_OF_SEEDS','8'),(5,1,'NUMBER_OF_PLAYERS','32'),(6,1,'CATEGORY','SENIOR');
 /*!40000 ALTER TABLE `competition_properties` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `game_set`
+--
+
+DROP TABLE IF EXISTS `game_set`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `game_set` (
+  `game_id` bigint(20) NOT NULL,
+  `set_no` tinyint(4) NOT NULL,
+  `points_home` tinyint(4) NOT NULL DEFAULT '0',
+  `points_away` tinyint(4) NOT NULL DEFAULT '0',
+  KEY `game_id_idx` (`game_id`),
+  CONSTRAINT `game_id` FOREIGN KEY (`game_id`) REFERENCES `games` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `game_set`
+--
+
+LOCK TABLES `game_set` WRITE;
+/*!40000 ALTER TABLE `game_set` DISABLE KEYS */;
+/*!40000 ALTER TABLE `game_set` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -145,7 +170,7 @@ CREATE TABLE `games` (
   `points_home` int(3) NOT NULL DEFAULT '0',
   `points_away` int(3) NOT NULL DEFAULT '0',
   `finished` tinyint(4) NOT NULL DEFAULT '0',
-  `group_num` int(3) NOT NULL DEFAULT '0',
+  `group_id` int(3) NOT NULL DEFAULT '0',
   `round` int(3) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `competition_idx` (`competition_id`),
@@ -154,7 +179,7 @@ CREATE TABLE `games` (
   CONSTRAINT `competition` FOREIGN KEY (`competition_id`) REFERENCES `competition` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `player_away` FOREIGN KEY (`player_away`) REFERENCES `player` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `player_home` FOREIGN KEY (`player_home`) REFERENCES `player` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=1825 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2161 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -163,7 +188,7 @@ CREATE TABLE `games` (
 
 LOCK TABLES `games` WRITE;
 /*!40000 ALTER TABLE `games` DISABLE KEYS */;
-INSERT INTO `games` VALUES (1777,1,2,32,0,0,0,0,1),(1778,1,17,19,0,0,0,0,1),(1779,1,2,19,0,0,0,0,2),(1780,1,32,17,0,0,0,0,2),(1781,1,2,17,0,0,0,0,3),(1782,1,19,32,0,0,0,0,3),(1783,1,3,30,0,0,0,0,1),(1784,1,13,22,0,0,0,0,1),(1785,1,3,22,0,0,0,0,2),(1786,1,30,13,0,0,0,0,2),(1787,1,3,13,0,0,0,0,3),(1788,1,22,30,0,0,0,0,3),(1789,1,4,27,0,0,0,0,1),(1790,1,11,25,0,0,0,0,1),(1791,1,4,25,0,0,0,0,2),(1792,1,27,11,0,0,0,0,2),(1793,1,4,11,0,0,0,0,3),(1794,1,25,27,0,0,0,0,3),(1795,1,5,31,0,0,0,0,1),(1796,1,15,18,0,0,0,0,1),(1797,1,5,18,0,0,0,0,2),(1798,1,31,15,0,0,0,0,2),(1799,1,5,15,0,0,0,0,3),(1800,1,18,31,0,0,0,0,3),(1801,1,6,33,0,0,0,0,1),(1802,1,14,24,0,0,0,0,1),(1803,1,6,24,0,0,0,0,2),(1804,1,33,14,0,0,0,0,2),(1805,1,6,14,0,0,0,0,3),(1806,1,24,33,0,0,0,0,3),(1807,1,7,28,0,0,0,0,1),(1808,1,10,20,0,0,0,0,1),(1809,1,7,20,0,0,0,0,2),(1810,1,28,10,0,0,0,0,2),(1811,1,7,10,0,0,0,0,3),(1812,1,20,28,0,0,0,0,3),(1813,1,8,29,0,0,0,0,1),(1814,1,16,21,0,0,0,0,1),(1815,1,8,21,0,0,0,0,2),(1816,1,29,16,0,0,0,0,2),(1817,1,8,16,0,0,0,0,3),(1818,1,21,29,0,0,0,0,3),(1819,1,9,26,0,0,0,0,1),(1820,1,12,23,0,0,0,0,1),(1821,1,9,23,0,0,0,0,2),(1822,1,26,12,0,0,0,0,2),(1823,1,9,12,0,0,0,0,3),(1824,1,23,26,0,0,0,0,3);
+INSERT INTO `games` VALUES (2113,1,2,31,0,0,0,146,1),(2114,1,11,18,0,0,0,146,1),(2115,1,2,18,0,0,0,146,2),(2116,1,31,11,0,0,0,146,2),(2117,1,2,11,0,0,0,146,3),(2118,1,18,31,0,0,0,146,3),(2119,1,3,33,0,0,0,147,1),(2120,1,13,24,0,0,0,147,1),(2121,1,3,24,0,0,0,147,2),(2122,1,33,13,0,0,0,147,2),(2123,1,3,13,0,0,0,147,3),(2124,1,24,33,0,0,0,147,3),(2125,1,4,30,0,0,0,148,1),(2126,1,15,21,0,0,0,148,1),(2127,1,4,21,0,0,0,148,2),(2128,1,30,15,0,0,0,148,2),(2129,1,4,15,0,0,0,148,3),(2130,1,21,30,0,0,0,148,3),(2131,1,5,27,0,0,0,149,1),(2132,1,10,22,0,0,0,149,1),(2133,1,5,22,0,0,0,149,2),(2134,1,27,10,0,0,0,149,2),(2135,1,5,10,0,0,0,149,3),(2136,1,22,27,0,0,0,149,3),(2137,1,6,28,0,0,0,150,1),(2138,1,17,23,0,0,0,150,1),(2139,1,6,23,0,0,0,150,2),(2140,1,28,17,0,0,0,150,2),(2141,1,6,17,0,0,0,150,3),(2142,1,23,28,0,0,0,150,3),(2143,1,7,32,0,0,0,151,1),(2144,1,12,20,0,0,0,151,1),(2145,1,7,20,0,0,0,151,2),(2146,1,32,12,0,0,0,151,2),(2147,1,7,12,0,0,0,151,3),(2148,1,20,32,0,0,0,151,3),(2149,1,8,29,0,0,0,152,1),(2150,1,14,25,0,0,0,152,1),(2151,1,8,25,0,0,0,152,2),(2152,1,29,14,0,0,0,152,2),(2153,1,8,14,0,0,0,152,3),(2154,1,25,29,0,0,0,152,3),(2155,1,9,26,0,0,0,153,1),(2156,1,16,19,0,0,0,153,1),(2157,1,9,19,0,0,0,153,2),(2158,1,26,16,0,0,0,153,2),(2159,1,9,16,0,0,0,153,3),(2160,1,19,26,0,0,0,153,3);
 /*!40000 ALTER TABLE `games` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -190,7 +215,7 @@ CREATE TABLE `group_player` (
 
 LOCK TABLES `group_player` WRITE;
 /*!40000 ALTER TABLE `group_player` DISABLE KEYS */;
-INSERT INTO `group_player` VALUES (82,2),(83,3),(84,4),(85,5),(86,6),(87,7),(88,8),(89,9),(87,10),(84,11),(89,12),(83,13),(86,14),(85,15),(88,16),(82,17),(85,18),(82,19),(87,20),(88,21),(83,22),(89,23),(86,24),(84,25),(89,26),(84,27),(87,28),(88,29),(83,30),(85,31),(82,32),(86,33);
+INSERT INTO `group_player` VALUES (146,2),(147,3),(148,4),(149,5),(150,6),(151,7),(152,8),(153,9),(149,10),(146,11),(151,12),(147,13),(152,14),(148,15),(153,16),(150,17),(146,18),(153,19),(151,20),(148,21),(149,22),(150,23),(147,24),(152,25),(153,26),(149,27),(150,28),(152,29),(148,30),(146,31),(151,32),(147,33);
 /*!40000 ALTER TABLE `group_player` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -230,4 +255,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-07-09 10:17:11
+-- Dump completed on 2018-07-24 16:27:49

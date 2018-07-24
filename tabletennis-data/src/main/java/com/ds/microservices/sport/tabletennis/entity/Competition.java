@@ -24,7 +24,7 @@ public class Competition implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 
-	private String type;
+	private String category;
 
 	private String description;
 
@@ -34,13 +34,6 @@ public class Competition implements Serializable {
 
 	private boolean current;
 
-//    @ManyToMany(fetch = FetchType.EAGER)
-//	@JoinTable(name="competition_player", 
-//			joinColumns = @JoinColumn(name="competition_id", referencedColumnName="id"),
-//			inverseJoinColumns = @JoinColumn (name="player_id", referencedColumnName="id")
-//	)
-
-//	@JoinColumn(name="competition_id")
 	@OneToMany(mappedBy="competition")
     private Set<CompetitionProperty> properties;
 	
@@ -53,8 +46,6 @@ public class Competition implements Serializable {
 	@OneToMany(mappedBy="competition", cascade=CascadeType.ALL)
 	private List<Group> groups;
     
-	public Competition() {
-	}
 
 	public Long getId() {
 		return this.id;
@@ -130,16 +121,16 @@ public class Competition implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Competition [id=" + id + ", description=" + description + ", name=" + name + ", competitionPlayers=" + competitionPlayers
-				+ "]";
+		return "Competition [id=" + id + ", description=" + description + ", name=" + name + "]";
 	}
 
-	public String getType() {
-		return type;
+	public String getCategory() {
+		return category;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setCategory(String category) {
+		this.category = category;
 	}
+
 
 }

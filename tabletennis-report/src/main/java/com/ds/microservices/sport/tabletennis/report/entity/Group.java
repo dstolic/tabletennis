@@ -14,10 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 
 @Entity
 @Table(name="competition_group")
@@ -29,11 +27,6 @@ public class Group implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 
-//	@OneToMany(mappedBy="group")
-//	@JsonIgnore
-//	@Transient
-//	private List<CompetitionPlayer> competitionPlayers;
-	
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(name="group_player",
 		joinColumns = @JoinColumn(name="group_id", referencedColumnName="id"),
@@ -54,11 +47,6 @@ public class Group implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	@Override
-	public String toString() {
-		return "Group [id=" + id + ", points=" + groupPoints() + ", players=" + players + "]";
 	}
 
 	public int groupPoints() {
@@ -100,5 +88,11 @@ public class Group implements Serializable {
 	public void setCompetition(Competition competition) {
 		this.competition = competition;
 	}
+
+	@Override
+	public String toString() {
+		return "Group [id=" + id + ", points=" + groupPoints() + ", players=" + players + "]";
+	}
+
 
 }

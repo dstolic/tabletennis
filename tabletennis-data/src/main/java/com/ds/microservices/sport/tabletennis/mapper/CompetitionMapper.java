@@ -29,10 +29,12 @@ public abstract class CompetitionMapper {
 		
 		Set<PlayerDto> players = new HashSet<PlayerDto>();
 		
-		for (CompetitionPlayer competitionPlayer : competitionPlayers) {
-			PlayerDto playerDto = playerMapper.playerToPlayerDto(competitionPlayer.getId().getPlayer(), new CycleAvoidMappingContext());
-			if (!players.contains(playerDto)) {
-				players.add(playerDto);
+		if (competitionPlayers != null) {
+			for (CompetitionPlayer competitionPlayer : competitionPlayers) {
+				PlayerDto playerDto = playerMapper.playerToPlayerDto(competitionPlayer.getId().getPlayer(), new CycleAvoidMappingContext());
+				if (!players.contains(playerDto)) {
+					players.add(playerDto);
+				}
 			}
 		}
 	

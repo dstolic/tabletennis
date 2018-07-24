@@ -8,9 +8,6 @@ public class CompetitionPlayerDto {
 	
 	private boolean active;
 
-	public CompetitionPlayerDto() {
-	}
-
 	public CompetitionPlayerPKDto getId() {
 		return id;
 	}

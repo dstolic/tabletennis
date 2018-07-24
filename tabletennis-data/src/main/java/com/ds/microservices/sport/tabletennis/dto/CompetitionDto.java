@@ -1,21 +1,17 @@
 package com.ds.microservices.sport.tabletennis.dto;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
-import com.ds.microservices.sport.tabletennis.entity.CompetitionPlayer;
 import com.ds.microservices.sport.tabletennis.entity.CompetitionProperty;
-import com.ds.microservices.sport.tabletennis.entity.Group;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName("Competition")
-public class CompetitionDto implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class CompetitionDto {
 
 	private Long id;
 
-	private String type;
+	private String category;
 
 	private String description;
 
@@ -27,8 +23,6 @@ public class CompetitionDto implements Serializable {
 
 	private Set<PlayerDto> players;
 
-//	@JsonIgnore
-//	@JsonBackReference
     private Set<CompetitionProperty> properties;
     
 	private List<CompetitionPlayerDto> competitionPlayers;
@@ -38,9 +32,6 @@ public class CompetitionDto implements Serializable {
 	private List<GameDto> games;
 
 	
-	public CompetitionDto() {
-	}
-
 	public Long getId() {
 		return this.id;
 	}
@@ -63,18 +54,6 @@ public class CompetitionDto implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public Set<PlayerDto> getPlayers() {
-		return players;
-	}
-
-//	public void setCompetitionPlayers(Set<PlayerDto> players) {
-//		this.players = players;
-//	}
-
-	public void setPlayers(Set<PlayerDto> players) {
-		this.players = players;
 	}
 
 	public Set<CompetitionProperty> getProperties() {
@@ -131,12 +110,20 @@ public class CompetitionDto implements Serializable {
 				+ "]";
 	}
 
-	public String getType() {
-		return type;
+	public Set<PlayerDto> getPlayers() {
+		return players;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setPlayers(Set<PlayerDto> players) {
+		this.players = players;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 }

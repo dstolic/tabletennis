@@ -15,4 +15,8 @@ public interface BaseGameService {
 	List<Game> findScheduledGames();
 	List<Game> findScheduledGames(Long competitionId);
 
+	Game getGame(Long id);
+	Game addGameResult(Long id, Game game);
+
+
 }

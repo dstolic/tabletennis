@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ds.microservices.sport.tabletennis.entity.Player;
+import com.ds.microservices.sport.tabletennis.exceptions.PlayerNotFoundException;
 import com.ds.microservices.sport.tabletennis.repository.PlayerRepository;
 import com.ds.microservices.sport.tabletennis.service.BasePlayerService;
 
@@ -21,31 +22,25 @@ public class PlayerService implements BasePlayerService {
 	// List of all players
 	@Override
 	public List<Player> allPlayers() {
-		logger.info("player-service all() invoked: ");
-
 		return (List<Player>) playerRepository.findAll();
 	}
 	
 	// Find player by id
 	@Override
 	public Player findOne(Long id) {
-		return playerRepository.findById(id).get();
+		return playerRepository.findById(id).orElseThrow(PlayerNotFoundException::new);
 	}
 
 	// Save/update player
 	@Override
 	public Player savePlayer(Player player) {
-		logger.info("player-service save() invoked: ");
-
 		return playerRepository.save(player);
 	}
 
 	// Activate/deactivate player (to check: could we use save() method for both activation also) 
 	@Override
 	public Player activatePlayer(Long id, boolean active) {
-		logger.info("player-service activatePlayer() invoked: ");
-		
-		Player player = playerRepository.findById(id).get();
+		Player player = playerRepository.findById(id).orElseThrow(PlayerNotFoundException::new);
 		player.setActive(active);
 		
 		return playerRepository.save(player);
@@ -54,9 +49,7 @@ public class PlayerService implements BasePlayerService {
 	// Find players-candidates for competition
 	@Override
 	public List<Player> findCandidatesForCompetition() {
-		logger.info("player-service findCandidatesForCompetition() invoked: ");
-
-		return (List<Player>) playerRepository.findByActive(true);
+		return playerRepository.findByActive(true);
 	}
 
 

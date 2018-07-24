@@ -6,7 +6,6 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-import com.ds.microservices.sport.tabletennis.report.entity.Competition;
 import com.ds.microservices.sport.tabletennis.report.entity.CompetitionPlayer;
 import com.ds.microservices.sport.tabletennis.report.entity.CompetitionPlayerPK;
 

@@ -11,7 +11,7 @@ public class CompetitionDto {
 
 	private Long id;
 
-	private String type;
+	private String category;
 
 	private String description;
 
@@ -23,8 +23,6 @@ public class CompetitionDto {
 
 	private Set<PlayerDto> players;
 
-//	@JsonIgnore
-//	@JsonBackReference
     private Set<CompetitionProperty> properties;
     
 	private List<CompetitionPlayerDto> competitionPlayers;
@@ -34,9 +32,6 @@ public class CompetitionDto {
 	private List<GameDto> games;
 
 	
-	public CompetitionDto() {
-	}
-
 	public Long getId() {
 		return this.id;
 	}
@@ -60,18 +55,6 @@ public class CompetitionDto {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-//	public Set<PlayerDto> getPlayers() {
-//		return players;
-//	}
-
-//	public void setCompetitionPlayers(Set<PlayerDto> players) {
-//		this.players = players;
-//	}
-
-//	public void setPlayers(Set<PlayerDto> players) {
-//		this.players = players;
-//	}
 
 	public Set<CompetitionProperty> getProperties() {
 		return properties;
@@ -121,18 +104,10 @@ public class CompetitionDto {
 		this.current = current;
 	}
 
-//	@Override
-//	public String toString() {
-//		return "CompetitionDto [id=" + id + ", description=" + description + ", name=" + name
-//				+ "]";
-//	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
+	@Override
+	public String toString() {
+		return "CompetitionDto [id=" + id + ", description=" + description + ", name=" + name + ", players=" + players
+				+ "]";
 	}
 
 	public Set<PlayerDto> getPlayers() {
@@ -141,6 +116,14 @@ public class CompetitionDto {
 
 	public void setPlayers(Set<PlayerDto> players) {
 		this.players = players;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 }

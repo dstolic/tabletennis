@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.ds.microservices.sport.tabletennis.entity.Competition;
 import com.ds.microservices.sport.tabletennis.entity.Game;
+import com.ds.microservices.sport.tabletennis.exceptions.GameNotFoundException;
 import com.ds.microservices.sport.tabletennis.repository.CompetitionRepository;
 import com.ds.microservices.sport.tabletennis.repository.GameRepository;
+import com.ds.microservices.sport.tabletennis.repository.GameSetRepository;
 import com.ds.microservices.sport.tabletennis.service.BaseGameService;
 
 @Service
@@ -19,6 +21,9 @@ public class GameService implements BaseGameService {
 	
 	@Autowired
 	protected GameRepository gameRepository;
+
+	@Autowired
+	protected GameSetRepository gameSetRepository;
 
 	@Autowired
 	protected CompetitionRepository competitionRepository;
@@ -56,4 +61,14 @@ public class GameService implements BaseGameService {
 		return gameRepository.findByCompetitionIdAndFinished(competitionId, false);
 	}
 
+	@Override
+	public Game getGame(Long id) {
+		return gameRepository.findById(id).orElseThrow(GameNotFoundException::new);
+	}
+	
+	@Override
+	public Game addGameResult(Long id, Game game) {
+		return gameRepository.save(game);
+	}
+	
 }

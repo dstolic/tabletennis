@@ -27,16 +27,10 @@ public class GameController {
 	@Autowired
 	protected GameMapper gameMapper;
 	
-	@Autowired
-	public GameController() {
-	}
-
 
 	// Games from competition
 	@RequestMapping(value="/competition/games", produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<List<GameDto>> findGamesForCompetition() {
-		logger.info("game-controller findGamesForCompetition() invoked.");
-		
 		return ResponseEntity.ok(
 				gameService.findGamesFromCompetition()
 				.stream()
@@ -48,8 +42,6 @@ public class GameController {
 	// Finished games
 	@RequestMapping(value="/competition/games/finished", produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<List<GameDto>> findFinishedGames() {
-		logger.info("game-controller findGamesForCompetition() invoked.");
-		
 		return ResponseEntity.ok(
 				gameService.findFinishedGames()
 				.stream()
@@ -61,8 +53,6 @@ public class GameController {
 	// Scheduled games
 	@RequestMapping(value="/competition/games/scheduled", produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<List<GameDto>> findScheduledGames() {
-		logger.info("game-controller findGamesForCompetition() invoked.");
-		
 		return ResponseEntity.ok(
 				gameService.findScheduledGames()
 				.stream()

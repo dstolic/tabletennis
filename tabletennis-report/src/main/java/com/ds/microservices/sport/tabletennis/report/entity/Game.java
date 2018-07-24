@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -44,7 +43,7 @@ public class Game implements Serializable {
 	@JoinColumn(name="player_home")
 	private Player playerHome;
 	
-	@JsonIgnore // budzevina, resiti kasnije
+	@JsonIgnore
     @ManyToOne
     @JoinColumn(name = "competition_id")
 	private Competition competition;
@@ -100,14 +99,6 @@ public class Game implements Serializable {
 		this.competition = competition;
 	}
 
-//	public Long getCompetitionId() {
-//		return competitionId;
-//	}
-//
-//	public void setCompetitionId(Long competitionId) {
-//		this.competitionId = competitionId;
-//	}
-
 	public Player getPlayerHome() {
 		return playerHome;
 	}
@@ -123,14 +114,6 @@ public class Game implements Serializable {
 	public void setPlayerAway(Player playerAway) {
 		this.playerAway = playerAway;
 	}
-
-//	public Long getGroupNum() {
-//		return groupNum;
-//	}
-//
-//	public void setGroupNum(Long groupNum) {
-//		this.groupNum = groupNum;
-//	}
 
 	public int getRound() {
 		return round;
@@ -156,10 +139,10 @@ public class Game implements Serializable {
 		this.sets = sets;
 	}
 
-//	@Override
-//	public String toString() {
-//		return "Game [id=" + id + ", competition=" + competition.getId() + ", playerHome=" + playerHome + ", playerAway="
-//				+ playerAway + "," + ", round=" + round + "]";
-//	}
+	@Override
+	public String toString() {
+		return "Game [id=" + id + ", competition=" + competition.getId() + ", playerHome=" + playerHome + ", playerAway="
+				+ playerAway + "," + ", round=" + round + ", groupId=" + groupId + "]";
+	}
 
 }

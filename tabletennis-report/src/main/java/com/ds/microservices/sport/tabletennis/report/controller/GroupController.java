@@ -28,15 +28,10 @@ public class GroupController {
 	@Autowired
 	protected GroupMapper groupMapper;
 
-//	@Autowired
-//	protected CompetitionPlayerMapper competitionPlayerMapper;
 
-	
 	// Find groups 
 	@RequestMapping(value="/competition/group", produces=MediaType.APPLICATION_JSON_UTF8_VALUE, method=RequestMethod.GET)
 	public ResponseEntity<List<GroupDto>> findGroups() {
-		logger.info("competetion-controller findGroups() start");
-		
 		return ResponseEntity.ok(
 				groupMapper.groupToGroupDto(
 						groupService.findAllByCompetition(), new CycleAvoidMappingContext()
@@ -47,8 +42,6 @@ public class GroupController {
 	// Find groups 
 	@RequestMapping(value="/competition/group/{name}", produces=MediaType.APPLICATION_JSON_UTF8_VALUE, method=RequestMethod.GET)
 	public ResponseEntity<GroupDto> findGroupByName(@PathVariable String name) {
-		logger.info("competetion-controller findGroupByName() start");
-		
 		return ResponseEntity.ok(
 				groupMapper.groupToGroupDto(
 						groupService.findByName(name), new CycleAvoidMappingContext()

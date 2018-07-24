@@ -21,8 +21,6 @@ public class PlayerDto {
 
 	private int groupPoints;
 
-	public PlayerDto() {
-	}
 
 	public Long getId() {
 		return this.id;

@@ -5,8 +5,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 import com.ds.microservices.sport.tabletennis.report.dto.GameDto;
+import com.ds.microservices.sport.tabletennis.report.dto.GameStatus;
 import com.ds.microservices.sport.tabletennis.report.entity.Game;
-import com.ds.microservices.sport.tabletennis.report.dto.*;
 
 
 @Mapper(componentModel = "spring", uses= { GameSetMapper.class})

@@ -12,7 +12,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 @Entity
@@ -25,8 +24,7 @@ public class CompetitionProperty implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 
-	@JsonIgnore // budzevina, resiti kasnije
-//	@JsonManagedReference
+	@JsonIgnore
     @ManyToOne
     @JoinColumn(name = "competition_id")
 	private Competition competition;
@@ -34,9 +32,6 @@ public class CompetitionProperty implements Serializable {
 	private String name;
 
 	private String value;
-
-	public CompetitionProperty() {
-	}
 
 	public Long getId() {
 		return this.id;

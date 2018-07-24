@@ -8,9 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.ds.microservices.sport.tabletennis.report.entity.Competition;
 import com.ds.microservices.sport.tabletennis.report.entity.Game;
-import com.ds.microservices.sport.tabletennis.report.service.BaseGameService;
+import com.ds.microservices.sport.tabletennis.report.exceptions.GameNotFoundException;
 import com.ds.microservices.sport.tabletennis.report.repository.CompetitionRepository;
 import com.ds.microservices.sport.tabletennis.report.repository.GameRepository;
+import com.ds.microservices.sport.tabletennis.report.service.BaseGameService;
 
 @Service
 public class GameService implements BaseGameService {
@@ -31,12 +32,7 @@ public class GameService implements BaseGameService {
 	// Find games from competition
 	@Override
 	public List<Game> findGamesFromCompetition() {
-		logger.info("game-service findGamesFromCompetition() invoked: ");
-
 		Competition competition =  competitionRepository.findByCurrent(true);
-		
-		List<Game> games = gameRepository.findByCompetitionId(competition.getId());
-		
 		return gameRepository.findByCompetitionId(competition.getId());
 	}
 
@@ -44,7 +40,6 @@ public class GameService implements BaseGameService {
 	@Override
 	public List<Game> findFinishedGames() {
 		Competition competition =  competitionRepository.findByCurrent(true);
-		
 		return gameRepository.findByCompetitionIdAndFinished(competition.getId(), true);
 	}
 
@@ -52,8 +47,12 @@ public class GameService implements BaseGameService {
 	@Override
 	public List<Game> findScheduledGames() {
 		Competition competition =  competitionRepository.findByCurrent(true);
-		
 		return gameRepository.findByCompetitionIdAndFinished(competition.getId(), false);
 	}
 
+	@Override
+	public Game getGame(Long id) {
+		return gameRepository.findById(id).orElseThrow(GameNotFoundException::new);
+	}
+	
 }

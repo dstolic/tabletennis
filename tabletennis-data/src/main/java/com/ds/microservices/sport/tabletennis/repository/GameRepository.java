@@ -13,7 +13,6 @@ public interface GameRepository extends PagingAndSortingRepository<Game, Long> {
 	@Query("SELECT count(*) from Game")
 	public long count();
 
-	
 	public List<Game> findByFinished(boolean finished);
 	
 	public List<Game> findByCompetitionId(Long competitionId);

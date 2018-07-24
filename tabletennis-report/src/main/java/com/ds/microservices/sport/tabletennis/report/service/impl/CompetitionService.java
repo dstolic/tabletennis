@@ -1,7 +1,6 @@
 package com.ds.microservices.sport.tabletennis.report.service.impl;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.ds.microservices.sport.tabletennis.report.entity.Competition;
 import com.ds.microservices.sport.tabletennis.report.entity.CompetitionPlayer;
-import com.ds.microservices.sport.tabletennis.report.entity.CompetitionPlayerPK;
+import com.ds.microservices.sport.tabletennis.report.exceptions.CompetitionNotFoundException;
 import com.ds.microservices.sport.tabletennis.report.repository.CompetitionPlayerRepository;
 import com.ds.microservices.sport.tabletennis.report.repository.CompetitionRepository;
 import com.ds.microservices.sport.tabletennis.report.service.BaseCompetitionService;
@@ -29,12 +28,18 @@ public class CompetitionService implements BaseCompetitionService {
 		this.competitionPlayerRepository = competitionPlayerRepository;
 	}
 
+	// List of all competitions
+	@Override
+	public List<Competition> allCompetitions() {
+		return (List<Competition>)competitionRepository.findAll();
+	}
+
 	// Find competition by id
 	@Override
 	public Competition findById(Long id) {
 		logger.info("competition-service findById invoked. ");
 	
-		return competitionRepository.findById(id).get();
+		return competitionRepository.findById(id).orElseThrow(CompetitionNotFoundException::new);
 	}
 
 	// Find current competition

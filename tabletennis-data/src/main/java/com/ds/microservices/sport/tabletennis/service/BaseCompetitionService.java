@@ -1,10 +1,8 @@
 package com.ds.microservices.sport.tabletennis.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.ds.microservices.sport.tabletennis.entity.Competition;
-import com.ds.microservices.sport.tabletennis.entity.CompetitionPlayer;
 import com.ds.microservices.sport.tabletennis.entity.Player;
 
 public interface BaseCompetitionService {
@@ -12,9 +10,6 @@ public interface BaseCompetitionService {
 	List<Competition> allCompetitions();
 
 	Competition findById(Long id);
-
-	List<CompetitionPlayer> findPlayersFromCompetition();
-	List<CompetitionPlayer> findPlayersFromCompetition(Long competitionId);
 
 	Competition findByCurrent();
 

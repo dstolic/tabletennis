@@ -133,20 +133,6 @@ public class CompetitionService implements BaseCompetitionService {
 		return competitionRepository.save(competition);
 	}
 	
-	// Find players from competition
-	// TODO: Try to find optimized version. 'findByIdCompetitionId' produces one SELECT statement per competitionPlayer
-	@Override
-	public List<CompetitionPlayer> findPlayersFromCompetition(Long competitionId) {
-		return competitionPlayerRepository.findByIdCompetitionId(competitionId);
-	}
-
-	@Override
-	public List<CompetitionPlayer> findPlayersFromCompetition() {
-		Competition competition =  competitionRepository.findByCurrent(true);
-
-		return competitionPlayerRepository.findByIdCompetitionId(competition.getId());
-	}
-
 	// Generate competition
 	@Override
 	public Competition generateCompetition()  {

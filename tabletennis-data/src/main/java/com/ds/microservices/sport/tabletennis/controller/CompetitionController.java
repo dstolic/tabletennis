@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -101,33 +103,12 @@ public class CompetitionController {
 						));
 	}
 
-	// Players from competition
-	@RequestMapping(value="/competition/{id}/players", produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<List<CompetitionPlayerDto>> findPlayersFromCompetition(@PathVariable Long id) {
-		return ResponseEntity.ok(
-				competitionService.findPlayersFromCompetition(id)
-				.stream()
-				.map(player -> competitionPlayerMapper.competitionPlayerToCompetitionPlayerDto(player, new CycleAvoidMappingContext()))
-				.collect(Collectors.toList()));
-	}
-
-	// Players from competition
-	@RequestMapping(value="/competition/players", produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<List<CompetitionPlayerDto>> findPlayersFromCompetition() {
-		return ResponseEntity.ok(
-				competitionService.findPlayersFromCompetition()
-				.stream()
-				.map(player -> competitionPlayerMapper.competitionPlayerToCompetitionPlayerDto(player, new CycleAvoidMappingContext()))
-				.collect(Collectors.toList()));
-	}
-	
 /* 
  *  Edit functions (admin only) 
  */
-	
 	// Save/update competition
 	@RequestMapping(value="/competition/add", produces=MediaType.APPLICATION_JSON_UTF8_VALUE, method=RequestMethod.POST)
-	public ResponseEntity<CompetitionDto> save(@RequestBody CompetitionDto competitionDto) {
+	public ResponseEntity<CompetitionDto> save(@RequestBody @Valid CompetitionDto competitionDto) {
 		return ResponseEntity.ok(
 				competitionMapper.competitionToCompetitionDto(
 						competitionService.saveCompetition(

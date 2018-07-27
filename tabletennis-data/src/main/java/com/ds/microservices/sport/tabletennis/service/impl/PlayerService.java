@@ -52,5 +52,4 @@ public class PlayerService implements BasePlayerService {
 		return playerRepository.findByActive(true);
 	}
 
-
 }

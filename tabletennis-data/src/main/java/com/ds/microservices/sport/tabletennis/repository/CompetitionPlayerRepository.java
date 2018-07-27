@@ -17,6 +17,8 @@ public interface CompetitionPlayerRepository extends PagingAndSortingRepository<
 
 	public List<CompetitionPlayer> findByIdCompetitionId(Long id);
 	
+	public CompetitionPlayer findByIdCompetitionIdAndIdPlayerId(Long id, Long playerId);
+
 	public List<CompetitionPlayer> findAll(Example<CompetitionPlayer> competitionPlayer);
 
 

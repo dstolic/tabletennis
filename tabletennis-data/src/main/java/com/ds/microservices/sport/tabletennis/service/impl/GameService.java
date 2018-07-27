@@ -40,6 +40,17 @@ public class GameService implements BaseGameService {
 	}
 
 	@Override
+	public Game findGameFromCompetition(Long gameId) {
+		Competition competition =  competitionRepository.findByCurrent(true);
+		return gameRepository.findByIdAndCompetitionId(gameId, competition.getId());
+	}
+
+	@Override
+	public Game findGameFromCompetition(Long competitionId, Long gameId) {
+		return gameRepository.findByIdAndCompetitionId(gameId, competitionId);
+	}
+	
+	@Override
 	public List<Game> findFinishedGames() {
 		Competition competition =  competitionRepository.findByCurrent(true);
 		return gameRepository.findByCompetitionIdAndFinished(competition.getId(), true);
@@ -68,7 +79,10 @@ public class GameService implements BaseGameService {
 	
 	@Override
 	public Game addGameResult(Long id, Game game) {
+		game.setCompetition(competitionRepository.findByCurrent(true));
+		game.getSets().forEach(gameSet -> gameSet.getId().setGame(game));
+		gameSetRepository.saveAll(game.getSets());
 		return gameRepository.save(game);
 	}
-	
+
 }

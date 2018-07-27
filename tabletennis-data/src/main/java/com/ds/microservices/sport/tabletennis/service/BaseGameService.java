@@ -9,6 +9,9 @@ public interface BaseGameService {
 	List<Game> findGamesFromCompetition();
 	List<Game> findGamesFromCompetition(Long competitionId);
 
+	Game findGameFromCompetition(Long gameId);
+	Game findGameFromCompetition(Long competitionId, Long gameId);
+
 	List<Game> findFinishedGames();
 	List<Game> findFinishedGames(Long competitionId);
 

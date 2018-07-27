@@ -1,5 +1,7 @@
 package com.ds.microservices.sport.tabletennis.dto;
 
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName("Player")
@@ -9,10 +11,13 @@ public class PlayerDto {
 
 	private boolean active;
 
+	@NotNull
 	private String firstName;
 
+	@NotNull
 	private String lastName;
 
+	@NotNull
 	private Long points;
 
 	private int gamesPointsFor;

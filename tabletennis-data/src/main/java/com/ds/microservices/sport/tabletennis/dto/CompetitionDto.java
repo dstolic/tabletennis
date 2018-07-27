@@ -3,6 +3,8 @@ package com.ds.microservices.sport.tabletennis.dto;
 import java.util.List;
 import java.util.Set;
 
+import javax.validation.constraints.NotNull;
+
 import com.ds.microservices.sport.tabletennis.entity.CompetitionProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
@@ -15,6 +17,7 @@ public class CompetitionDto {
 
 	private String description;
 
+	@NotNull
 	private String name;
 
 	private boolean completed;

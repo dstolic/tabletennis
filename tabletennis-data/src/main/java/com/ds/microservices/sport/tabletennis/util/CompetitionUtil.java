@@ -361,7 +361,6 @@ public class CompetitionUtil {
 
 	}
 
-	
 	public Map<CompetitionPlayerPK, CompetitionPlayer> getCompetitionPlayerMap() {
 		return competitionPlayerMap;
 	}

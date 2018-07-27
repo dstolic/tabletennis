@@ -19,4 +19,6 @@ public interface GameRepository extends PagingAndSortingRepository<Game, Long> {
 
 	public List<Game> findByCompetitionIdAndFinished(Long competitionId, boolean finished);
 
+	public Game findByIdAndCompetitionId(Long gameId, Long id);
+
 }
